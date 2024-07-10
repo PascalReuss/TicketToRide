@@ -1,0 +1,264 @@
+package myCBR;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+
+import com.google.gson.Gson;
+
+import myCBR.Recommender;
+import model.Request;
+import model.Response;
+import model.Situation;
+import model.Case;
+import model.Plan;
+
+/**
+ * 
+ * Diese Klasse startet den Server und wird vom Spiel angesteurt, wenn mit KIs gespielt werden soll. 
+ * 
+ * @author Tjark Harjes
+ *
+ */
+
+// die Klasse aktiviert den Server, der vom Client (das Spiel) angesteuert werden kann, um Anfragen zu stellen, die 
+// in Form von Anweisungen von der KI beantwortet werden
+
+// verantwortlich für die Verbindung zwischen Client und Server
+// empfängt Anfragen des Spiels und sendet die Antworten der KI ab
+// Die Verarbeitung der Anfragen wird allerdings in den anderen beiden genannten Klassen vorgenommen (Player und PlayerManager)
+public class CBRSystem {
+	
+	//private static JTextArea jtf;
+//	private static PlayerManager manager;
+
+	/**
+	 * Singleton für den Zugriff auf das CBR-System
+	 */
+	private static CBREngine engine;
+	
+	private Recommender recommender;
+	
+	public CBRSystem () {
+		
+	}
+
+	/**
+	 * Diese Methode stellt den zentralen Punkt des CBR-System dar. Hier wird
+	 * die Verbindung vom C#-Projekt akzeptiert, die Daten in Empfang genommen
+	 * und Anworten werden wiedrum abgeschickt
+	 * 
+	 * @param port
+	 *            
+	 */
+	public void receive(int port) {
+		while (true) {
+
+			port = 5555;
+			ServerSocket serverSocket = null;
+
+			Socket socket = null;
+			InputStream in = null;
+			OutputStream out = null;
+
+			try {
+				
+				serverSocket = new ServerSocket(port);
+				socket = serverSocket.accept();
+				in = socket.getInputStream();
+				out = socket.getOutputStream();
+				String clientSentence;
+
+				BufferedReader inFromClient = new BufferedReader(new InputStreamReader(in));
+				clientSentence = inFromClient.readLine();
+				System.out.println(clientSentence);
+				Gson gson = new Gson();
+//				System.out.println(clientSentence + " --- " + Request.class);
+				Request request = gson.fromJson(clientSentence, Request.class);
+				
+				String requestType = request.getRequestType();
+//				System.out.println("rt " + requestType);
+//				Case ccase = request.getNewCase();
+//				System.out.println("case " + ccase);
+//				Situation sit = request.getSituation();
+//				System.out.println("sit " + sit);
+				// HIER FINDET DER EMPFANG AUS DEM C# PROJEKT STATT
+//				System.out.println("Received in java: " + request.toString());
+				
+				// war schon auskommentiert
+				//Response response = manager.answerRequest(request);
+				
+				//Thread.sleep(5000);
+				
+				// ----------- HIER KANN EINE FALLBASIS ERSTELLT WERDEN ------------
+//				handlePlayerCaseBase(player);
+				
+				// ----------- HIER WIRD DAS RETRIEVAL DURCHGEFÜHRT -> MEIN RETRIEVAL ANWENDEN?------------
+				// RESPONSE
+//				Response response = engine.executeRetrieval(request);
+//				Response response = recommender.solveOuery(null, null, player, player, player, clientSentence, player, null);
+//				Response response = recommender.solveOuery(request);
+				try {
+					recommender = new Recommender();
+					recommender.loadengine(request);
+				} catch (Exception ee) {
+					ee.printStackTrace();
+					System.out.println(ee.getMessage());
+				}
+				
+				
+				// HIER WIRD DIE ANTWORT ERHALTEN, INDEM EIN RETRIEVAL DURCHGEFUEHRT WIRD
+				String answer = "";
+//				System.out.println(requestType);
+				if (requestType.contains("Retrieval")) {
+					answer = recommender.solveOuery(request);
+				}
+				
+				if (requestType.equalsIgnoreCase("newCase")) {
+					recommender.insertNewCase(request.getNewCase());
+					
+					if (request.getNewCase().caseType.contains("Random")) {
+						recommender.decreaseCaseBase(recommender.cb, 100);
+					}
+				}
+					
+				
+
+				// ----------- HIER WIRD DIE ANTWORT WIEDER MITTELS JSON ÜBERSETZT------------
+				// RESPONSE
+//				String toC = gson.toJson(response);
+				String answerJSON = gson.toJson(answer);
+				System.out.println("\nAnswer: " + answerJSON.toString());
+
+				//jtf.setText(jtf.getText() + "\n***********************CB Size: " + engine.getCaseBaseForPlayer(player).getCases().size() + "*************************");
+				
+				// RESPONSE
+				//writeToFile("Estimated Plan: " + toC);
+//				System.out.println("Status: " + toC);
+
+
+				// RESPONSE
+				out.write(answerJSON.toString().concat("\r\n").getBytes());
+				out.flush();
+//				System.out.println("toC sent!");
+				
+				System.out.println("\n-------------------------------------------------------\n");
+
+			} catch (IOException exc) {
+				System.out.println("IOException");
+				System.out.println(exc.getMessage());
+				exc.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("Exception");
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					//engine.getCbrProject().save();
+					out.close();
+					in.close();
+					socket.close();
+					serverSocket.close();
+					break;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+
+	}
+
+
+	/**
+	 * Die Methode erzeugt die Fallbasis
+	 * 
+	 * @param name
+	 *            
+	 */
+//	private static void handlePlayerCaseBase(String name) {
+//		
+//		if (!engine.caseBaseForPlayerAlreadyExists(name)) {
+//			try {
+//				//jtf.setText(jtf.getText() + "\nWir erstellen eine CaseBase für Spieler: " +  name);
+//				engine.createCaseBaseForPlayer(name);
+//				//jtf.setText(jtf.getText() + "\nCase Base erstellt!");
+//				//Thread.sleep(5000);
+//				engine.addDefaultCases(name);
+//				//jtf.setText(jtf.getText() + "\nCases hinzugefügt!");
+//				//Thread.sleep(5000);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				//jtf.setText(e.getMessage());
+//			}
+//		}
+//	}
+
+	/**
+	 * Getter.
+	 * 
+	 * @return engine
+	 */
+	public static CBREngine getEngine() {
+		return engine;
+	}
+
+	/**
+	 * Main-Methode
+	 */
+	public static void main(String[] args) throws FileNotFoundException {
+		int port;
+		//JFrame jframe = new JFrame();
+		//jframe.setVisible(true);
+		
+		PrintStream out = new PrintStream(new FileOutputStream("Java-Console_Log.txt"));
+		System.setOut(out);
+		if (args.length == 0) {
+			port = 5555;
+		} else {
+			port = Integer.parseInt(args[0]);
+		}
+		//jtf = new JTextArea();
+		//jtf.setBounds(20, 200, 300, 300);
+		//jframe.add(jtf);
+		//jframe.setBounds(500, 500, 500, 500);
+		System.out.println("Starting server on the port " + port);
+		//jtf.setText(jtf.getText() + "Starting server on port " + port);
+		
+		//JScrollPane scroll = new JScrollPane (jtf, 
+		//JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		//jframe.add(scroll);
+		//jframe.setVisible (true);
+
+		engine = CBREngine.getInstance();
+//		manager = new PlayerManager(/*jtf*/);
+
+		CBRSystem cbrSystem = new CBRSystem();
+		
+		new Thread(new Runnable() {
+
+			
+			public void run() {
+				while (true) {
+					cbrSystem.receive(port);
+				}
+			}
+		}).start();
+	}
+}

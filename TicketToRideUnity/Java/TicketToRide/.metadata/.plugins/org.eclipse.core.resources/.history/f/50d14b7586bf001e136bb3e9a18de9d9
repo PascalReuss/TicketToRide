@@ -1,0 +1,118 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Situation {
+	
+	public String playerHeroColor;
+	public int dice; 
+	public int fogtokens;
+	public int gold;
+	public int hour;
+	public int letter;
+	public Boolean parchmentIsActive;
+	public String positionBlue;
+	public String positionGreen;
+	public String positionPurple;
+	public String positionYellow;
+	public int shields;
+	public int strength;
+	public int willpower;
+	public String situationType;
+	public int battleRound;
+    public String position;
+    public int strengthCreature;
+    public int willpowerCreature;
+    public int willpowerLost;
+    public int willpowerLostCreature;
+    public boolean canFight;
+    public boolean canFightTogether;
+    public int amount;
+    public List<Integer> activeCreatures;
+    public boolean hasParchment;
+
+	
+	public Situation() {
+		this.situationType = "";
+	}
+
+	public Situation(String playerHeroColor) {
+		this.playerHeroColor = playerHeroColor;
+	}
+
+	public Situation(String playerHeroColor, int dice, int fogtokens, int gold, int hour, int letter,
+			Boolean parchmentIsActive, String positionBlue, String positionGreen, String positionPurple,
+			String positionYellow, int shields, int strength, int willpower, boolean canFight, boolean canFightTogether,
+			String situationType, boolean hasParchment) {
+		super();
+		this.playerHeroColor = playerHeroColor;
+		this.dice = dice;
+		this.fogtokens = fogtokens;
+		this.gold = gold;
+		this.hour = hour;
+		this.letter = letter;
+		this.parchmentIsActive = parchmentIsActive;
+		this.positionBlue = positionBlue;
+		this.positionGreen = positionGreen;
+		this.positionPurple = positionPurple;
+		this.positionYellow = positionYellow;
+		this.shields = shields;
+		this.strength = strength;
+		this.willpower = willpower;
+		this.situationType = situationType;
+		this.canFight = canFight;
+		this.canFightTogether = canFightTogether;
+		this.activeCreatures = new ArrayList<Integer>();
+		this.hasParchment = hasParchment;
+	}
+	
+	public Situation(String playerHeroColor, int dice, int hour, String plan, int strength, int willpower, String caseType,
+			int battleRound, String position, int strengthCreature, int willpowerCreature, int willpowerLost, 
+			int willpowerLostCreature, String situationType) {
+		super();
+		this.playerHeroColor = playerHeroColor;
+		this.dice = dice;
+		this.hour = hour;
+		this.strength = strength;
+		this.willpower = willpower;
+		this.battleRound = battleRound;
+		this.position = position;
+		this.strengthCreature = strengthCreature;
+		this.willpowerCreature = willpowerCreature;
+		this.willpowerLost = willpowerLost;
+        this.willpowerLostCreature = willpowerLostCreature;
+        this.situationType = situationType;
+	}
+	
+	public Situation(String playerHeroColor, int amount, int gold, int letter, Boolean parchmentIsActive, 
+            int strength, int willpower, String situationType)
+        {
+            this.playerHeroColor = playerHeroColor;
+            this.gold = gold;
+            this.letter = letter;
+            this.parchmentIsActive = parchmentIsActive;
+            this.strength = strength;
+            this.willpower = willpower;
+            this.amount = amount;
+            this.situationType = situationType;
+        }
+
+	public String getPlayer() {
+		return playerHeroColor;
+	}
+
+	public void setPlayer(String playerHeroColor) {
+		this.playerHeroColor = playerHeroColor;
+	}
+
+	public String situationToString(String requestType) {
+		return "";
+	}
+	
+	@Override
+	public String toString() {
+		return "Situation: PlayerHeroColor = " + playerHeroColor + ", Type = " + situationType;
+	}
+
+}

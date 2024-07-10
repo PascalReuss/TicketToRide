@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Project name="CBRSystemTicketToRide" author="" >
+<svs>
+  <sv name="_unknown_"/>
+  <sv name="_undefined_"/>
+  <sv name="_others_"/>
+<fct name="default function" type="Symbol" mt="PARTNER_QUERY" r="REUSE" t="MAX" symm="true">
+<qsym name="_unknown_">
+</qsym>
+<qsym name="_undefined_">
+</qsym>
+<qsym name="_others_">
+</qsym>
+</fct>
+</svs>
+<model>
+  <concept name="TicketToRide">
+    <desc name="availableWagons" type="Integer" min="0" max="45" mult="false" >
+      <fct name="Sim" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+      <fct name="default function" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+    </desc>
+    <desc name="averageScoreOfRoutes" type="Float" min="0.0" max="15.0" mult="false" >
+      <fct name="Sim" type="Float" ltype="POLYNOMIAL_WITH" lparam="2.0" rtype="POLYNOMIAL_WITH" rparam="2.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" maxForQuotient="10.0" />
+      <fct name="default function" type="Float" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" maxForQuotient="10.0" />
+    </desc>
+    <desc name="routeOptions" type="Concept" concept="routeOptions" mult="true" >
+      <mc fct="RouteOption" mt="BEST_MATCH" r="NONE" t="NONE" />
+    </desc>
+    <desc name="handTrainCardsCount" type="Integer" min="0" max="30" mult="false" >
+      <fct name="Sim" type="Integer" ltype="POLYNOMIAL_WITH" lparam="3.0" rtype="POLYNOMIAL_WITH" rparam="3.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+      <fct name="default function" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+    </desc>
+    <desc name="destinationCardsCount" type="Integer" min="0" max="5" mult="false" >
+      <fct name="Sim" type="Integer" ltype="POLYNOMIAL_WITH" lparam="3.0" rtype="POLYNOMIAL_WITH" rparam="3.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+      <fct name="default function" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+    </desc>
+    <desc name="minimalAvailableWagons" type="Integer" min="0" max="45" mult="false" >
+      <fct name="Sim" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+      <fct name="default function" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+    </desc>
+    <desc name="plan" type="String" mult="false" >
+      <fct name="default function" type="String" symm="true" config="EQUALITY" n="3" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+    </desc>
+    <amalgam name="ConceptFunction" type="WEIGHTED_SUM" active="true" >
+      <entry name="availableWagons" active="true" fct="Sim" weight="1.0"/>
+      <entry name="averageScoreOfRoutes" active="true" fct="Sim" weight="0.5"/>
+      <entry name="routeOptions" active="true" fct="RouteOption" weight="5.0"/>
+      <entry name="handTrainCardsCount" active="true" fct="Sim" weight="2.5"/>
+      <entry name="destinationCardsCount" active="true" fct="Sim" weight="1.0"/>
+      <entry name="minimalAvailableWagons" active="true" fct="Sim" weight="2.0"/>
+      <entry name="plan" active="false" fct="default function" weight="1.0"/>
+    </amalgam>
+  </concept>
+  <concept name="routeOptions">
+    <desc name="destinationCardPoints" type="Integer" min="0" max="25" mult="false" >
+      <fct name="Sim" type="Integer" ltype="POLYNOMIAL_WITH" lparam="2.0" rtype="POLYNOMIAL_WITH" rparam="2.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+      <fct name="default function" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_MAX" r="REUSE" t="AVG" />
+    </desc>
+    <desc name="lengthOfRoute" type="Integer" min="1" max="6" mult="false" >
+      <fct name="Sim" type="Integer" ltype="POLYNOMIAL_WITH" lparam="2.0" rtype="POLYNOMIAL_WITH" rparam="2.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+      <fct name="default function" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_MAX" r="REUSE" t="AVG" />
+    </desc>
+    <desc name="nameOfRoute" type="String" mult="false" >
+      <fct name="default function" type="String" symm="true" config="EQUALITY" n="3" mt="PARTNER_MAX" r="REUSE" t="AVG" />
+    </desc>
+    <desc name="faceUpCards" type="Integer" min="0" max="5" mult="false" >
+      <fct name="Sim" type="Integer" ltype="CONSTANT" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="false" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+      <fct name="default function" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_MAX" r="REUSE" t="AVG" />
+    </desc>
+    <desc name="trainCards" type="Integer" min="0" max="10" mult="false" >
+      <fct name="Sim" type="Integer" ltype="POLYNOMIAL_WITH" lparam="4.0" rtype="POLYNOMIAL_WITH" rparam="4.0" mode="DIFFERENCE" symm="true" mt="PARTNER_QUERY" r="REUSE" t="MAX" />
+      <fct name="default function" type="Integer" ltype="POLYNOMIAL_WITH" lparam="1.0" rtype="POLYNOMIAL_WITH" rparam="1.0" mode="DIFFERENCE" symm="true" mt="PARTNER_MAX" r="REUSE" t="AVG" />
+    </desc>
+    <amalgam name="RouteOption" type="WEIGHTED_SUM" active="true" >
+      <entry name="destinationCardPoints" active="true" fct="Sim" weight="1.0"/>
+      <entry name="lengthOfRoute" active="true" fct="Sim" weight="1.0"/>
+      <entry name="nameOfRoute" active="false" fct="default function" weight="1.0"/>
+      <entry name="faceUpCards" active="true" fct="Sim" weight="1.0"/>
+      <entry name="trainCards" active="true" fct="Sim" weight="1.0"/>
+    </amalgam>
+  </concept>
+</model>
+<hierarchy>
+  <fct name="default function" type="Taxonomy" mt="PARTNER_QUERY" r="REUSE" t="MAX" qconfig="INNER_NODES_ANY" cconfig="INNER_NODES_ANY" top="inheritanceDesc" sim="0.0" symm="true" >
+    <node name="routeOptions" sim="1.0" parent="inheritanceDesc" />
+    <node name="TicketToRide" sim="1.0" parent="inheritanceDesc" />
+  </fct>
+</hierarchy>
+<cases no="173" cb="CaseBase"/>
+</Project>

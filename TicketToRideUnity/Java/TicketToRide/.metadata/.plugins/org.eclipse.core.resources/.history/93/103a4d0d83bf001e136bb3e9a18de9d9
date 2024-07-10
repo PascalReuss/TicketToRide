@@ -1,0 +1,418 @@
+package myCBR;
+
+
+import de.dfki.mycbr.core.Project;
+import de.dfki.mycbr.core.casebase.Instance;
+import de.dfki.mycbr.core.model.Concept;
+import de.dfki.mycbr.core.model.SymbolDesc;
+import de.dfki.mycbr.io.CSVImporter;
+import de.dfki.mycbr.core.*;
+
+import java.io.File;
+import java.text.ParseException;
+
+import de.dfki.mycbr.core.*;
+import de.dfki.mycbr.util.Pair;
+import model.Case;
+import model.Request;
+import de.dfki.mycbr.io.CSVImporter;
+
+
+public class CBREngine {
+	
+	private static CBREngine cbrEngine;
+	private Concept concept;
+
+	// Path
+	static File f1 = new File(System.getProperty("user.dir"));
+	static File f2 = new File(f1.getAbsolutePath());
+//	File f3 = new File(f2.getPath(), APPLICATION_NAME);
+	
+	// set path to myCBR projects	
+//	private static String data_path = "C:\\myCBR\\";
+	private static String data_path = f2.getAbsolutePath() + "\\Java\\CBRS";
+	// name of the project file
+	private static String projectName = "CBRSystemTicketToRide.prj";
+	// name of the central concept 
+//	private static String conceptName = Request.getRequestType();
+	private static String conceptName = "Andor";
+	// name of the csv containing the instances
+	private static String csv = "ki.csv";
+	// set the separators that are used in the csv file
+	private static String columnseparator = ";";
+	private static String multiplevalueseparator = ",";
+	// name of the case base that should be used
+	private static String casebase = "AllCases";
+	
+	public CBREngine() {
+		
+	}
+	
+	public CBREngine(Request request) {
+
+		if (request.getRequestType().equalsIgnoreCase("RetrievalAndor")) {
+			projectName = "CBRSystemAndor.prj";
+			casebase = request.getSituation().playerHeroColor;
+			conceptName = request.getSituation().situationType;
+		} else if (request.getRequestType().equalsIgnoreCase("RetrievalAndorComplete")) {
+			projectName = "CBRSystemAndorComplex.prj";
+			casebase = request.getSituationComplete().playerHeroColor;
+			conceptName = "AndorComplete";
+		} else if (request.getRequestType().equalsIgnoreCase("RetrievalAndorRandom")) {
+			projectName = "CBRSystemAndorRandom.prj";
+			casebase = request.getSituationComplete().playerHeroColor;
+			conceptName = "AndorRandom";
+		} else if (request.getRequestType().equalsIgnoreCase("NewCase")) {
+			if (request.getNewCase().caseType.contains("AndorComplete")) {
+				projectName = "CBRSystemAndorComplex.prj";
+				casebase = request.getNewCase().situationComplete.playerHeroColor;
+				conceptName = "AndorComplete";
+			} else if (request.getNewCase().caseType.equalsIgnoreCase("AndorRandom")) {
+				projectName = "CBRSystemAndorRandom.prj";
+				casebase = request.getNewCase().situationComplete.playerHeroColor;
+				conceptName = "AndorRandom";
+			} else {
+				projectName = "CBRSystemAndor.prj";
+				casebase = request.getNewCase().situation.playerHeroColor;
+				conceptName = request.getNewCase().situation.situationType;
+			}
+		}
+//		System.out.println(casebase);
+//		System.out.println("Farbe:" + request.getNewCase().situationComplete.playerHeroColor);
+//		System.out.println("Farbe:" + request.getNewCase().situation.playerHeroColor);
+	}
+	
+	public CBREngine (String projectName) {
+		CBREngine.projectName = projectName;
+	}
+	
+	// Getter for the Project meta data
+	public static String getCaseBase() {
+		return casebase;
+	}
+
+	public static void setCasebase(String casebase) {
+		CBREngine.casebase = casebase;
+	}
+
+	public static String getProjectName() {
+		return projectName;
+	}	
+
+	public static void setProjectName(String projectName) {
+		CBREngine.projectName = projectName;
+	}
+
+	public static String getConceptName() {
+		return conceptName;
+	}
+
+	public static void setConceptName(String conceptName) {
+		CBREngine.conceptName = conceptName;
+	}
+
+	public static String getCsv() {
+		return csv;
+	}
+
+	public static void setCsv(String csv) {
+		CBREngine.csv = csv;
+	}
+
+	/**
+	 * This methods creates a myCBR project and loads the project from a .prj file
+	 */	
+	public Project createProjectFromPRJ(){
+
+//		System.out.println("Trying to load prj file with : "+data_path+ " "+projectName+" "+conceptName+" "); 
+
+		Project project = null;
+
+		try{
+
+			project = new Project(data_path + "\\" + projectName);
+			// Sehr wichtig hier das Warten einzubauen, sonst gibts leere 
+			// Retrieval Results, weil die Faelle noch nicht geladen sind wenn das 
+			// Erste Retrieval laueft		
+			while (project.isImporting()){
+				Thread.sleep(1000);
+			}		
+		}
+		catch(Exception ex){
+			System.out.println("Fehler beim Laden des Projektes");
+		}		
+		return project;		
+	}	
+
+	/**
+	 * This methods creates a myCBR project and loads the cases in this project.
+	 * The specification of the project's location and according file names has to be
+	 * done at the beginning of this class.
+	 * @return Project instance containing model, sims and cases (if available)
+	 */
+	public Project createCBRProject(){
+
+		Project project = null;
+		try {
+			// load new project
+			project = new Project(data_path+projectName);
+			// create a concept and get the main concept of the project; 
+			// the name has to be specified at the beginning of this class
+			while (project.isImporting()){
+				Thread.sleep(1000);
+				System.out.print(".");
+			}
+			System.out.print("\n");	//console pretty print
+			Concept concept = project.getConceptByID(conceptName);
+			// Initialize CSV Import  
+			CSVImporter csvImporter = new CSVImporter(data_path+csv, concept);
+			// set the separators that are used in the csv file
+			csvImporter.setSeparator(columnseparator); // column separator
+			csvImporter.setSeparatorMultiple(multiplevalueseparator); //multiple value separator
+			// prepare for import
+			csvImporter.readData();	
+			csvImporter.checkData();
+			csvImporter.addMissingValues();
+			csvImporter.addMissingDescriptions();
+			// do the import of the instances 
+			csvImporter.doImport();
+			// wait until the import is done
+			System.out.print("Importing ");
+			while (csvImporter.isImporting()){
+				Thread.sleep(1000);
+				System.out.print(".");
+			}
+			System.out.print("\n");	//console pretty print
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return project;
+	}
+
+	/**
+	 * This methods creates an EMPTY myCBR project.
+	 * The specification of the project's location and according file names has to be
+	 * done at the beginning of this class.
+	 * @return Project instance containing model, sims and cases (if available)
+	 */
+	public Project createemptyCBRProject(){
+
+		Project project = null;
+		try {
+			// load new project
+			project = new Project(data_path+projectName);
+			// create a concept and get the main concept of the project; 
+			// the name has to be specified at the beginning of this class
+			while (project.isImporting()){
+				Thread.sleep(1000);
+				System.out.print(".");
+			}
+			System.out.print("\n");	//console pretty print
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return project;
+	}
+	
+	// ------------------- neu -------------------
+	
+	
+	
+	/**
+	 * Statischer Getter fuer das Singleton-Designpattern. Falls die einzige
+	 * Instanz der CBREngine <tt>null</tt> ist, wird der <tt>private</tt>
+	 * Konstruktor aufgerufen und das so erzeuge Objekt anschlie&szlig;end
+	 * mittels <tt>return</tt> zurueckgegeben..
+	 * 
+	 * @return Die einzige Instanz der Klasse <tt>{@link CBREngine}</tt>.
+	 */
+	public static CBREngine getInstance() {
+		if (cbrEngine == null) {
+			cbrEngine = new CBREngine();
+		}
+		return cbrEngine;
+	}
+
+	public Object getConcept() {
+		// TODO Auto-generated method stub
+		return concept;
+	}
+	
+	
+	
+	/**
+	 * Diese Methode fuehrt anhand einer gegebenen Anfrage ein Retrieval
+	 * aus, fuehrt den Reviseprozess aus und gibt den vorgeschlagenen Plan
+	 * in Form eines <tt>{@link Response}</tt> Objekts zurueck.
+	 * 
+	 * @param request
+	 *            Die gegebene Anfrage.
+	 * @return Der vorgeschlagene Plan in Form eines Response-Objekts.
+	 * @throws ParseException 
+	 */
+//	public Response executeRetrieval(Request request) throws ParseException {
+//		Response response = new Response();
+//		response.getSituation().setPlayer(request.getSituation().getPlayer());
+//		response.getSituation().setPlayerStatus(new Status());
+//
+//		String cbName = request.getSituation().getPlayer();
+//
+//		Retrieval retrieval = new Retrieval(statusConcept, cbrProject.getCB(cbName));
+//		retrieval.setRetrievalMethod(RetrievalMethod.RETRIEVE_SORTED);
+//
+//		Instance query = retrieval.getQueryInstance();
+//
+//		query = fillInstance(query, request.getSituation().getPlayerStatus(), request.getSituation().getPlayer());
+//		//tempStatus.add(request.getSituation().getPlayerStatus());
+//
+//		retrieval.start();
+//		List<Pair<Instance, Similarity>> resultate = retrieval.getResult();
+//		
+//		//jtf.setText(jtf.getText() + "\n" + resultate.size());
+//		/*for (int i = 0; i < 5;i++) {
+//			jtf.setText(jtf.getText() + "\n*************************Fall: " + i + "***************************");
+//			jtf.setText(jtf.getText() + "\n" + resultate.get(i).getSecond());
+//			jtf.setText(jtf.getText() + "\nCityPlacesActive: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.CITY_PLACES_ACTIVE).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nVillagePlacesActive: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.VILLAGE_PLACES_ACTIVE).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nRoadPlacesActive: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.ROAD_PLACES_ACTIVE).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nIsFirstTurn: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.IS_FIRST_TURN).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nIsSecondTurn: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.IS_SECOND_TURN).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nfreeBuild: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.HAS_FREE_BUILD).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nFreeBuildRoad: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.HAS_FREE_BUILD_ROAD).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nHas Longest Road: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.HAS_LONGEST_ROAD).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nabled to build city: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_CITY).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nabled to build village: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_VILLAGE).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nabled to build road: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_ROAD).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nabled to end turn: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.IS_ABLED_TO_END_TURN).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nallowed to roll dice: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.IS_ALLOWED_TO_ROLL_DICE).getValueAsString());
+//			/*jtf.setText(jtf.getText() + "\nbricks: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.BRICKS).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nwood: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.WOOD).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nsheep: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.SHEEP).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nwheat: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.WHEAT).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nstone: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.STONE).getValueAsString());*/
+//			/*jtf.setText(jtf.getText() + "\nPreference: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.PREFERENCE_DESC).getValueAsString());
+//			jtf.setText(jtf.getText() + "\nPlan: " + resultate.get(i).getFirst().getAttForDesc(RetrievalHelper.PLAN_DESC).getValueAsString());
+//		}*/
+//
+//		int counter = 0;
+//		boolean found = false;
+//		Instance currentInstance;
+//		Plan plan = new Plan();
+//		
+//		Instance handleInstance = null;
+//		
+//
+//		while (counter < resultate.size() && !found) {
+//		
+//			System.out.println("counter: " + counter);
+//			
+//			currentInstance = resultate.get(counter).getFirst();
+//
+//			response.getSituation().getPlayerStatus().cityPlacesActive = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.CITY_PLACES_ACTIVE).getValueAsString());
+//
+//			response.getSituation().getPlayerStatus().villagePlacesActive = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.VILLAGE_PLACES_ACTIVE).getValueAsString());
+//
+//			response.getSituation().getPlayerStatus().roadPlacesActive = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.ROAD_PLACES_ACTIVE).getValueAsString());
+//
+//			response.getSituation().getPlayerStatus().isFirstTurn = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.IS_FIRST_TURN).getValueAsString());
+//
+//			response.getSituation().getPlayerStatus().isSecondTurn = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.IS_SECOND_TURN).getValueAsString());
+//
+//			response.getSituation().getPlayerStatus().allowedToRollDice = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.IS_ALLOWED_TO_ROLL_DICE).getValueAsString());
+//
+//			response.getSituation().getPlayerStatus().isAbledToEndTurn = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_END_TURN).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().freeBuild = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.HAS_FREE_BUILD).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().freeBuildRoad = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.HAS_FREE_BUILD_ROAD).getValueAsString());
+//
+//			response.getSituation().getPlayerStatus().hasLongestRoad = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.HAS_LONGEST_ROAD).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().isAbledToBuildCity = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_CITY).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().isAbledToBuildVillage = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_VILLAGE).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().isAbledToBuildRoad = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_ROAD).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().isAbledToBuyDevelopmentCard = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUY_DEVELOPMENTCARD).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().cityPlacesAvailable = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.CITY_PLACES_AVAILABLE).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().villagePlacesAvailable = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.VILLAGE_PLACES_AVAILABLE).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().roadPlacesAvailable = Boolean.parseBoolean(currentInstance.getAttForDesc(RetrievalHelper.ROAD_PLACES_AVAILABLE).getValueAsString());
+//			
+//			response.getSituation().getPlayerStatus().preference = (currentInstance.getAttForDesc(RetrievalHelper.PREFERENCE_DESC).getValueAsString());
+//
+//			//response.getSituation().getPlayerStatus().bricks = (Integer.parseInt(currentInstance.getAttForDesc(RetrievalHelper.BRICKS).getValueAsString()));
+//
+//			//response.getSituation().getPlayerStatus().wood = (Integer.parseInt(currentInstance.getAttForDesc(RetrievalHelper.WOOD).getValueAsString()));
+//
+//			//response.getSituation().getPlayerStatus().sheep = (Integer.parseInt(currentInstance.getAttForDesc(RetrievalHelper.SHEEP).getValueAsString()));
+//
+//			//response.getSituation().getPlayerStatus().wheat = (Integer.parseInt(currentInstance.getAttForDesc(RetrievalHelper.WHEAT).getValueAsString()));
+//
+//			//response.getSituation().getPlayerStatus().stone = (Integer.parseInt(currentInstance.getAttForDesc(RetrievalHelper.STONE).getValueAsString()));
+//
+//			plan.setActionsAsString(currentInstance.getAttForDesc(RetrievalHelper.PLAN_DESC).getValueAsString());
+//			//jtf.setText(jtf.getText() + "\n" + plan.getActionsAsString());
+//			//jtf.setText(jtf.getText() + "\nRausgekommen: " + response.getSituation().getPlayerStatus().preference);
+//			
+//			
+//			if (planExecutable(plan, request.getSituation().getPlayerStatus())) {
+//				
+////				if (previousPlan.equals("ActivateVillagePlaces;") && previousPlan.equals(plan.getActionsAsString())) {
+////					plan.setActionsAsString("ActivateRoadPlaces;");
+////				} else if (previousPlan.equals("ActivateRoadPlaces;") && plan.getActionsAsString().equals("ActivateRoadPlaces;")) {
+////					plan.setActionsAsString("BuildRoad;ActivateRoadPlaces;");
+////				} else if (previousPlan.equals("ActivateCityPlaces;") && previousPlan.equals(plan.getActionsAsString())) {
+////					plan.setActionsAsString("BuildCity;ActivateCityPlaces;");
+////				}
+////				
+////				if (!planExecutable(plan, request.getSituation().getPlayerStatus())) {
+////					plan.setActionsAsString(currentInstance.getAttForDesc(RetrievalHelper.PLAN_DESC).getValueAsString());
+////				} 
+//				response.setPlan(plan);
+//				found = true;
+//			} else {
+//				//jtf.setText(jtf.getText() + "Following plan was not permitted: " + plan.getActionsAsString());
+//			}
+//			counter++;
+//			handleInstance = currentInstance;	
+//			
+//		}
+//		if (!found) {
+//			if(request.getSituation().getPlayerStatus().allowedToRollDice) {
+//				plan.setActionsAsString("RollDice;");
+//			} else {
+//				plan.setActionsAsString("EndTurn;");
+//			}
+//			response.setPlan(plan);
+//			//System.out.println("Could not find a good case... just do something!");
+//		}
+////		previousPlan = response.getPlan().getActionsAsString();
+//
+//		//updateCasebase(handleInstance, request);
+//		
+////		/*
+////		 * Dieser Abschnitt ist für das Hinzufügen des verwendeten Falls 
+////		 * in die Fallbasis verantwortlich. Da momentan keine Retain-Phase
+////		 * implementiert ist, wird auf diesen Schritt voerst verzeichtet.	
+////		 * 
+////		 * ram zu cbr Aender, dann wie vorher	
+////		 */
+////		try {
+////			Instance newCase = createInstance(request.getSituation().getPlayerStatus(), plan.getActionsAsString(),
+////					"s" + ramProject.getCB(request.getSituation().getPlayer()).getCases().size());
+////			
+////			ramProject.getCB(request.getSituation().getPlayer()).addCase(newCase);
+////			
+////		} catch (Exception exc) {
+////			exc.printStackTrace();
+////		}		
+//
+//		return response;
+//	}
+}

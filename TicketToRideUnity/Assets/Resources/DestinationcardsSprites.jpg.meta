@@ -1,0 +1,828 @@
+fileFormatVersion: 2
+guid: 140f45a7fa720ee4faf3125161e29a58
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3151336869888882911
+    second: Denver_ElPaso_4
+  - first:
+      213: -4320717757980853877
+    second: KansasCity_Houston_5
+  - first:
+      213: 7008515113044784789
+    second: NewYork_Atlanta_6
+  - first:
+      213: 5120037799705319565
+    second: Calgary_SaltLakeCity_7
+  - first:
+      213: -4787278901138948254
+    second: Chicago_NewOrleans_7
+  - first:
+      213: -3689345407492359220
+    second: Duluth_Houston_8
+  - first:
+      213: -8780068336261679175
+    second: Helena_LosAngeles_8
+  - first:
+      213: -1828392241530817820
+    second: SaultStMarie_Nashville_8
+  - first:
+      213: -4495549650092581945
+    second: Seattle_LosAngeles_9
+  - first:
+      213: 4696216777988741911
+    second: Montreal_Atlanta_9
+  - first:
+      213: -7737746758419954961
+    second: SaultStMarie_OklahomaCity_9
+  - first:
+      213: -2101538922610235954
+    second: Chicago_SantaFe_9
+  - first:
+      213: 5394396604406357612
+    second: Toronto_Miami_10
+  - first:
+      213: -8696879114774448794
+    second: Duluth_ElPaso_10
+  - first:
+      213: -5126830550620688528
+    second: Portland_Phoenix_11
+  - first:
+      213: -7555033084373791496
+    second: Winnipeg_LittleRock_11
+  - first:
+      213: 6507379747132827654
+    second: Denver_Pittsburgh_11
+  - first:
+      213: -5175388376236773727
+    second: Dallas_NewYork_11
+  - first:
+      213: -2249290050352003573
+    second: Winnipeg_Houston_12
+  - first:
+      213: 1700170580889652204
+    second: Boston_Miami_12
+  - first:
+      213: -8135524228910790780
+    second: Vancouver_SantaFe_13
+  - first:
+      213: -3926094461217206172
+    second: Montreal_NewOrleans_13
+  - first:
+      213: 5339930765471151924
+    second: Calgary_Phoenix_13
+  - first:
+      213: 815852328035138427
+    second: LosAngeles_Chicago_16
+  - first:
+      213: 5376682586884028191
+    second: SanFrancisco_Atlanta_17
+  - first:
+      213: 2875466466221116148
+    second: Portland_Nashville_17
+  - first:
+      213: -3314352381806982017
+    second: LosAngeles_Miami_20
+  - first:
+      213: -2835220282454127659
+    second: Vancouver_Montreal_20
+  - first:
+      213: 7636570720377299367
+    second: LosAngeles_NewYork_21
+  - first:
+      213: -7883819363966313944
+    second: Seattle_NewYork_22
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Denver_ElPaso_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 918
+        width: 280
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd87159cf2ccbbb20800000000000000
+      internalID: 3151336869888882911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KansasCity_Houston_5
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 918
+        width: 279
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8934dc571ab904c0800000000000000
+      internalID: -4320717757980853877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewYork_Atlanta_6
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 918
+        width: 277
+        height: 179
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 596bdf3dc5f334160800000000000000
+      internalID: 7008515113044784789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Calgary_SaltLakeCity_7
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 917
+        width: 278
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d88120070470e0740800000000000000
+      internalID: 5120037799705319565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chicago_NewOrleans_7
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 917
+        width: 280
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26ff3e8143b209db0800000000000000
+      internalID: -4787278901138948254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Duluth_Houston_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 734
+        width: 278
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccbf2bc16efccccc0800000000000000
+      internalID: -3689345407492359220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Helena_LosAngeles_8
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 735
+        width: 278
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b7b771fd5ee62680800000000000000
+      internalID: -8780068336261679175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SaultStMarie_Nashville_8
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 734
+        width: 278
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e2b97d81fe30a6e0800000000000000
+      internalID: -1828392241530817820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seattle_LosAngeles_9
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 733
+        width: 281
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cb991469699c91c0800000000000000
+      internalID: -4495549650092581945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Montreal_Atlanta_9
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 733
+        width: 280
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b9f3827405c2140800000000000000
+      internalID: 4696216777988741911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SaultStMarie_OklahomaCity_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 551
+        width: 277
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe2c27ec1500e9490800000000000000
+      internalID: -7737746758419954961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chicago_SantaFe_9
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 550
+        width: 281
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec5e82cfb75d5d2e0800000000000000
+      internalID: -2101538922610235954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toronto_Miami_10
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 553
+        width: 277
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6ed637812fbcda40800000000000000
+      internalID: 5394396604406357612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Duluth_ElPaso_10
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 551
+        width: 281
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 665fa5de58a7e4780800000000000000
+      internalID: -8696879114774448794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Portland_Phoenix_11
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 550
+        width: 283
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07f22aef6c6d9d8b0800000000000000
+      internalID: -5126830550620688528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Winnipeg_LittleRock_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 368.1667
+        width: 280.2
+        height: 182.83333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fc83932071272790800000000000000
+      internalID: -7555033084373791496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Denver_Pittsburgh_11
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 371
+        width: 280
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6086c66076bde4a50800000000000000
+      internalID: 6507379747132827654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dallas_NewYork_11
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 371
+        width: 278
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aea8b331b35d28b0800000000000000
+      internalID: -5175388376236773727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Winnipeg_Houston_12
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 368
+        width: 282
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b06c2ffcd9ae8c0e0800000000000000
+      internalID: -2249290050352003573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boston_Miami_12
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 365
+        width: 283
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceb4f7ba228389710800000000000000
+      internalID: 1700170580889652204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vancouver_SantaFe_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 183
+        width: 280
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 487403251dfc81f80800000000000000
+      internalID: -8135524228910790780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Montreal_NewOrleans_13
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 186
+        width: 280
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 460158c83e5b389c0800000000000000
+      internalID: -3926094461217206172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Calgary_Phoenix_13
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 188
+        width: 278
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43776113dbe3b1a40800000000000000
+      internalID: 5339930765471151924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LosAngeles_Chicago_16
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 185
+        width: 280
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7bb5b9ae5d725b00800000000000000
+      internalID: 815852328035138427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SanFrancisco_Atlanta_17
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 183
+        width: 280
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f17304d6350dd9a40800000000000000
+      internalID: 5376682586884028191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Portland_Nashville_17
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 0
+        width: 279
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fa48a22485b7e720800000000000000
+      internalID: 2875466466221116148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LosAngeles_Miami_20
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 0
+        width: 280
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ccce5a11e0102d0800000000000000
+      internalID: -3314352381806982017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vancouver_Montreal_20
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 0
+        width: 281
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dbc65cbc2647a8d0800000000000000
+      internalID: -2835220282454127659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LosAngeles_NewYork_21
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 0
+        width: 280
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a1ec322c9c8af960800000000000000
+      internalID: 7636570720377299367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seattle_NewYork_22
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 0
+        width: 275
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82a11790f0c079290800000000000000
+      internalID: -7883819363966313944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

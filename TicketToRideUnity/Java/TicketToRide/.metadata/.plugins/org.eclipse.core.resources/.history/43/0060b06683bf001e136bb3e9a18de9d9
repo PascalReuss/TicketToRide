@@ -1,0 +1,79 @@
+package model;
+
+
+/**
+ * Diese Klasse bietet eine Datenstruktur, um eine Anfrage (Request) darstellen zu können.
+ * 
+ * @author Tjark Harjes
+ */
+public class Request {
+
+	/**
+	 * Die Situation, in der sich der Spieler befindet.
+	 */
+	private Situation situation;
+	
+	private SituationComplete situationComplete;
+	
+	private Case newCase;
+	
+	private String requestType;
+	
+
+	public Request(Case newCase, String requestType) {
+		this.newCase = newCase;
+		this.requestType = requestType;
+	}
+
+	public Request(Situation situation, String requestType) {
+		this.situation = situation;
+		this.requestType = requestType;
+	}
+	
+	public Request(SituationComplete situationComplete, String requestType) {
+		this.situationComplete = situationComplete;
+		this.requestType = requestType;
+	}
+
+	public void setSituation(Situation situation) {
+		this.situation = situation;
+	}
+	
+	public Situation getSituation() {
+		return situation;
+	}
+	
+	public void setSituationComplete(SituationComplete situationComplete) {
+		this.situationComplete = situationComplete;
+	}
+	
+	public SituationComplete getSituationComplete() {
+		return situationComplete;
+	}
+
+	public Case getNewCase() {
+		return newCase;
+	}
+
+	public void setNewCase(Case newCase) {
+		this.newCase = newCase;
+	}
+
+	public String getRequestType() {
+		return requestType;
+	}
+
+	public void setRequestType(String requestType) {
+		this.requestType = requestType;
+	}
+	
+	@Override
+	public String toString() {
+		if (situation == null)
+			situation = new Situation();
+		if (newCase == null)
+			newCase = new Case();
+		return "Request: Case [" + newCase.toString() + "] - Situation [" + situation.toString() + "] - Type [" + requestType + "]"; 
+	}
+
+}

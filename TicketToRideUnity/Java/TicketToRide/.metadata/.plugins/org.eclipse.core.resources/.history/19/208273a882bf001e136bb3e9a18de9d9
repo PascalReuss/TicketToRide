@@ -1,0 +1,1295 @@
+package myCBR;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Queue;
+import java.util.Set;
+
+import model.Case;
+import model.Request;
+import model.Situation;
+import de.dfki.mycbr.core.DefaultCaseBase;
+import de.dfki.mycbr.core.Project;
+import de.dfki.mycbr.core.casebase.Attribute;
+import de.dfki.mycbr.core.casebase.Instance;
+import de.dfki.mycbr.core.model.AttributeDesc;
+import de.dfki.mycbr.core.model.BooleanDesc;
+import de.dfki.mycbr.core.model.Concept;
+import de.dfki.mycbr.core.model.IntegerDesc;
+import de.dfki.mycbr.core.model.StringDesc;
+import de.dfki.mycbr.core.model.SymbolDesc;
+import de.dfki.mycbr.core.retrieval.Retrieval;
+import de.dfki.mycbr.core.retrieval.Retrieval.RetrievalMethod;
+import de.dfki.mycbr.core.similarity.AmalgamationFct;
+import de.dfki.mycbr.core.similarity.Similarity;
+import de.dfki.mycbr.util.Pair;
+
+/**
+ * @author the cbr team & Daniel Schreider
+ */
+
+public class Recommender {
+
+	public CBREngine engine;
+	public Project project;
+	public DefaultCaseBase cb;
+	public Concept myConcept;
+
+//	StringDesc playerHeroColor;
+	IntegerDesc dice;
+//	IntegerDesc distanceToFogtoken;
+	IntegerDesc fogtokens;
+	IntegerDesc gold;
+	IntegerDesc hour;
+	IntegerDesc letter;
+	BooleanDesc parchmentIsActive;
+	StringDesc plan;
+	SymbolDesc positionBlue;
+	SymbolDesc positionGreen;
+	SymbolDesc positionPurple;
+	SymbolDesc positionYellow;
+	IntegerDesc shields;
+	IntegerDesc strength;
+	IntegerDesc willpower;
+	IntegerDesc battleRound;
+	SymbolDesc position;
+	IntegerDesc strengthCreature;
+	IntegerDesc willpowerCreature;
+	IntegerDesc willpowerLost;
+	IntegerDesc willpowerLostCreature;
+	BooleanDesc canFight;
+	BooleanDesc canFightTogether;
+	IntegerDesc amount;
+	IntegerDesc rewardAmount;
+	
+	// --- new Andor complex variables ---
+
+	IntegerDesc[] dicePlayers = new IntegerDesc[3];
+	BooleanDesc[] eventcardActivated = new BooleanDesc[12];
+	IntegerDesc[] fogtokenActivated = new IntegerDesc[15];
+	IntegerDesc[] goldSpaces = new IntegerDesc[42];
+	IntegerDesc[] goldPlayers = new IntegerDesc[4];
+	BooleanDesc[] gor = new BooleanDesc[28];
+	BooleanDesc[] hasParchmentPlayers = new BooleanDesc[4];
+	IntegerDesc[] hourPlayers = new IntegerDesc[4];
+	SymbolDesc parchmentPosition;
+	SymbolDesc[] positionPlayers = new SymbolDesc[4];
+	BooleanDesc[] skral = new BooleanDesc[14];
+	BooleanDesc spaces16and48connected;
+	IntegerDesc[] strengthPlayers = new IntegerDesc[4];
+	BooleanDesc[] waterwellUsed = new BooleanDesc[4];
+	BooleanDesc waterwellExisting55;
+	IntegerDesc[] willpowerPlayers = new IntegerDesc[4];
+	
+	// --- new Andor random variables ---
+	
+	IntegerDesc utility;
+	
+	public void loadengine(Request request) {
+
+		engine = new CBREngine(request);
+		project = engine.createProjectFromPRJ();
+		// create case bases and assign the case bases that will be used for submitting
+		// a query
+		cb = (DefaultCaseBase) project.getCaseBases().get(engine.getCaseBase());
+		// create a concept and get the main concept of the project;
+		myConcept = project.getConceptByID(engine.getConceptName());
+
+//		playerHeroColor = (StringDesc) myConcept.getAllAttributeDescs().get("playerHeroColor");
+		dice = (IntegerDesc) myConcept.getAllAttributeDescs().get("dice");
+//		distanceToFogtoken = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToFogtoken");
+		fogtokens = (IntegerDesc) myConcept.getAllAttributeDescs().get("fogtokens");
+		gold = (IntegerDesc) myConcept.getAllAttributeDescs().get("gold");
+		hour = (IntegerDesc) myConcept.getAllAttributeDescs().get("hour");
+		letter = (IntegerDesc) myConcept.getAllAttributeDescs().get("letter");
+		parchmentIsActive = (BooleanDesc) myConcept.getAllAttributeDescs().get("parchmentIsActive");
+		plan = (StringDesc) myConcept.getAllAttributeDescs().get("plan");
+		positionBlue = (SymbolDesc) myConcept.getAllAttributeDescs().get("positionBlue");
+		positionGreen = (SymbolDesc) myConcept.getAllAttributeDescs().get("positionGreen");
+		positionPurple = (SymbolDesc) myConcept.getAllAttributeDescs().get("positionPurple");
+		positionYellow = (SymbolDesc) myConcept.getAllAttributeDescs().get("positionYellow");
+		shields = (IntegerDesc) myConcept.getAllAttributeDescs().get("shields");
+		strength = (IntegerDesc) myConcept.getAllAttributeDescs().get("strength");
+		willpower = (IntegerDesc) myConcept.getAllAttributeDescs().get("willpower");
+		battleRound = (IntegerDesc) myConcept.getAllAttributeDescs().get("battleRound");
+		position = (SymbolDesc) myConcept.getAllAttributeDescs().get("position");
+		strengthCreature = (IntegerDesc) myConcept.getAllAttributeDescs().get("strengthCreature");
+		willpowerCreature = (IntegerDesc) myConcept.getAllAttributeDescs().get("willpowerCreature");
+		willpowerLost = (IntegerDesc) myConcept.getAllAttributeDescs().get("willpowerLost");
+		willpowerLostCreature = (IntegerDesc) myConcept.getAllAttributeDescs().get("willpowerLostCreature");
+		canFight = (BooleanDesc) myConcept.getAllAttributeDescs().get("canFight");
+		canFightTogether = (BooleanDesc) myConcept.getAllAttributeDescs().get("canFightTogether");
+		amount = (IntegerDesc) myConcept.getAllAttributeDescs().get("amount");
+		rewardAmount = (IntegerDesc) myConcept.getAllAttributeDescs().get("rewardAmount");
+
+		String[] playerColors = { "Blue", "Green", "Purple", "Yellow" };
+		int[] fogtokenNumbers = { 11, 12, 13, 16, 32, 42, 44, 46, 47, 48, 49, 56, 63, 64, 8 };
+		int[] gorPossibleSpaces = { 1, 2, 3, 4, 6, 7, 8, 11, 12, 13, 15, 16, 19, 21, 22, 23, 24, 36, 38, 39, 42, 43, 44,
+				46, 47, 48, 53, 56 };
+		int[] skralPossibleSpaces = { 6, 13, 16, 32, 38, 39, 42, 43, 44, 45, 46, 47, 54, 64 };
+
+//		dicePlayers[0] = (IntegerDesc) myConcept.getAllAttributeDescs().get("diceBlue");
+
+		for (int i = 0; i < 12; i++) {
+			eventcardActivated[i] = (BooleanDesc) myConcept.getAllAttributeDescs().get("eventcardActivated" + i);
+		}
+		for (int i = 0; i < fogtokenNumbers.length; i++) {
+			fogtokenActivated[i] = (IntegerDesc) myConcept.getAllAttributeDescs()
+					.get("fogtokenActivated" + fogtokenNumbers[i]);
+		}
+		for (int i = 0; i < 4; i++) {
+			goldPlayers[i] = (IntegerDesc) myConcept.getAllAttributeDescs().get("gold" + playerColors[i]);
+		}
+
+		dicePlayers[0] = (IntegerDesc) myConcept.getAllAttributeDescs().get("diceBlue");
+		dicePlayers[1] = (IntegerDesc) myConcept.getAllAttributeDescs().get("diceGreen");
+		dicePlayers[2] = (IntegerDesc) myConcept.getAllAttributeDescs().get("diceYellow");
+
+		String indexS = "";
+		for (int i = 0; i <= 36; i++) {
+			if (i < 10)
+				indexS = "0" + i;
+			else
+				indexS = Integer.toString(i);
+			goldSpaces[i] = (IntegerDesc) myConcept.getAllAttributeDescs().get("gold" + indexS);
+		}
+		goldSpaces[37] = (IntegerDesc) myConcept.getAllAttributeDescs().get("gold38");
+		goldSpaces[38] = (IntegerDesc) myConcept.getAllAttributeDescs().get("gold39");
+		goldSpaces[39] = (IntegerDesc) myConcept.getAllAttributeDescs().get("gold43");
+		goldSpaces[40] = (IntegerDesc) myConcept.getAllAttributeDescs().get("gold71");
+		goldSpaces[41] = (IntegerDesc) myConcept.getAllAttributeDescs().get("gold72");
+
+		int index = 0;
+		for (int i = 0; i < gorPossibleSpaces.length; i++) {
+			index = gorPossibleSpaces[i];
+			if (index < 10)
+				indexS = "0" + index;
+			else
+				indexS = Integer.toString(index);
+			gor[i] = (BooleanDesc) myConcept.getAllAttributeDescs().get("gor" + indexS);
+		}
+		for (int i = 0; i < 4; i++) {
+			hasParchmentPlayers[i] = (BooleanDesc) myConcept.getAllAttributeDescs().get("hasParchment" + playerColors[i]);
+		}
+		for (int i = 0; i < 4; i++) {
+			hourPlayers[i] = (IntegerDesc) myConcept.getAllAttributeDescs().get("hour" + playerColors[i]);
+		}
+
+		parchmentPosition = (SymbolDesc) myConcept.getAllAttributeDescs().get("parchmentPosition");
+
+		for (int i = 0; i < 4; i++) {
+			positionPlayers[i] = (SymbolDesc) myConcept.getAllAttributeDescs().get("position" + playerColors[i]);
+		}
+
+		for (int i = 0; i < skralPossibleSpaces.length; i++) {
+			index = skralPossibleSpaces[i];
+			if (index < 10)
+				indexS = "0" + index;
+			else
+				indexS = Integer.toString(index);
+			skral[i] = (BooleanDesc) myConcept.getAllAttributeDescs().get("skral" + indexS);
+		}
+
+		spaces16and48connected = (BooleanDesc) myConcept.getAllAttributeDescs().get("spaces16and48connected");
+
+		for (int i = 0; i < 4; i++) {
+			strengthPlayers[i] = (IntegerDesc) myConcept.getAllAttributeDescs().get("strength" + playerColors[i]);
+		}
+
+		waterwellExisting55 = (BooleanDesc) myConcept.getAllAttributeDescs().get("waterwellExisting55");
+		waterwellUsed[0] = (BooleanDesc) myConcept.getAllAttributeDescs().get("waterwellUsed5");
+		waterwellUsed[1] = (BooleanDesc) myConcept.getAllAttributeDescs().get("waterwellUsed35");
+		waterwellUsed[2] = (BooleanDesc) myConcept.getAllAttributeDescs().get("waterwellUsed45");
+		waterwellUsed[3] = (BooleanDesc) myConcept.getAllAttributeDescs().get("waterwellUsed55");
+
+		for (int i = 0; i < 4; i++) {
+			willpowerPlayers[i] = (IntegerDesc) myConcept.getAllAttributeDescs().get("willpower" + playerColors[i]);
+		}
+		
+		utility = (IntegerDesc) myConcept.getAllAttributeDescs().get("utility");
+	}
+
+//	public void CheckforAmalgamSelection(){
+//
+//		List<AmalgamationFct> liste = remy.myConcept.getAvailableAmalgamFcts();
+//
+//		for (int i = 0; i < liste.size(); i++){
+//
+//			if  ((liste.get(i).getName()).equals(InputAmalgam.getText())) {
+//
+//				remy.myConcept.setActiveAmalgamFct(liste.get(i));
+//			}		 
+//		}			
+//	}
+
+//	public Response solveOuery(Integer noun, Integer pluralnoun, String sentenceStructure, String keyword,
+//			String keyword2, String verb, String verb2, Integer caseNumber) {
+	public String solveOuery(Request request) {
+
+//		public String displayAmalgamationFunctions() {
+//
+//			ArrayList<String> amalgam = new ArrayList<String>();
+//			String listoffunctions = "Currently available Amalgamationfunctions: <br /> <br />";
+//			AmalgamationFct current = myConcept.getActiveAmalgamFct();
+//			System.out.println("Amalgamation Function is used = " + current.getName());
+//			List<AmalgamationFct> liste = myConcept.getAvailableAmalgamFcts();
+//
+//			for (int i = 0; i < liste.size(); i++) {
+////				System.out.println(liste.get(i).getName());
+//				listoffunctions = listoffunctions + liste.get(i).getName() + "<br />";
+//			}
+//
+//			listoffunctions = listoffunctions
+//					+ (" <br /> <br /> Currently selected Amalgamationfunction: " + current.getName() + "\n");
+//			listoffunctions = listoffunctions
+//					+ (" <br /> <br /> Please type the name of the Amalgamationfunction to use in the "
+//							+ " Field \"Amalgamationfunction\" it will be automatically used during the next retrieval");
+////			System.out.println(listoffunctions);	 s
+//			return listoffunctions;
+//		}
+
+		// answer -> response
+//		String answer = "";
+//		Response response = new Response();
+		System.out.println("\n- Started the Retrieval -");
+		// cbr team START
+		// create a new retrieval
+		Retrieval ret = new Retrieval(myConcept, cb);
+		// specify the retrieval method
+		ret.setRetrievalMethod(RetrievalMethod.RETRIEVE_SORTED);
+		// specify the Amalgamationfunction (Fight - Reward - Andor)
+		
+		// create a query instance
+		Instance query = ret.getQueryInstance();
+		// cbr team END
+//		try {
+//			if (request.getRequestType().equalsIgnoreCase("RetrievalAndorComplete") || 
+//					request.getRequestType().equalsIgnoreCase("RetrievalAndorRandom"))
+//				query = fillInstanceComplete(query, request.getSituationComplete());
+//			else
+//				query = fillInstance(query, request.getSituation());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("Recommender: " + e.getMessage());
+//		}
+		
+		try {
+			query = fillInstance(query, request.getSituation());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+//		String answerAttribute = "";
+//		if (request.getRequestType().equalsIgnoreCase("Strategy")) {
+//			answerAttribute = "strategy";
+//		} else {
+//			answerAttribute = "plan";
+//		}
+		StringDesc answerDesc = (StringDesc) myConcept.getAllAttributeDescs().get("plan");
+
+		// measure performance time
+
+		// perform retrieval
+		ret.start();
+		// get the retrieval result
+		List<Pair<Instance, Similarity>> result = ret.getResult();
+
+		double sim = 0;
+		String answerAsString = "";	
+		Map<Instance, Double> answers = new LinkedHashMap<>();	
+		int answersCount = 5;
+		Boolean done = false;
+		int counter = 0;
+		int instancesCount = cb.getCases().size();
+		System.out.println("Number of instances of the casebase " + cb.getName() + ": " + instancesCount);
+		if (instancesCount == 0) {
+			return "";
+		}
+		if (result.size() > 0) {
+
+			// get the best case's name
+			String casename = result.get(0).getFirst().getName();
+//			// get the similarity value
+			Double simAll = result.get(0).getSecond().getValue();
+//			// runde die Ähnlichkeit
+			sim = Math.round(simAll * 100.0) / 100.0;
+//			answer = "I found "+casename+" with a similarity of "+sim+" as the best match.";
+//			answer = answer+"The "+numberofcases+" best cases shown in a table: <br /> <br /> <table border=\"1\">";	
+			ArrayList<Hashtable<String, String>> liste = new ArrayList<Hashtable<String, String>>();
+//			// if more case results are requested than we have in our case base at all:
+//			if(numberofcases>=cb.getCases().size()){numberofcases = cb.getCases().size();}
+//
+//			for (int i = 0; i <= caseNumber; i++) {
+
+//			for (int i = 0; i < 5; i++) {
+//
+//				liste.add(getAttributes(result.get(i), rec.getConceptByID(engine.getConceptName())));
+////				System.out.println("Fall: " + liste.get(i).toString());
+////				answer=answer+"<tr><td>"+result.get(i).getFirst().getName()+"</td><td>"+liste.get(i).toString()+"</td></tr>";
+//			}
+//
+//			answer= answer+"</table>";	
+			
+//			System.out.println("ResultNumber: " + result.size());
+			
+			if (request.getSituation() == null)
+				request.setSituation(new Situation());
+
+			answerAsString = result.get(counter).getFirst().getAttForDesc(answerDesc).getValueAsString();
+			answerDesc = (StringDesc) myConcept.getAllAttributeDescs().get(answerAsString);
+
+		
+		if (answers.size() == 1) {
+			int count = 3;
+			for (Entry<Instance, Double> entry : answers.entrySet()) {
+				System.out.println("\nCase retrieved: " + entry.getKey().getAttForDesc(answerDesc).getValueAsString() 
+						+ " (" + entry.getKey() + ") with sim of " + entry.getValue());
+				answerAsString = entry.getKey().getAttForDesc(answerDesc).getValueAsString();
+			}
+			System.out.println("\nNext " + count + " cases would be: ");
+			if (instancesCount > 3) {
+				if (request.getRequestType().contains("RetrievalAndorComplete")) {
+					if (!request.getSituationComplete().situationType.equalsIgnoreCase("AndorComplete") &&
+							!request.getSituationComplete().situationType.equalsIgnoreCase("AndorRandom"))
+						count = 0;
+				} else {
+					if (!request.getSituation().situationType.equalsIgnoreCase("Andor"))
+						count = 0;
+				}
+				for (int i = 0; i < count; i++) {
+					if (result.get(counter+i).getFirst().getAttForDesc(answerDesc) == null)
+						continue; 
+					System.out.println("case: " + result.get(counter+i).getFirst().getAttForDesc(answerDesc).getValueAsString() 
+							+ " (" + result.get(counter+i-1).getFirst().getName() + ") with Sim: "+ result.get(counter+i-1).getSecond().getValue());
+				}
+			}
+		} else {
+			Map.Entry<Instance, Double> randomCase = chooseRandomCase(answers);
+			answerAsString = randomCase.getKey().getAttForDesc(answerDesc).getValueAsString();
+			int count = 3;
+			System.out.println("\nCases with same Similarity were retrieved. Random chosen case: " 
+			+ randomCase.getKey().getAttForDesc(answerDesc).getValueAsString() + " (" + randomCase.getKey() + 
+			") with sim of " + randomCase.getValue());
+			System.out.println("\nAll cases in this list: ");
+			for (Entry<Instance, Double> entry : answers.entrySet()) {
+				System.out.println("case: " + entry.getKey().getAttForDesc(answerDesc).getValueAsString() 
+						+ " (" + entry.getKey() + ") with Sim: "+ entry.getValue());
+			}
+			System.out.println("\nNext " + count + " cases would be: ");
+			if (instancesCount > 3) {
+				if (request.getRequestType().contains("RetrievalAndorComplete")) {
+					if (!request.getSituationComplete().situationType.equalsIgnoreCase("AndorComplete") &&
+							!request.getSituationComplete().situationType.equalsIgnoreCase("AndorRandom"))
+						count = 0;
+				} else {
+					if (!request.getSituation().situationType.equalsIgnoreCase("Andor"))
+						count = 0;
+				}
+				for (int i = 0; i < count; i++) {
+					System.out.println("case: " + result.get(counter+i).getFirst().getAttForDesc(answerDesc).getValueAsString() 
+							+ " (" + result.get(counter+i-1).getFirst().getName() + ") with Sim: "+ result.get(counter+i-1).getSecond().getValue());
+				}
+			}
+		}
+		return answerAsString;
+	}
+
+	private Instance fillInstance(Instance instance, Situation situation) throws ParseException {
+
+		if (situation.situationType.equalsIgnoreCase("AndorFight")) {
+			instance.addAttribute(battleRound, battleRound.getAttribute(situation.battleRound));
+			instance.addAttribute(dice, dice.getAttribute(situation.dice));
+			instance.addAttribute(hour, hour.getAttribute(situation.hour));
+			instance.addAttribute(position, position.getAttribute(situation.position));
+			instance.addAttribute(strength, strength.getAttribute(situation.strength));
+			instance.addAttribute(strengthCreature, strengthCreature.getAttribute(situation.strengthCreature));
+			instance.addAttribute(willpower, willpower.getAttribute(situation.willpower));
+			instance.addAttribute(willpowerCreature, willpowerCreature.getAttribute(situation.willpowerCreature));
+			instance.addAttribute(willpowerLost, willpowerLost.getAttribute(situation.willpowerLost));
+			instance.addAttribute(willpowerLostCreature,
+					willpowerLostCreature.getAttribute(situation.willpowerLostCreature));
+		} else if (situation.situationType.equalsIgnoreCase("AndorReward")) {
+			instance.addAttribute(amount, amount.getAttribute(situation.amount));
+			instance.addAttribute(gold, gold.getAttribute(situation.gold));
+			instance.addAttribute(letter, letter.getAttribute(situation.letter));
+			instance.addAttribute(parchmentIsActive, parchmentIsActive.getAttribute(situation.parchmentIsActive));
+			instance.addAttribute(strength, strength.getAttribute(situation.strength));
+			instance.addAttribute(willpower, willpower.getAttribute(situation.willpower));
+		} else {
+			instance.addAttribute(dice, dice.getAttribute(situation.dice));
+			instance.addAttribute(fogtokens, fogtokens.getAttribute(situation.fogtokens));
+			instance.addAttribute(gold, gold.getAttribute(situation.gold));
+			instance.addAttribute(hour, hour.getAttribute(situation.hour));
+			instance.addAttribute(letter, letter.getAttribute(situation.letter));
+			instance.addAttribute(parchmentIsActive, parchmentIsActive.getAttribute(situation.parchmentIsActive));
+			instance.addAttribute(positionBlue, positionBlue.getAttribute(situation.positionBlue));
+			instance.addAttribute(positionGreen, positionGreen.getAttribute(situation.positionGreen));
+			instance.addAttribute(positionPurple, positionPurple.getAttribute(situation.positionPurple));
+			instance.addAttribute(positionYellow, positionYellow.getAttribute(situation.positionYellow));
+			instance.addAttribute(shields, shields.getAttribute(situation.shields));
+			instance.addAttribute(strength, strength.getAttribute(situation.strength));
+			instance.addAttribute(willpower, willpower.getAttribute(situation.willpower));
+			instance.addAttribute(canFight, canFight.getAttribute(situation.canFight));
+			instance.addAttribute(canFightTogether, canFightTogether.getAttribute(situation.canFightTogether));
+		}
+
+		return instance;
+	}
+
+	private Instance fillInstanceComplete(Instance instance, SituationComplete situationComplete)
+			throws ParseException {
+
+		instance.addAttribute(letter, letter.getAttribute(situationComplete.letter));
+
+		try {
+			for (int i = 0; i < 3; i++) {
+				instance.addAttribute(dicePlayers[i], dicePlayers[i].getAttribute(situationComplete.dicePlayers[i]));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		for (int i = 0; i < 12; i++) {
+			instance.addAttribute(eventcardActivated[i], eventcardActivated[i].getAttribute(situationComplete.eventcardActivated[i]));
+		}
+		for (int i = 0; i < 15; i++) {
+			instance.addAttribute(fogtokenActivated[i], fogtokenActivated[i].getAttribute(situationComplete.fogtokenActivated[i]));
+		}
+		for (int i = 0; i < 42; i++) {
+			instance.addAttribute(goldSpaces[i], goldSpaces[i].getAttribute(situationComplete.goldSpaces[i]));
+		}
+		for (int i = 0; i < 4; i++) {
+			instance.addAttribute(goldPlayers[i], goldPlayers[i].getAttribute(situationComplete.goldPlayers[i]));
+		}
+		for (int i = 0; i < 28; i++) {
+			instance.addAttribute(gor[i], gor[i].getAttribute(situationComplete.gor[i]));
+		}
+		for (int i = 0; i < 4; i++) {
+			instance.addAttribute(hasParchmentPlayers[i], hasParchmentPlayers[i].getAttribute(situationComplete.hasParchmentPlayers[i]));
+		}
+		for (int i = 0; i < 4; i++) {
+			instance.addAttribute(hourPlayers[i], hourPlayers[i].getAttribute(situationComplete.hourPlayers[i]));
+		}
+		for (int i = 0; i < 4; i++) {
+			instance.addAttribute(positionPlayers[i], positionPlayers[i].getAttribute(situationComplete.positionPlayers[i]));
+		}
+		for (int i = 0; i < 14; i++) {
+			instance.addAttribute(skral[i], skral[i].getAttribute(situationComplete.skral[i]));
+		}
+		for (int i = 0; i < 4; i++) {
+			instance.addAttribute(strengthPlayers[i], strengthPlayers[i].getAttribute(situationComplete.strengthPlayers[i]));
+		}
+		for (int i = 0; i < 4; i++) {
+			instance.addAttribute(waterwellUsed[i], waterwellUsed[i].getAttribute(situationComplete.waterwellUsed[i]));
+		}
+		for (int i = 0; i < 4; i++) {
+			instance.addAttribute(willpowerPlayers[i], willpowerPlayers[i].getAttribute(situationComplete.willpowerPlayers[i]));
+		}
+
+		instance.addAttribute(parchmentIsActive, parchmentIsActive.getAttribute(situationComplete.parchmentIsActive));
+		instance.addAttribute(parchmentPosition, parchmentPosition.getAttribute(situationComplete.parchmentPosition));
+		instance.addAttribute(plan, plan.getAttribute(situationComplete.plan));
+		instance.addAttribute(shields, shields.getAttribute(situationComplete.shields));
+		instance.addAttribute(spaces16and48connected,spaces16and48connected.getAttribute(situationComplete.spaces16and48connected));
+		instance.addAttribute(canFight, canFight.getAttribute(situationComplete.canFight));
+		instance.addAttribute(canFightTogether, canFightTogether.getAttribute(situationComplete.canFightTogether));
+		
+		
+		if (situationComplete.utility > -200) {
+			instance.addAttribute(utility, utility.getAttribute(situationComplete.utility));
+		}
+		
+		if (situationComplete.situationType.contains("Fight")) {
+			instance.addAttribute(battleRound, battleRound.getAttribute(situationComplete.battleRound));
+			instance.addAttribute(strengthCreature, strengthCreature.getAttribute(situationComplete.strengthCreature));
+			instance.addAttribute(willpowerCreature, willpowerCreature.getAttribute(situationComplete.willpowerCreature));
+		}
+		if (situationComplete.situationType.contains("Reward")) {
+			instance.addAttribute(rewardAmount, rewardAmount.getAttribute(situationComplete.rewardAmount));
+		}
+
+		return instance;
+	}
+
+	public void insertNewCase(Case newCase) {
+
+		try {
+			System.out.println("Groesse der Fallbasis (" + cb.getName() + "): " + cb.getCases().size());
+			String nameOfNewCase = "";
+			if (newCase.caseType.contains("Complete"))
+				nameOfNewCase = newCase.situationComplete.playerHeroColor + (cb.getCases().size() + 1);
+			else if (newCase.caseType.contains("Random"))
+				nameOfNewCase = newCase.situationComplete.playerHeroColor + 1;
+			else
+				nameOfNewCase = newCase.situation.playerHeroColor + (cb.getCases().size() + 1);
+			
+			Boolean nameOfCaseDone = false;
+			int nameCounter = 2;
+			String caseName = "";
+			do {
+				nameOfCaseDone = true;
+				for (Iterator<Instance> iterator = cb.getCases().iterator(); iterator.hasNext();) {
+					caseName = iterator.next().getName();
+					if (nameOfNewCase.equals(caseName)) {
+						nameOfCaseDone = false;
+						nameOfNewCase = newCase.situationComplete.playerHeroColor + nameCounter;
+						nameCounter++;
+					}
+				}
+			} while (!nameOfCaseDone);
+
+			Instance caseToInsert = myConcept.addInstance(nameOfNewCase);
+
+			if (newCase.caseType.contains("Complete") || newCase.caseType.contains("Random"))
+				caseToInsert = fillInstanceComplete(caseToInsert, newCase.situationComplete);
+			else
+				caseToInsert = fillInstance(caseToInsert, newCase.situation);
+
+
+			caseToInsert.addAttribute(plan, plan.getAttribute(newCase.plan));
+			cb.addCase(caseToInsert);
+
+			System.out.println("Fall hinzugefuegt: " + nameOfNewCase);
+			System.out.println("Groesse der Fallbasis (" + cb.getName() +  ") nach Hinzufuegen des Falls: " + cb.getCases().size());
+
+			project.getCaseBases().get("AllCases").addCase(caseToInsert);
+
+			project.save();
+
+		} catch (Exception exc) {
+			System.out.println("Exception!");
+			System.out.println(exc.getMessage());
+		}
+	}
+
+	public Map.Entry<Instance, Double> evaluateCasesByUtility(Map<Instance, Double> answers) {
+		Map.Entry<Instance, Double> bestCase = answers.entrySet().iterator().next();
+		for (Entry<Instance, Double> entry : answers.entrySet()) {
+			if (Integer.parseInt(entry.getKey().getAttForDesc(utility).getValueAsString()) > 
+				Integer.parseInt(bestCase.getKey().getAttForDesc(utility).getValueAsString())) {
+				bestCase = entry;
+			} else if (Integer.parseInt(entry.getKey().getAttForDesc(utility).getValueAsString()) 
+				== Integer.parseInt(bestCase.getKey().getAttForDesc(utility).getValueAsString())) {
+				if (Math.round(Math.random()) == 1)
+					bestCase = entry;
+			}
+		}
+		
+		return bestCase;
+	}
+	
+	public Map.Entry<Instance, Double> chooseRandomCase(Map<Instance, Double> answers) {
+		int random = (int) (Math.random() * answers.size()-1);
+		Map.Entry<Instance, Double> randomCase = (Entry<Instance, Double>) answers.entrySet().toArray()[random];
+		return randomCase;
+	}
+	
+	public Map.Entry<Instance, Double> evaluateCasesByUtilityUsingProbability(Map<Instance, Double> answers) {
+		Map.Entry<Instance, Double> bestCase = answers.entrySet().iterator().next();
+		return bestCase;
+	}
+	
+//	Attribute utilityDesc = caseEntry.getKey().getAttForDesc(utility);
+//	int utility = Integer.parseInt(utilityDesc.getValueAsString()
+	
+	public void decreaseCaseBase(DefaultCaseBase cb, int limit) {
+		while (cb.getCases().size() > limit) {
+			Boolean allCasesHavePositiveUtility = true;
+			for (Instance c : cb.getCases()) {
+				if (Integer.parseInt(c.getAttForDesc(utility).getValueAsString()) < 0) {
+					allCasesHavePositiveUtility = false;
+					break;
+				}
+			}
+			
+			if (allCasesHavePositiveUtility) {
+				System.out.println("\nNo case was deleted. All cases have positive utility!");
+				return;
+			}
+			
+			Instance caseToDelete = cb.getCases().iterator().next();
+			for (Instance c : cb.getCases()) {			
+				if (Integer.parseInt(c.getAttForDesc(utility).getValueAsString()) < 
+						Integer.parseInt(caseToDelete.getAttForDesc(utility).getValueAsString())) {
+					caseToDelete = c;
+				} else if (Integer.parseInt(c.getAttForDesc(utility).getValueAsString()) == 
+						Integer.parseInt(caseToDelete.getAttForDesc(utility).getValueAsString())) {
+					if (Math.round(Math.random()) == 1)
+						caseToDelete = c;
+				}
+			}
+			cb.removeCase(caseToDelete);
+			System.out.println("Case " + caseToDelete.getAttForDesc(plan).getValueAsString() + " (" + caseToDelete.getName() 
+				+ ") with utility of " + caseToDelete.getAttForDesc(utility).getValueAsString() + " was removed from the case base.");
+			project.save();
+		}
+	}
+	
+	void createMapMatrix() throws Exception {
+		try {
+			graph = new Graph(85);
+			graph.addEdges(0, new int[] { 1, 2, 4, 5, 6, 7, 11 });
+			graph.addEdges(1, new int[] { 2, 3, 4 });
+			graph.addEdges(2, new int[] { 3, 6, 14 });
+			graph.addEdges(3, new int[] { 4, 20, 19, 10, 14 });
+			graph.addEdges(4, new int[] { 5, 20, 21 });
+			graph.addEdges(5, new int[] { 21 });
+			graph.addEdges(6, new int[] { 11, 13, 14, 17 });
+			graph.addEdges(7, new int[] { 8, 9, 11, 15 });
+			graph.addEdges(8, new int[] { 9, 11 });
+			graph.addEdges(9, new int[] { 15 });
+			graph.addEdges(10, new int[] { 14, 18, 19 });
+			graph.addEdges(11, new int[] { 12, 13 });
+			graph.addEdges(12, new int[] { 13 });
+			graph.addEdges(13, new int[] { 16, 17 });
+			graph.addEdges(14, new int[] { 17, 18 });
+			graph.addEdges(15, new int[] {});
+			graph.addEdges(16, new int[] { 17, 32, 38, 36, 48 });
+			graph.addEdges(17, new int[] { 18, 36 });
+			graph.addEdges(18, new int[] { 36, 28, 72 });
+			graph.addEdges(19, new int[] { 20, 22, 23, 72 });
+			graph.addEdges(20, new int[] { 21, 22 });
+			graph.addEdges(21, new int[] { 22, 24 });
+			graph.addEdges(22, new int[] { 24, 23 });
+			graph.addEdges(23, new int[] { 24, 25, 72, 31, 34, 35 });
+			graph.addEdges(24, new int[] { 25 });
+			graph.addEdges(25, new int[] { 26, 27, 31 });
+			graph.addEdges(26, new int[] { 27 });
+			graph.addEdges(27, new int[] { 31 });
+			graph.addEdges(28, new int[] { 29, 72, 38, 36 });
+			graph.addEdges(29, new int[] { 30, 34, 72 });
+			graph.addEdges(30, new int[] { 34, 35, 33 });
+			graph.addEdges(31, new int[] { 33, 35 });
+			graph.addEdges(32, new int[] { 38 });
+			graph.addEdges(33, new int[] { 35 });
+			graph.addEdges(34, new int[] { 72, 35 });
+			graph.addEdges(35, new int[] {});
+			graph.addEdges(36, new int[] { 38 });
+			graph.addEdges(37, new int[] { 41 });
+			graph.addEdges(38, new int[] { 39 });
+			graph.addEdges(39, new int[] { 40, 42, 43 });
+			graph.addEdges(40, new int[] { 41 });
+			graph.addEdges(41, new int[] {});
+			graph.addEdges(42, new int[] { 43, 44 });
+			graph.addEdges(43, new int[] { 44, 71, 45 });
+			graph.addEdges(44, new int[] { 45, 46 });
+			graph.addEdges(45, new int[] { 46, 64, 65 });
+			graph.addEdges(46, new int[] { 47, 64 });
+			graph.addEdges(47, new int[] { 48, 53, 56, 54 });
+			graph.addEdges(48, new int[] { 49, 50, 51, 53 });
+			graph.addEdges(49, new int[] { 50 });
+			graph.addEdges(50, new int[] { 51, 52 });
+			graph.addEdges(51, new int[] { 52, 53, 55 });
+			graph.addEdges(52, new int[] { 55 });
+			graph.addEdges(53, new int[] { 55, 54 });
+			graph.addEdges(54, new int[] { 55, 56, 57 });
+			graph.addEdges(55, new int[] { 57 });
+			graph.addEdges(56, new int[] { 57, 63 });
+			graph.addEdges(57, new int[] { 58, 59, 63 });
+			graph.addEdges(58, new int[] { 59, 60, 61, 62, 63 });
+			graph.addEdges(59, new int[] { 60 });
+			graph.addEdges(60, new int[] { 62 });
+			graph.addEdges(61, new int[] { 62, 63, 64 });
+			graph.addEdges(62, new int[] {});
+			graph.addEdges(63, new int[] { 64 });
+			graph.addEdges(64, new int[] { 65 });
+			graph.addEdges(65, new int[] { 66 });
+			graph.addEdges(66, new int[] { 67 });
+			graph.addEdges(67, new int[] { 68 });
+			graph.addEdges(68, new int[] { 69 });
+			graph.addEdges(69, new int[] { 70 });
+			graph.addEdges(70, new int[] { 81 });
+			graph.addEdges(71, new int[] {});
+			graph.addEdges(72, new int[] {});
+			graph.addEdges(81, new int[] { 82 });
+			graph.addEdges(82, new int[] { 84 });
+			graph.addEdges(84, new int[] {});
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	int[] bfs(int start, int target) throws Exception {
+		// "Warteschlange": first in, first out
+		Queue<Integer> q = new LinkedList<>();
+		// bool list which shows if a node was already visited
+		Boolean[] visited = new Boolean[graph.getNumVertices()];
+		for (int i = 0; i < graph.getNumVertices(); i++)
+			visited[i] = false;
+
+		// array of List<int> which saves the path of nodes
+		int[][] vertices = new int[graph.getNumVertices()][];
+
+//		LinkedList<Integer> vertices[] = new LinkedList[graph.getNumVertices()];
+//        for (int i=0; i<graph.getNumVertices(); i++)  
+//        {  
+//            vertices[i] = new LinkedList<>();  
+//        }  
+//        ArrayList<Integer>[] vertices = (ArrayList<Integer>[]) new ArrayList[graph.getNumVertices()];
+
+		// add the start node into the queue
+		q.add(start);
+		// create a new list at the index of the start node which contains the start
+		// node
+		vertices[start] = new int[] { start };
+
+		while (q.size() > 0) {
+			// remove first element of the queue
+			int v = q.remove();
+			// set index to true -> the node was visited
+			visited[v] = true;
+
+			// for each neighbor
+			for (int w : graph.getAdjacentVertices(v)) {
+				// if the node was not visited yet
+				if (!visited[w]) {
+//                    // if the array does not contain a list for the node -> create empty list
+//                    if (vertices[w] == null)
+//                        vertices[w] = new int[1];
+					// add values of parent node list to this list = add followed path to the list
+					vertices[w] = Arrays.copyOf(vertices[v], vertices[v].length + 1);
+					// add current node to the list
+					vertices[w][vertices[w].length - 1] = w;
+					// if the target node was visited, leave the method and return the list
+					if (vertices[target] != null)
+						return vertices[target];
+					// set index to true -> the node was visited
+					visited[w] = true;
+					// add this node to the queue -> node "waits" so that its neighbors can be
+					// visited later
+					q.add(w);
+				}
+			}
+		}
+		return vertices[target];
+	}
+
+	Boolean checkIfPlayerReachesSpace(int start, int target, Request request) throws Exception {
+
+		int reachableHour = getReachableHour(request);
+		int playerHour = getPlayerHour(request);
+		
+//		System.out.println("BFS Length: " + bfs(start, target).length);
+//		System.out.println("reachableHour: " + reachableHour);
+
+		if (bfs(start, target).length - 1 <= reachableHour - playerHour)
+			return true;
+		else
+			return false;
+
+	}
+	
+	int getReachableHour(Request request) {
+		int reachableHour = 10;
+		
+		int playerHour = getPlayerHour(request);
+		int willpower = getPlayerWillpower(request);
+
+		if (willpower <= 6 && playerHour <= 7)
+			reachableHour--;
+		if (willpower <= 4 && playerHour <= 8)
+			reachableHour--;
+		if (willpower <= 2)
+			reachableHour--;
+		
+		return reachableHour;
+	}
+	
+	int getPlayerHour(Request request) {
+		int playerHour = -1;
+		
+		if (request.getRequestType().contains("Complete") || request.getRequestType().contains("Random")) {
+			String playerHeroColor = request.getSituationComplete().playerHeroColor;
+			switch (playerHeroColor) {
+			case "Blue":
+				playerHour = request.getSituationComplete().hourPlayers[0];
+				break;
+			case "Green":
+				playerHour = request.getSituationComplete().hourPlayers[1];
+				break;
+			case "Purple":
+				playerHour = request.getSituationComplete().hourPlayers[2];
+				break;
+			case "Yellow":
+				playerHour = request.getSituationComplete().hourPlayers[3];
+				break;
+			}
+		}
+		else {
+			playerHour = request.getSituation().hour;
+		}
+		
+		return playerHour;
+	}
+	
+	int getPlayerWillpower(Request request) {
+		int willpower = -1;
+		
+		if (request.getRequestType().contains("Complete") || request.getRequestType().contains("Random")) {
+			String playerHeroColor = request.getSituationComplete().playerHeroColor;
+			switch (playerHeroColor) {
+			case "Blue":
+				willpower = request.getSituationComplete().willpowerPlayers[0];
+				break;
+			case "Green":
+				willpower = request.getSituationComplete().willpowerPlayers[1];
+				break;
+			case "Purple":
+				willpower = request.getSituationComplete().willpowerPlayers[2];
+				break;
+			case "Yellow":
+				willpower = request.getSituationComplete().willpowerPlayers[3];
+				break;
+			}
+		}
+		else {
+			willpower = request.getSituation().willpower;
+		}
+		
+		return willpower;
+	}
+
+	Boolean CheckIfParchmentCollidesWithCreature(int start, int target, List<Integer> creatures) throws Exception
+    {
+        // get the walked spaces
+        int[] spaces = bfs(start, target);
+        // check for each space if there is a creature
+        for (int space : spaces)
+        {
+            for (int creature : creatures)
+                if (space == creature)
+                	return true;
+        }
+        return false;
+    }
+	
+	
+	/**
+	 * Diese Methode befuellt eine gegebene Instanz mit den konkreten Werten, die
+	 * aus einem gegebenen Status gezogen werden k&ouml;nnen.
+	 * 
+	 * @param instance Die Instanz, die befuellt werden soll.
+	 * @param status   Der Status, aus dem die konkreten Werte gezogen werden.
+	 * @return Die nun befuellte Instanz.
+	 * @throws ParseException
+	 */
+//	private Instance fillQueryPrototype(Instance instance, Status status, String player, String requestType) throws ParseException {
+//
+////			if (player.equals("Player1")) {
+////				status.calculatePreferencePlayer1();
+////			} else {
+////				status.calculatePreferencePlayer2();
+////			}
+//		//jtf.setText(jtf.getText() + "\n*******************Preference: " + status.getPreference());
+//		
+//		// Die folgenden Zeilen ersetzen diesen Code:
+////		IntegerDesc availableBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableBrick");
+////		query.addAttribute(availableBrickDesc, availableBrickDesc.getAttribute(request.getSituation().getPlayerStatus().brick));
+//		
+//		
+//		if (requestType.equalsIgnoreCase("Turn")) {
+//			IntegerDesc availableBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableBrick");
+//			IntegerDesc availableWoodDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableWood");
+//			IntegerDesc availableWheatDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableWheat");
+//			IntegerDesc availableSheepDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableSheep");
+//			IntegerDesc availableStoneDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableStone");
+//			IntegerDesc handcardsCountDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("handcardsCount");
+//			
+//			IntegerDesc probabilityBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilityBrick");
+//			IntegerDesc probabilityWoodDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilityWood");
+//			IntegerDesc probabilityWheatDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilityWheat");
+//			IntegerDesc probabilitySheepDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilitySheep");
+//			IntegerDesc probabilityStoneDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilityStone");
+//			
+//			IntegerDesc availableHarborBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborBrick");
+//			IntegerDesc availableHarborWoodDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborWood");
+//			IntegerDesc availableHarborWheatDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborWheat");
+//			IntegerDesc availableHarborSheepDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborSheep");
+//			IntegerDesc availableHarborStoneDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborStone");
+//			
+//			IntegerDesc devCardKnightIsAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("devCardKnightIsAvailable");
+//			IntegerDesc devCardMonopolyIsAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("devCardMonopolyIsAvailable");
+//			IntegerDesc devCardRoadBuildingIsAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("devCardRoadBuildingIsAvailable");
+//			IntegerDesc devCardYearOfPlentyIsAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("devCardYearOfPlentyIsAvailable");
+//			
+//			IntegerDesc knightCountOpDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("knightCountOp");
+//			IntegerDesc knightCountOwnDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("knightCountOwn");		
+//			IntegerDesc largestArmyIsOwnerDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("largestArmyIsOwner");
+//			
+//			IntegerDesc longestRoadOpDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("longestRoadOp");
+//			IntegerDesc longestRoadOwnDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("longestRoadOwn");
+//			IntegerDesc longestRoadIsOwnerDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("longestRoadIsOwner");
+//			
+//			IntegerDesc thiefIsBlockingDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("thiefIsBlocking");
+//			IntegerDesc victoryPointsOpDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("victoryPointsOp");
+//			IntegerDesc victoryPointsOwnDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("victoryPointsOwn");
+//			
+//			IntegerDesc villagePlaceAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("villagePlaceAvailable");
+//			IntegerDesc villagePlaceTargetAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("villagePlaceTargetAvailable");
+//			IntegerDesc cityPlaceAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("cityPlaceAvailable");
+//			IntegerDesc cityPlaceTargetAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("cityPlaceTargetAvailable");
+//			IntegerDesc roadPlaceAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("roadPlaceAvailable");
+//			IntegerDesc roadPlaceTargetAvailableDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("roadPlaceTargetAvailable");
+//			
+//			IntegerDesc roadsRequiredDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("roadsRequired");
+//			SymbolDesc currentStrategyDesc = (SymbolDesc) myConcept.getAllAttributeDescs().get("currentStrategy");
+////			IntegerDesc villagesDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("villages");
+//			
+//			instance.addAttribute(availableBrickDesc, availableBrickDesc.getAttribute(status.brick));
+//			instance.addAttribute(availableWoodDesc, availableWoodDesc.getAttribute(status.wood));
+//			instance.addAttribute(availableWheatDesc, availableWheatDesc.getAttribute(status.wheat));
+//			instance.addAttribute(availableSheepDesc, availableSheepDesc.getAttribute(status.sheep));
+//			instance.addAttribute(availableStoneDesc, availableStoneDesc.getAttribute(status.stone));
+//			instance.addAttribute(handcardsCountDesc, handcardsCountDesc.getAttribute(status.handcardsCount));
+//			
+//			instance.addAttribute(probabilityBrickDesc, probabilityBrickDesc.getAttribute(status.probabilityBrick));
+//			instance.addAttribute(probabilityWoodDesc, probabilityWoodDesc.getAttribute(status.probabilityWood));
+//			instance.addAttribute(probabilityWheatDesc, probabilityWheatDesc.getAttribute(status.probabilityWheat));
+//			instance.addAttribute(probabilitySheepDesc, probabilitySheepDesc.getAttribute(status.probabilitySheep));
+//			instance.addAttribute(probabilityStoneDesc, probabilityStoneDesc.getAttribute(status.probabilityStone));
+//			
+//			instance.addAttribute(availableHarborBrickDesc, availableHarborBrickDesc.getAttribute(status.availableHarborBrick));
+//			instance.addAttribute(availableHarborWoodDesc, availableHarborWoodDesc.getAttribute(status.availableHarborWood));
+//			instance.addAttribute(availableHarborWheatDesc, availableHarborWheatDesc.getAttribute(status.availableHarborWheat));
+//			instance.addAttribute(availableHarborSheepDesc, availableHarborSheepDesc.getAttribute(status.availableHarborSheep));
+//			instance.addAttribute(availableHarborStoneDesc, availableHarborStoneDesc.getAttribute(status.availableHarborStone));
+//			
+//			instance.addAttribute(devCardKnightIsAvailableDesc, devCardKnightIsAvailableDesc.getAttribute(status.devCardKnightIsAvailable));
+//			instance.addAttribute(devCardMonopolyIsAvailableDesc, devCardMonopolyIsAvailableDesc.getAttribute(status.devCardMonopolyIsAvailable));
+//			instance.addAttribute(devCardRoadBuildingIsAvailableDesc, devCardRoadBuildingIsAvailableDesc.getAttribute(status.devCardRoadBuildingIsAvailable));
+//			instance.addAttribute(devCardYearOfPlentyIsAvailableDesc, devCardYearOfPlentyIsAvailableDesc.getAttribute(status.devCardYearOfPlentyIsAvailable));
+//			
+//			instance.addAttribute(knightCountOpDesc, knightCountOpDesc.getAttribute(status.knightCountOp));
+//			instance.addAttribute(knightCountOwnDesc, knightCountOwnDesc.getAttribute(status.knightCountOwn));
+//			instance.addAttribute(largestArmyIsOwnerDesc, largestArmyIsOwnerDesc.getAttribute(status.largestArmyIsOwner));
+//			
+//			instance.addAttribute(longestRoadOpDesc, longestRoadOpDesc.getAttribute(status.longestRoadOp));
+//			instance.addAttribute(longestRoadOwnDesc, longestRoadOwnDesc.getAttribute(status.longestRoadOwn));
+//			instance.addAttribute(longestRoadIsOwnerDesc, longestRoadIsOwnerDesc.getAttribute(status.longestRoadIsOwner));
+//			
+//			instance.addAttribute(thiefIsBlockingDesc, thiefIsBlockingDesc.getAttribute(status.thiefIsBlocking));
+//			instance.addAttribute(victoryPointsOpDesc, victoryPointsOpDesc.getAttribute(status.victoryPointsOp));
+//			instance.addAttribute(victoryPointsOwnDesc, victoryPointsOwnDesc.getAttribute(status.victoryPointsOwn));
+//			
+//			instance.addAttribute(villagePlaceAvailableDesc, villagePlaceAvailableDesc.getAttribute(status.villagePlaceAvailable));
+//			instance.addAttribute(villagePlaceTargetAvailableDesc, villagePlaceTargetAvailableDesc.getAttribute(status.villagePlaceTargetAvailable));
+//			instance.addAttribute(cityPlaceAvailableDesc, cityPlaceAvailableDesc.getAttribute(status.cityPlaceAvailable));
+//			instance.addAttribute(cityPlaceTargetAvailableDesc, cityPlaceTargetAvailableDesc.getAttribute(status.cityPlaceTargetAvailable));
+//			instance.addAttribute(roadPlaceAvailableDesc, roadPlaceAvailableDesc.getAttribute(status.roadPlaceAvailable));
+//			instance.addAttribute(roadPlaceTargetAvailableDesc, roadPlaceTargetAvailableDesc.getAttribute(status.roadPlaceTargetAvailable));
+//			
+//			instance.addAttribute(roadsRequiredDesc, roadsRequiredDesc.getAttribute(status.roadsRequired));
+//			instance.addAttribute(currentStrategyDesc, currentStrategyDesc.getAttribute(status.currentStrategy));
+//			
+//		} else {
+//			
+//			IntegerDesc probabilityBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilityBrick");
+//			IntegerDesc probabilityWoodDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilityWood");
+//			IntegerDesc probabilityWheatDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilityWheat");
+//			IntegerDesc probabilitySheepDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilitySheep");
+//			IntegerDesc probabilityStoneDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("probabilityStone");
+//			
+//			IntegerDesc availableHarborBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborBrick");
+//			IntegerDesc availableHarborWoodDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborWood");
+//			IntegerDesc availableHarborWheatDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborWheat");
+//			IntegerDesc availableHarborSheepDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborSheep");
+//			IntegerDesc availableHarborStoneDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableHarborStone");
+//			
+//			IntegerDesc knightCountOpDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("knightCountOp");
+//			IntegerDesc knightCountOwnDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("knightCountOwn");		
+//			IntegerDesc largestArmyIsOwnerDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("largestArmyIsOwner");
+//			
+//			IntegerDesc longestRoadOpDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("longestRoadOp");
+//			IntegerDesc longestRoadOwnDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("longestRoadOwn");
+//			IntegerDesc longestRoadIsOwnerDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("longestRoadIsOwner");
+//			
+//			IntegerDesc victoryPointsOpDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("victoryPointsOp");
+//			IntegerDesc victoryPointsOwnDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("victoryPointsOwn");
+//			
+//			IntegerDesc villageCountDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("villageCount");
+//			IntegerDesc cityCountDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("cityCount");
+//			IntegerDesc roadCountDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("roadCount");
+//			
+//			IntegerDesc distanceToHarborBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToHarborBrick");
+//			IntegerDesc distanceToHarborWoodDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToHarborWood");
+//			IntegerDesc distanceToHarborWheatDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToHarborWheat");
+//			IntegerDesc distanceToHarborSheepDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToHarborSheep");
+//			IntegerDesc distanceToHarborStoneDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToHarborStone");
+//			
+//			IntegerDesc distanceToVillageBuildPlaceBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToVillageBuildPlaceBrick");
+//			IntegerDesc distanceToVillageBuildPlaceWoodDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToVillageBuildPlaceWood");
+//			IntegerDesc distanceToVillageBuildPlaceWheatDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToVillageBuildPlaceWheat");
+//			IntegerDesc distanceToVillageBuildPlaceSheepDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToVillageBuildPlaceSheep");
+//			IntegerDesc distanceToVillageBuildPlaceStoneDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToVillageBuildPlaceStone");
+//			IntegerDesc distanceToVillageBuildPlaceBestDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToVillageBuildPlaceBest");
+//			IntegerDesc distanceToVillageBuildPlaceGoodDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("distanceToVillageBuildPlaceGood");
+//			
+//			
+//			instance.addAttribute(probabilityBrickDesc, probabilityBrickDesc.getAttribute(status.probabilityBrick));
+//			instance.addAttribute(probabilityWoodDesc, probabilityWoodDesc.getAttribute(status.probabilityWood));
+//			instance.addAttribute(probabilityWheatDesc, probabilityWheatDesc.getAttribute(status.probabilityWheat));
+//			instance.addAttribute(probabilitySheepDesc, probabilitySheepDesc.getAttribute(status.probabilitySheep));
+//			instance.addAttribute(probabilityStoneDesc, probabilityStoneDesc.getAttribute(status.probabilityStone));
+//			
+//			instance.addAttribute(availableHarborBrickDesc, availableHarborBrickDesc.getAttribute(status.availableHarborBrick));
+//			instance.addAttribute(availableHarborWoodDesc, availableHarborWoodDesc.getAttribute(status.availableHarborWood));
+//			instance.addAttribute(availableHarborWheatDesc, availableHarborWheatDesc.getAttribute(status.availableHarborWheat));
+//			instance.addAttribute(availableHarborSheepDesc, availableHarborSheepDesc.getAttribute(status.availableHarborSheep));
+//			instance.addAttribute(availableHarborStoneDesc, availableHarborStoneDesc.getAttribute(status.availableHarborStone));
+//			
+//			instance.addAttribute(knightCountOpDesc, knightCountOpDesc.getAttribute(status.knightCountOp));
+//			instance.addAttribute(knightCountOwnDesc, knightCountOwnDesc.getAttribute(status.knightCountOwn));
+//			instance.addAttribute(largestArmyIsOwnerDesc, largestArmyIsOwnerDesc.getAttribute(status.largestArmyIsOwner));
+//			
+//			instance.addAttribute(longestRoadOpDesc, longestRoadOpDesc.getAttribute(status.longestRoadOp));
+//			instance.addAttribute(longestRoadOwnDesc, longestRoadOwnDesc.getAttribute(status.longestRoadOwn));
+//			instance.addAttribute(longestRoadIsOwnerDesc, longestRoadIsOwnerDesc.getAttribute(status.longestRoadIsOwner));
+//			
+//			instance.addAttribute(victoryPointsOpDesc, victoryPointsOpDesc.getAttribute(status.victoryPointsOp));
+//			instance.addAttribute(victoryPointsOwnDesc, victoryPointsOwnDesc.getAttribute(status.victoryPointsOwn));
+//			
+//			instance.addAttribute(villageCountDesc, victoryPointsOwnDesc.getAttribute(status.villageCount));
+//			instance.addAttribute(cityCountDesc, victoryPointsOwnDesc.getAttribute(status.cityCount));
+//			instance.addAttribute(roadCountDesc, victoryPointsOwnDesc.getAttribute(status.roadCount));
+//			
+//			instance.addAttribute(distanceToHarborBrickDesc, victoryPointsOwnDesc.getAttribute(status.distanceToHarborBrick));
+//			instance.addAttribute(distanceToHarborWoodDesc, victoryPointsOwnDesc.getAttribute(status.distanceToHarborWood));
+//			instance.addAttribute(distanceToHarborWheatDesc, victoryPointsOwnDesc.getAttribute(status.distanceToHarborWheat));
+//			instance.addAttribute(distanceToHarborSheepDesc, victoryPointsOwnDesc.getAttribute(status.distanceToHarborSheep));
+//			instance.addAttribute(distanceToHarborStoneDesc, victoryPointsOwnDesc.getAttribute(status.distanceToHarborStone));
+//			
+//			instance.addAttribute(distanceToVillageBuildPlaceBestDesc, victoryPointsOwnDesc.getAttribute(status.distanceToVillageBuildPlaceBest));
+//			instance.addAttribute(distanceToVillageBuildPlaceGoodDesc, victoryPointsOwnDesc.getAttribute(status.distanceToVillageBuildPlaceGood));
+//			instance.addAttribute(distanceToVillageBuildPlaceBrickDesc, victoryPointsOwnDesc.getAttribute(status.distanceToVillageBuildPlaceBrick));
+//			instance.addAttribute(distanceToVillageBuildPlaceWoodDesc, victoryPointsOwnDesc.getAttribute(status.distanceToVillageBuildPlaceWood));
+//			instance.addAttribute(distanceToVillageBuildPlaceWheatDesc, victoryPointsOwnDesc.getAttribute(status.distanceToVillageBuildPlaceWheat));
+//			instance.addAttribute(distanceToVillageBuildPlaceSheepDesc, victoryPointsOwnDesc.getAttribute(status.distanceToVillageBuildPlaceSheep));
+//			instance.addAttribute(distanceToVillageBuildPlaceStoneDesc, victoryPointsOwnDesc.getAttribute(status.distanceToVillageBuildPlaceStone));
+//			
+////			instance.addAttribute(villagesDesc, villagesDesc.getAttribute(status.villages));IntegerDesc availableBrickDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("availableBrick");
+//		}
+//		return instance;
+//		
+//	}
+
+	// updateAttributeWeight(status);
+	// tempStati.add(status);
+
+	// temporary disabled
+	/*
+	 * setWeightForAttr(instance, RetrievalHelper.IS_COVERED_DESC, isCoveredAttrW);
+	 * setWeightForAttr(instance, RetrievalHelper.PLAN_DESC, planAttrW);
+	 * setWeightForAttr(instance, RetrievalHelper.QUALITY_DESC, qualityAttrW);
+	 */
+
+	// Alle Werte werden hier initial gesetzt.
+	/*
+	 * setWeightForAttr(instance, RetrievalHelper.IS_ABLED_TO_BUILD_CITY,
+	 * isAbledToBuildCity); setWeightForAttr(instance,
+	 * RetrievalHelper.IS_ABLED_TO_BUILD_VILLAGE, isAbledToBuildVillage);
+	 * setWeightForAttr(instance, RetrievalHelper.IS_ABLED_TO_BUILD_ROAD,
+	 * isAbledToBuildRoad); setWeightForAttr(instance,
+	 * RetrievalHelper.IS_FIRST_TURN, isFirstTurn); setWeightForAttr(instance,
+	 * RetrievalHelper.IS_SECOND_TURN, isSecondTurn); setWeightForAttr(instance,
+	 * RetrievalHelper.IS_ALLOWED_TO_ROLL_DICE, isAllowedToRollDice);
+	 * setWeightForAttr(instance, RetrievalHelper.IS_ABLED_TO_END_TURN,
+	 * isAbledToEndTurn); //Hier wäre iscovered bool, mal gucken ob das geht
+	 * setWeightForAttr(instance, RetrievalHelper.CITY_PLACES_ACTIVE,
+	 * cityPlacesAct); setWeightForAttr(instance,
+	 * RetrievalHelper.VILLAGE_PLACES_ACTIVE, villagePlacesAct);
+	 * setWeightForAttr(instance, RetrievalHelper.ROAD_PLACES_ACTIVE,
+	 * roadPlacesAct); //setWeightForAttr(instance,
+	 * RetrievalHelper.HAS_LONGEST_ROAD, hasLongestRoad); setWeightForAttr(instance,
+	 * RetrievalHelper.HAS_FREE_BUILD, hasFreeBuild); setWeightForAttr(instance,
+	 * RetrievalHelper.HAS_FREE_BUILD_ROAD, hasFreeBuildRoad);
+	 * /*setWeightForAttr(instance, RetrievalHelper.BRICKS, bricks);
+	 * setWeightForAttr(instance, RetrievalHelper.WOOD, wood);
+	 * setWeightForAttr(instance, RetrievalHelper.SHEEP, sheep);
+	 * setWeightForAttr(instance, RetrievalHelper.WHEAT, wheat);
+	 * setWeightForAttr(instance, RetrievalHelper.STONE, stone);
+	 */
+
+	/*
+	 * jtf.setText(jtf.getText() +
+	 * "\n*************************VERGLEICHSFALL**************************************"
+	 * ); jtf.setText(jtf.getText() + "\nCityPlacesActive: " +
+	 * instance.getAttForDesc(RetrievalHelper.CITY_PLACES_ACTIVE).getValueAsString()
+	 * ); jtf.setText(jtf.getText() + "\nVillagePlacesActive: " +
+	 * instance.getAttForDesc(RetrievalHelper.VILLAGE_PLACES_ACTIVE).
+	 * getValueAsString()); jtf.setText(jtf.getText() + "\nRoadPlacesActive: " +
+	 * instance.getAttForDesc(RetrievalHelper.ROAD_PLACES_ACTIVE).getValueAsString()
+	 * ); jtf.setText(jtf.getText() + "\nFirst Tur: " +
+	 * instance.getAttForDesc(RetrievalHelper.IS_FIRST_TURN).getValueAsString());
+	 * jtf.setText(jtf.getText() + "\nSecond Turn: " +
+	 * instance.getAttForDesc(RetrievalHelper.IS_SECOND_TURN).getValueAsString());
+	 * jtf.setText(jtf.getText() + "\nFree Build: " +
+	 * instance.getAttForDesc(RetrievalHelper.HAS_FREE_BUILD).getValueAsString());
+	 * jtf.setText(jtf.getText() + "\nFree Build road: " +
+	 * instance.getAttForDesc(RetrievalHelper.HAS_FREE_BUILD_ROAD).getValueAsString(
+	 * )); jtf.setText(jtf.getText() + "\nhas longest Road: " +
+	 * instance.getAttForDesc(RetrievalHelper.HAS_LONGEST_ROAD).getValueAsString());
+	 * jtf.setText(jtf.getText() + "\nabled to build city: " +
+	 * instance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_CITY).
+	 * getValueAsString()); jtf.setText(jtf.getText() + "\nabled to build village: "
+	 * + instance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_VILLAGE).
+	 * getValueAsString()); jtf.setText(jtf.getText() + "\nabled to build road: " +
+	 * instance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_BUILD_ROAD).
+	 * getValueAsString()); jtf.setText(jtf.getText() + "\nabled to end Turn: " +
+	 * instance.getAttForDesc(RetrievalHelper.IS_ABLED_TO_END_TURN).getValueAsString
+	 * ()); jtf.setText(jtf.getText() + "\nallowed to roll dice: " +
+	 * instance.getAttForDesc(RetrievalHelper.IS_ALLOWED_TO_ROLL_DICE).
+	 * getValueAsString()); /*jtf.setText(jtf.getText() + "\nbricks" +
+	 * instance.getAttForDesc(RetrievalHelper.BRICKS).getValueAsString());
+	 * jtf.setText(jtf.getText() + "\nwood" +
+	 * instance.getAttForDesc(RetrievalHelper.WOOD).getValueAsString());
+	 * jtf.setText(jtf.getText() + "\nsheep" +
+	 * instance.getAttForDesc(RetrievalHelper.SHEEP).getValueAsString());
+	 * jtf.setText(jtf.getText() + "\nwheat" +
+	 * instance.getAttForDesc(RetrievalHelper.WHEAT).getValueAsString());
+	 * jtf.setText(jtf.getText() + "\nstone" +
+	 * instance.getAttForDesc(RetrievalHelper.STONE).getValueAsString());
+	 */
+	// jtf.setText(jtf.getText() + "\nPreference: " +
+	// instance.getAttForDesc(RetrievalHelper.PREFERENCE_DESC).getValueAsString());
+
+//			flush();
+
+	// ----------------------------------------------------------------------------------------------------------------------
+
+	public double SimOfOuery(Integer noun, Integer pluralnoun, String sentenceStructure, String keyword,
+			String keyword2, String verb, String verb2, Integer caseNumber) {
+
+		// similarity of the case
+		double sim = 0;
+
+		// create a new retrieval
+		Retrieval ret = new Retrieval(myConcept, cb);
+		// specify the retrieval method
+		ret.setRetrievalMethod(RetrievalMethod.RETRIEVE_SORTED);
+		// create a query instance
+		Instance query = ret.getQueryInstance();
+
+		SymbolDesc keywordDesc = (SymbolDesc) myConcept.getAllAttributeDescs().get("Keyword");
+		SymbolDesc keyword2Desc = (SymbolDesc) myConcept.getAllAttributeDescs().get("Keyword2");
+		SymbolDesc sentenceStructureDesc = (SymbolDesc) myConcept.getAllAttributeDescs().get("SentenceStructure");
+		SymbolDesc verbDesc = (SymbolDesc) myConcept.getAllAttributeDescs().get("VerbType");
+		SymbolDesc verb2Desc = (SymbolDesc) myConcept.getAllAttributeDescs().get("VerbType");
+		IntegerDesc nomenDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("NumberNouns");
+		IntegerDesc pluralnomenDesc = (IntegerDesc) myConcept.getAllAttributeDescs().get("NumberPluralNouns");
+
+		// Insert values into the query
+		query.addAttribute(keywordDesc, keywordDesc.getAttribute(keyword));
+		query.addAttribute(keyword2Desc, keyword2Desc.getAttribute(keyword2));
+		query.addAttribute(sentenceStructureDesc, sentenceStructureDesc.getAttribute(sentenceStructure));
+		query.addAttribute(verbDesc, verbDesc.getAttribute(verb));
+		query.addAttribute(verb2Desc, verb2Desc.getAttribute(verb2));
+
+		try {
+			query.addAttribute(nomenDesc, nomenDesc.getAttribute(noun));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			query.addAttribute(pluralnomenDesc, pluralnomenDesc.getAttribute(pluralnoun));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		// perform retrieval
+		ret.start();
+		// get the retrieval result
+		List<Pair<Instance, Similarity>> result = ret.getResult();
+		// get the case name
+		if (result.size() > 0) {
+			sim = result.get(caseNumber).getSecond().getValue();
+			sim = Math.round(sim * 100.0);
+			ArrayList<Hashtable<String, String>> liste = new ArrayList<Hashtable<String, String>>();
+//			for (int i = 0; i < caseNumber; i++) {
+			for (int i = 0; i < 5; i++) {
+				liste.add(getAttributes(result.get(i), project.getConceptByID(engine.getConceptName())));
+//				System.out.println("Fall: " + liste.get(i).toString());
+			}
+		} else {
+			System.out.println("Retrieval Result is empty");
+		}
+
+		return sim;
+	}
+
+	/**
+	 * This method delivers a Hashtable which contains the Attributs names
+	 * (Attributes of the case) combined with their respective values.
+	 * 
+	 * @author weber,koehler,namuth
+	 * @param r       = An Instance.
+	 * @param concept = A Concept
+	 * @return List = List containing the Attributes of a case with their values.
+	 */
+	public static Hashtable<String, String> getAttributes(Pair<Instance, Similarity> r, Concept concept) {
+
+		Hashtable<String, String> table = new Hashtable<String, String>();
+		ArrayList<String> cats = getCategories(r);
+		// Add the similarity of the case
+		table.put("Sim", String.valueOf(r.getSecond().getValue()));
+		for (String cat : cats) {
+			// Add the Attribute name and its value into the Hashtable
+			table.put(cat, r.getFirst().getAttForDesc(concept.getAllAttributeDescs().get(cat)).getValueAsString());
+		}
+		return table;
+	}
+
+	/**
+	 * This Method generates an ArrayList, which contains all Categories of aa
+	 * Concept.
+	 * 
+	 * @author weber,koehler,namuth
+	 * @param r = An Instance.
+	 * @return List = List containing the Attributes names.
+	 */
+	public static ArrayList<String> getCategories(Pair<Instance, Similarity> r) {
+
+		ArrayList<String> cats = new ArrayList<String>();
+
+		// Read all Attributes of a Concept
+		Set<AttributeDesc> catlist = r.getFirst().getAttributes().keySet();
+
+		for (AttributeDesc cat : catlist) {
+			if (cat != null) {
+				// Add the String literals for each Attribute into the ArrayList
+				cats.add(cat.getName());
+			}
+		}
+		return cats;
+	}
+
+	public String displayAmalgamationFunctions() {
+
+		ArrayList<String> amalgam = new ArrayList<String>();
+		String listoffunctions = "Currently available Amalgamationfunctions: <br /> <br />";
+		AmalgamationFct current = myConcept.getActiveAmalgamFct();
+		System.out.println("Amalgamation Function is used = " + current.getName());
+		List<AmalgamationFct> liste = myConcept.getAvailableAmalgamFcts();
+
+		for (int i = 0; i < liste.size(); i++) {
+//			System.out.println(liste.get(i).getName());
+			listoffunctions = listoffunctions + liste.get(i).getName() + "<br />";
+		}
+
+		listoffunctions = listoffunctions
+				+ (" <br /> <br /> Currently selected Amalgamationfunction: " + current.getName() + "\n");
+		listoffunctions = listoffunctions
+				+ (" <br /> <br /> Please type the name of the Amalgamationfunction to use in the "
+						+ " Field \"Amalgamationfunction\" it will be automatically used during the next retrieval");
+//		System.out.println(listoffunctions);	 s
+		return listoffunctions;
+	}
+}

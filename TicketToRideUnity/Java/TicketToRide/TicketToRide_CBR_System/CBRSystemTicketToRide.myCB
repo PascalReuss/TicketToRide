@@ -1,0 +1,2950 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Project name="CBRSystemTicketToRide" author="" >
+<instances name="routeOptions">
+  <instance id="fbbef9cb-b0c1-459f-8700-24e78945fc3d" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Raleigh_Atlanta_Grey_1" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="09a5e3eb-d456-4d84-ae7f-d0c382e6e3e6" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="4addac73-a694-41ed-991e-b56addd09c71" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Omaha_Chicago_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="2343f42c-647d-42e1-8326-4b70e9336770" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Portland_SanFrancisco_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="0ff2e6bd-8dca-4e6d-b8b9-48ab9ede94cb" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="3109169e-26f3-465b-ba4c-c37edc20a1db" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Pittsburgh_NewYork_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="4bfe64b3-83fe-4c0e-a491-f7beaa7ec3b0" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Winnipeg_Blue" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="eb82fe0d-8e9b-434f-8c36-58bb6c86435d" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Duluth_Toronto_Purple" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="4855cab2-e45d-4685-9373-618a854abfc8" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="KansasCity_SaintLouis_Purple" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="dea3b227-827e-4db7-a082-1ee80093a6d4" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Raleigh_Atlanta_Grey_1" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="5720e1bc-756e-40b9-a6fb-48acc07eec53" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="LosAngeles_ElPaso_Black" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="760a82d1-e5aa-4286-9bd1-6c302814892e" >
+    <att name="trainCards" value="6" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Portland_SaltLakeCity_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="876ebe1a-1bae-4416-8fe2-5159874ecb15" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SanFrancisco_SaltLakeCity_Orange" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="8b7cc888-b44b-430b-9ab1-b25c6764fb3a" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Denver_Omaha_Purple" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="43266e70-db14-4891-bdf0-813d9a739d07" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Nashville_Atlanta_Grey" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="98f2b307-9a1b-4243-89ba-08e634ce3ffa" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="9b832d4a-9cc0-4046-bb5a-bc0b1b60a2fe" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Chicago_Pittsburgh_Orange" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="11" />
+  </instance>
+  <instance id="e31529a3-2f2c-4cba-9e2c-0a427d28944d" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="70ebafed-142f-428d-a7df-2a951e075a5c" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="54674f8e-2dde-4bf1-a0b2-1b3392014af5" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="LittleRock_Dallas_Grey" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="8" />
+  </instance>
+  <instance id="0a5ba51a-da9d-4dee-b575-ab3e89e22b39" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Duluth_Toronto_Purple" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="00766c4e-f5bd-45de-8018-18d4b3915b3f" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="5ba7816b-5b71-4069-b6f7-55c1e7ba1d6d" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Omaha_Chicago_Blue" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="cb61b03c-177e-4ce8-8a41-42c7be484c3f" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="bcddfb6e-3463-4e29-977e-b517e00ebf0a" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Nashville_Atlanta_Grey" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="3c4d26e5-53f6-41ef-9c94-1f40fb32071e" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="OklahomaCity_Dallas_Grey_1" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="5" />
+  </instance>
+  <instance id="28c056c4-8ab4-479f-ab93-1c7745b1d78c" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Houston_NewOrleans_Grey" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="7" />
+  </instance>
+  <instance id="2ed0c72b-6b44-47a9-8d5c-85375133a32d" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Portland_SaltLakeCity_Blue" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="152659f5-ea16-4c0c-90e1-e5d1c79562f2" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SanFrancisco_SaltLakeCity_White" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="03e6a581-0bcb-4225-92fb-896a83792442" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Pittsburgh_NewYork_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="45592a14-4e78-47e2-bcf2-3d77a09f463f" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SanFrancisco_LosAngeles_Yellow" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="16" />
+  </instance>
+  <instance id="a59bcccc-4322-4a16-b606-b7f945b12550" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Phoenix_LosAngeles_Grey" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="1cf4d927-4b18-452a-8d98-8694245a4e95" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="OklahomaCity_Dallas_Grey_1" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="5" />
+  </instance>
+  <instance id="dc69c2b5-b8d9-4c6a-aedf-896b1a29444d" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Pittsburgh_NewYork_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="41d4bf78-9076-4469-baf4-3b733c6ada73" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SanFrancisco_LosAngeles_Yellow" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="16" />
+  </instance>
+  <instance id="cd94aff2-3324-4e30-8874-4cee29442a17" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SaultStMarie_Montreal_Black" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="5e075640-1b9f-4c6c-b44d-7620154e2677" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SaultStMarie_Montreal_Black" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="f58fe53a-aeda-4a5b-a8ce-7481fa44e5ea" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="df0a4f69-e647-41d4-bbbe-3b63f5040677" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Chicago_Pittsburgh_Orange" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="11" />
+  </instance>
+  <instance id="87af0461-0ca7-471f-ab8f-4d7b1d3d969d" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SanFrancisco_LosAngeles_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="16" />
+  </instance>
+  <instance id="5a0cf910-6cc2-445e-b3b9-fbd6854404d2" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Duluth_Chicago_Red" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="ac9b56df-d66c-4acc-8165-4411474793d7" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SanFrancisco_SaltLakeCity_Orange" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="6b164ab0-7e6b-49e1-9710-03c1d6316464" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="5577ca3b-04d4-4eb6-b7d6-b23b1ac2c464" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Chicago_Pittsburgh_Orange" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="3b3fb2cf-b0c4-4d51-a6a8-1f62fd55bbe4" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Pittsburgh_NewYork_White" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="ccf55aac-a683-455c-81e5-ea203d19242c" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="9e677e0c-aff5-42b7-9a90-5cb55cff32e6" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Portland_SaltLakeCity_Blue" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="6c74a1da-c07a-41c1-b365-a0e328ea202c" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="2146771c-dea2-468b-badf-9df6db29df3e" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Chicago_Pittsburgh_Orange" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="11" />
+  </instance>
+  <instance id="35c58f55-e3a8-4929-8d51-feeabb08cb54" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Raleigh_Atlanta_Grey_1" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="ffd5b979-ca48-4d55-8cd2-ba476a23c3a3" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="04d0eb14-e21e-402e-92e7-e92cbc151b35" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="12a963cf-28a9-4cda-bc75-1721502df8d8" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="b3305866-a7e7-4a4f-b180-1054c20c4e0b" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Winnipeg_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="20cdf41d-0084-41c0-9553-8d1ecda6739e" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="KansasCity_SaintLouis_Purple" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="91f3405e-9dd8-4844-a44c-35e6c34da4c2" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="SaintLouis_Nashville_Grey" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="e8496f10-6480-4a66-bb3a-53dea878a07b" >
+    <att name="trainCards" value="6" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SanFrancisco_SaltLakeCity_Orange" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="1e37c697-d57d-467a-b9d2-9d61ed1bc0d2" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Winnipeg_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="12698762-b1df-4726-ac9b-ac6e4012f8c5" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Seattle_Portland_Grey_1" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="22" />
+  </instance>
+  <instance id="f404730a-b979-4743-840d-4973c86a8f7e" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Pittsburgh_NewYork_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="fc65bd49-9e2d-4e81-b93e-b80406de83c8" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="02837b5a-d391-4521-b171-2312769802f9" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Portland_SaltLakeCity_Blue" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="01bb730b-6a33-4042-9cab-d98ea8cf9e13" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Portland_SanFrancisco_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="d4c8106a-05cd-453f-8b45-85af3f683c99" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Omaha_Chicago_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="8a17654c-6fc2-42c2-ad23-3e4eaaf0daac" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="fb7da694-adc7-4f19-aaab-e04f30627740" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Boston_NewYork_Yellow" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="a848d076-2a58-4dd3-9acc-4e2e6c785822" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SanFrancisco_LosAngeles_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="16" />
+  </instance>
+  <instance id="0fc1a3ee-8603-4a42-8ea8-c02f7764f122" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Portland_SaltLakeCity_Blue" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="592e78fc-c2e8-44ce-9b8f-f3adf497d9fa" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Winnipeg_Blue" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="2bfb4d88-90f9-42a2-b908-2f405e5285f6" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Duluth_Chicago_Red" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="d844d3c5-8775-4b9d-bf01-42913540753b" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="KansasCity_SaintLouis_Blue" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="831316d6-ed40-48ca-8be2-3b23f5f295dd" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="SaintLouis_Chicago_Green" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="7" />
+  </instance>
+  <instance id="b77afe59-2f3b-4778-88e9-64dbef0fec00" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Raleigh_Atlanta_Grey_1" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="72f36ee5-0c56-41af-a765-0522267e430f" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Pittsburgh_Raleigh_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="5e9ac44d-6dc7-490f-9696-9aa571dd3adb" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Portland_SanFrancisco_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="085771a0-e361-4955-9bbc-7b5934bf8331" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Omaha_Chicago_Blue" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="889e47e8-62af-4d35-8f7c-9025e9fc76f3" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="36fb01a6-f695-499f-a156-88bc68ed5e13" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="ce306106-6b69-46c9-a664-7baa11134aae" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="ff1a12f3-7472-4293-ae0b-96f5f9de54e3" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Calgary_Helena_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="61925151-ceda-4518-8af5-5da38caad998" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="KansasCity_SaintLouis_Purple" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="efdb8a76-54a4-4820-96c2-46a12833be19" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="KansasCity_OklahomaCity_Grey_1" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="5" />
+  </instance>
+  <instance id="8324dd85-6967-4d5a-9684-636be8881544" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SaultStMarie_Montreal_Black" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="657fc06b-d7e4-401e-8c0b-7fcb54e86a6f" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="SantaFe_ElPaso_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="4" />
+  </instance>
+  <instance id="4766eaf3-f4f6-41d9-9cf6-221b2760d03a" >
+    <att name="trainCards" value="6" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Portland_SaltLakeCity_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="983dcd11-7960-4ce7-8102-950133e3c70e" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SanFrancisco_SaltLakeCity_White" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="340e2c52-6e46-4e11-9359-3088fb74f157" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="68dae0b3-3510-4ca9-96c8-84d8bb197892" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Dallas_Houston_Grey_1" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="5" />
+  </instance>
+  <instance id="49be751a-21a8-4d77-a555-6c769de70ae9" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SanFrancisco_LosAngeles_Purple" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="130d0531-0327-4b8f-94fd-f8cc5b85d68e" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SanFrancisco_LosAngeles_Yellow" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="16" />
+  </instance>
+  <instance id="de4eb746-09d6-4d84-95de-69878a673505" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Nashville_Atlanta_Grey" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="d5705b4b-c610-44d5-8e17-ffc4f3a4af75" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="ElPaso_Houston_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="0c53f64f-5825-4ef7-a815-22d46b865fe0" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="6b6f07dd-dd5a-402e-83cb-c2fad6c2bc86" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Nashville_Atlanta_Grey" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="219459be-aa80-4e0c-99e2-94e808acb30d" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Calgary_Helena_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="8094478a-f146-4512-a86a-0a6cd1249723" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="KansasCity_OklahomaCity_Grey_1" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="5" />
+  </instance>
+  <instance id="0eeaca88-6129-4f9c-920d-22a16d90cb26" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Portland_SaltLakeCity_Blue" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="52b744bf-1356-40a6-b718-d384a089c6c4" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="LosAngeles_ElPaso_Black" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="15450f0f-a55a-486b-82a4-ce45a9b3a675" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Denver_KansasCity_Black" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="4df7b8cf-c298-40b2-ad06-d9df4389d897" >
+    <att name="trainCards" value="6" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Portland_SanFrancisco_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="58177f7a-b622-49f0-9ddf-39a159a46142" >
+    <att name="trainCards" value="7" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Portland_SanFrancisco_Green" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="22" />
+  </instance>
+  <instance id="b2fa9883-bcfe-4f9c-9d08-b599d72321ff" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="6b7693c4-f27c-44f0-bd27-d4d9d25186a3" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Helena_SaltLakeCity_Purple" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="375bb531-6f17-499a-8483-9a8b26269cf5" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Duluth_Chicago_Red" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="0c359d46-dde7-4410-9f7b-ba95af63f8fc" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="7bee0fac-49d0-42e3-a1d0-5a61974be98b" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="2f8d0a12-ec91-4bbe-b79e-4c6fd3ec7bf2" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="3f5b9b16-a5db-48ec-8c57-6c096b168c7f" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="b7537236-bfd7-414b-a7a2-cecbea6af4fd" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Denver_Omaha_Purple" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="8abf7cd9-efb7-4b92-be35-e73ebcb0b188" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Denver_Omaha_Purple" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="c3140e30-720d-4af2-ac2d-2c6f685e2bcb" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SaultStMarie_Montreal_Black" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="da884829-3ed2-464b-8e75-5414a20074da" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Chicago_Pittsburgh_Orange" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="6c9ef540-330a-4a8b-a26a-6f1bccdcbf4a" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Omaha_Chicago_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="b8243055-12a7-442b-addb-474cade23f6d" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Winnipeg_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="497511d5-0908-47b0-81f6-bb5125e3b2f9" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Portland_SaltLakeCity_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="84b1c44c-5a09-4978-bfb9-b6bce9fdab72" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Seattle_Portland_Grey_1" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="b2e81eef-4eaf-4f3c-b163-f67800c24ee8" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="SaintLouis_LittleRock_Grey" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="7" />
+  </instance>
+  <instance id="66a70a52-8d17-4bff-a9e1-5a8b8141379a" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Chicago_Pittsburgh_Orange" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="fb529efe-0c56-4882-aa72-c99a06c752f2" >
+    <att name="trainCards" value="6" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="82dfe316-32da-4fb8-a368-795f02e1bf7e" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="f587c3ab-5789-4dad-a9b2-7047dfc8a02d" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Chicago_Pittsburgh_Orange" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="11" />
+  </instance>
+  <instance id="1340b948-3b42-43fc-b4f7-6822c876103d" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SantaFe_OklahomaCity_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="9479c343-6c1f-4eae-a6f7-0ff400904b50" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SaultStMarie_Montreal_Black" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="c50bcc84-ec96-4add-9f6a-b228b7d9533a" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Denver_SantaFe_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="cdbf9c2c-786e-4230-827d-a351449fbb29" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="97cdcee3-f478-457c-8455-b408bc593f68" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Helena_SaltLakeCity_Purple" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="3655c344-0a2c-4fd5-96aa-e82fed01595a" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Calgary_Helena_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="8f220948-63a6-49a7-a6af-fb4a809c5870" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Calgary_Helena_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="f52933f7-c0d5-4d4b-945f-eca5ccdef1a8" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="SaintLouis_Chicago_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="7" />
+  </instance>
+  <instance id="b533066a-ad43-48e8-8bb5-3c64aab44c4f" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Nashville_Atlanta_Grey" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="e094d6e7-893f-4a1b-8af0-1ed97205ade5" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="f9d35cb7-0ea0-4b29-86d0-cb72007b5a1b" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Red" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="efed27ea-0688-443e-bcec-23ba8b4e057c" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="ElPaso_Houston_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="8ca50e7b-4a44-4bae-ad2a-ad5c0e4f8991" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="cd1df609-ae8d-4d83-adfb-a5cd3a5f5424" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Pittsburgh_NewYork_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="2cc3c6d4-4c48-4a00-9837-4755cec21a95" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SanFrancisco_SaltLakeCity_Orange" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="f8be57cf-d566-49d8-a1f9-605580344230" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Seattle_Portland_Grey_1" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="29611e03-411d-443d-9f73-41bc6253fc5d" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Nashville_Atlanta_Grey" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="2cb19ed6-d4ed-4a04-b1d3-45d51647e0a7" >
+    <att name="trainCards" value="6" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Denver_Omaha_Purple" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="942ab8f7-d0d0-481b-bd43-34bec96ec2c5" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Red" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="07f584b4-f356-4af2-9bf0-4d632b603c13" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="db5960d3-921b-49e9-a8f6-1c6053482068" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Vancouver_Seattle_Grey_2" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="8d446299-b02a-47b6-af9a-e176772ba8cd" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="95aa0cb2-0baf-4b48-b187-0439a842bd6e" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Omaha_Chicago_Blue" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="d2678584-f52b-40b3-a379-48cd2dbaaa12" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="149ebf19-1759-4dc6-9b72-93f213a2a9d6" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Denver_Omaha_Purple" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="1f3cf712-c356-415e-83e2-a1c34fe8e0a3" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SaultStMarie_Montreal_Black" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="99ddd3d1-e643-4d1d-b764-d683aeca1f5a" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Dallas_Houston_Grey_1" />
+    <att name="faceUpCards" value="3" />
+    <att name="destinationCardPoints" value="8" />
+  </instance>
+  <instance id="b7578e9f-4afd-4015-a814-7a9e392e8a40" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Denver_KansasCity_Black" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="daea4528-4b96-4305-8725-2eeb07848fae" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="NewYork_Washington_Black" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="55b4244e-448d-4ece-a236-e2ea25ebec3c" >
+    <att name="trainCards" value="6" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Denver_KansasCity_Black" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="ae2fa37f-5a79-41ee-8d49-a00823ee9330" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Winnipeg_Blue" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="a0d33291-785b-4cd6-be4b-fc2501af5c2a" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SaultStMarie_Montreal_Black" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="cee00dc0-318f-4898-a81a-e9e1f1e54254" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Pittsburgh_NewYork_White" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="942ca571-48de-470b-93c7-772f4fcca45d" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Chicago_Pittsburgh_Orange" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="11aedab7-6d2b-40a2-b219-13c38eb887de" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Portland_SanFrancisco_Green" />
+    <att name="faceUpCards" value="2" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="6e039441-2209-4310-ad54-8622c404ea5d" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Winnipeg_Blue" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="87c33ebf-b16e-4d1b-a4bf-39b3d13d07ee" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="Duluth_Chicago_Red" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="edef91f2-3fe1-4b18-953e-8540f75cfb50" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Duluth_Toronto_Purple" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="05ac87ac-f574-4c5a-bf81-a8eb2ef8d7d9" >
+    <att name="trainCards" value="3" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+  <instance id="271807fe-e4c9-4bc0-888d-038695a16140" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Duluth_Toronto_Purple" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="b4073332-e9bf-4485-81db-cb0ed9cb8dd1" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="7d0b7ce7-6599-41d6-a69f-d4c8f3dcae85" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="1" />
+    <att name="nameOfRoute" value="Dallas_Houston_Grey_1" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="5" />
+  </instance>
+  <instance id="81b99fc5-384d-47fa-a132-eb350c327c38" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="ecbfd9bb-5eb9-4e26-9e88-74926f1ae690" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="Denver_SantaFe_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="a981e953-5ff6-420e-b0dd-cc078f056531" >
+    <att name="trainCards" value="0" />
+    <att name="lengthOfRoute" value="2" />
+    <att name="nameOfRoute" value="OklahomaCity_Dallas_Grey_1" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="5" />
+  </instance>
+  <instance id="fd59c518-acd6-4776-bd10-c7c0c15b9246" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SaultStMarie_Montreal_Black" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="88a405ba-3dac-4a66-bc52-1a45998ef09d" >
+    <att name="trainCards" value="6" />
+    <att name="lengthOfRoute" value="6" />
+    <att name="nameOfRoute" value="Duluth_Toronto_Purple" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="0" />
+  </instance>
+  <instance id="8fb36236-b555-479e-a960-4b49b1c96360" >
+    <att name="trainCards" value="2" />
+    <att name="lengthOfRoute" value="3" />
+    <att name="nameOfRoute" value="SaltLakeCity_Denver_Yellow" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="c8e90c26-e978-4934-8b81-440b83179aed" >
+    <att name="trainCards" value="1" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Helena_Denver_Green" />
+    <att name="faceUpCards" value="4" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="be198868-f575-413d-9554-7f6dec496ec7" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="4" />
+    <att name="nameOfRoute" value="Calgary_Helena_Grey" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="1efb83da-f17f-44ea-92d6-20d68935813b" >
+    <att name="trainCards" value="4" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="Phoenix_Denver_White" />
+    <att name="faceUpCards" value="0" />
+    <att name="destinationCardPoints" value="13" />
+  </instance>
+  <instance id="05b46b62-41f0-4b4e-b285-ec0d048a101a" >
+    <att name="trainCards" value="5" />
+    <att name="lengthOfRoute" value="5" />
+    <att name="nameOfRoute" value="SanFrancisco_SaltLakeCity_Orange" />
+    <att name="faceUpCards" value="1" />
+    <att name="destinationCardPoints" value="17" />
+  </instance>
+</instances>
+<instances name="TicketToRide">
+  <instance id="88" >
+    <att name="averageScoreOfRoutes" value="4.8" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="98f2b307-9a1b-4243-89ba-08e634ce3ffa;" />
+    <att name="handTrainCardsCount" value="14" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="29" />
+  </instance>
+  <instance id="89" >
+    <att name="averageScoreOfRoutes" value="4.8" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="3f5b9b16-a5db-48ec-8c57-6c096b168c7f;" />
+    <att name="handTrainCardsCount" value="15" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="29" />
+  </instance>
+  <instance id="110" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="2343f42c-647d-42e1-8326-4b70e9336770;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="111" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="2cc3c6d4-4c48-4a00-9837-4755cec21a95;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="112" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="43" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="ccf55aac-a683-455c-81e5-ea203d19242c;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="113" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="43" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="ce306106-6b69-46c9-a664-7baa11134aae;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="114" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="5e9ac44d-6dc7-490f-9696-9aa571dd3adb;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="115" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="01bb730b-6a33-4042-9cab-d98ea8cf9e13;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="116" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="11aedab7-6d2b-40a2-b219-13c38eb887de;" />
+    <att name="handTrainCardsCount" value="11" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="90" >
+    <att name="averageScoreOfRoutes" value="4.8" />
+    <att name="minimalAvailableWagons" value="24" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="8ca50e7b-4a44-4bae-ad2a-ad5c0e4f8991;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="24" />
+  </instance>
+  <instance id="117" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="4df7b8cf-c298-40b2-ad06-d9df4389d897;" />
+    <att name="handTrainCardsCount" value="12" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="91" >
+    <att name="averageScoreOfRoutes" value="5.6666665" />
+    <att name="minimalAvailableWagons" value="21" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="b2e81eef-4eaf-4f3c-b163-f67800c24ee8;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="22" />
+  </instance>
+  <instance id="118" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="40" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="58177f7a-b622-49f0-9ddf-39a159a46142;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="40" />
+  </instance>
+  <instance id="92" >
+    <att name="averageScoreOfRoutes" value="5.142857" />
+    <att name="minimalAvailableWagons" value="20" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="54674f8e-2dde-4bf1-a0b2-1b3392014af5;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="20" />
+  </instance>
+  <instance id="119" >
+    <att name="averageScoreOfRoutes" value="10.0" />
+    <att name="minimalAvailableWagons" value="40" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="ac9b56df-d66c-4acc-8165-4411474793d7;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="40" />
+  </instance>
+  <instance id="93" >
+    <att name="averageScoreOfRoutes" value="4.75" />
+    <att name="minimalAvailableWagons" value="19" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="99ddd3d1-e643-4d1d-b764-d683aeca1f5a;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="19" />
+  </instance>
+  <instance id="94" >
+    <att name="averageScoreOfRoutes" value="4.3333335" />
+    <att name="minimalAvailableWagons" value="19" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="eb82fe0d-8e9b-434f-8c36-58bb6c86435d;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="19" />
+  </instance>
+  <instance id="95" >
+    <att name="averageScoreOfRoutes" value="4.3333335" />
+    <att name="minimalAvailableWagons" value="19" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="28c056c4-8ab4-479f-ab93-1c7745b1d78c;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="19" />
+  </instance>
+  <instance id="96" >
+    <att name="averageScoreOfRoutes" value="4.3333335" />
+    <att name="minimalAvailableWagons" value="17" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="0a5ba51a-da9d-4dee-b575-ab3e89e22b39;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="17" />
+  </instance>
+  <instance id="97" >
+    <att name="averageScoreOfRoutes" value="4.1" />
+    <att name="minimalAvailableWagons" value="15" />
+    <att name="plan" value="DrawDestinationCards" />
+    <att name="routeOptions" value="271807fe-e4c9-4bc0-888d-038695a16140;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="17" />
+  </instance>
+  <instance id="10" >
+    <att name="averageScoreOfRoutes" value="2.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="2ed0c72b-6b44-47a9-8d5c-85375133a32d;" />
+    <att name="handTrainCardsCount" value="11" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="43" />
+  </instance>
+  <instance id="98" >
+    <att name="averageScoreOfRoutes" value="4.1" />
+    <att name="minimalAvailableWagons" value="15" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="edef91f2-3fe1-4b18-953e-8540f75cfb50;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="17" />
+  </instance>
+  <instance id="11" >
+    <att name="averageScoreOfRoutes" value="2.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="55b4244e-448d-4ece-a236-e2ea25ebec3c;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="39" />
+  </instance>
+  <instance id="99" >
+    <att name="averageScoreOfRoutes" value="4.1" />
+    <att name="minimalAvailableWagons" value="15" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="f587c3ab-5789-4dad-a9b2-7047dfc8a02d;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="17" />
+  </instance>
+  <instance id="12" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="37" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="6b164ab0-7e6b-49e1-9710-03c1d6316464;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="39" />
+  </instance>
+  <instance id="13" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="37" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="8a17654c-6fc2-42c2-ad23-3e4eaaf0daac;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="39" />
+  </instance>
+  <instance id="14" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="35" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="fb529efe-0c56-4882-aa72-c99a06c752f2;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="35" />
+  </instance>
+  <instance id="15" >
+    <att name="averageScoreOfRoutes" value="5.3333335" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="02837b5a-d391-4521-b171-2312769802f9;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="35" />
+  </instance>
+  <instance id="16" >
+    <att name="averageScoreOfRoutes" value="5.3333335" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="84b1c44c-5a09-4978-bfb9-b6bce9fdab72;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="35" />
+  </instance>
+  <instance id="17" >
+    <att name="averageScoreOfRoutes" value="5.3333335" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="f8be57cf-d566-49d8-a1f9-605580344230;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="34" />
+  </instance>
+  <instance id="18" >
+    <att name="averageScoreOfRoutes" value="4.25" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="db5960d3-921b-49e9-a8f6-1c6053482068;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="33" />
+  </instance>
+  <instance id="19" >
+    <att name="averageScoreOfRoutes" value="3.6" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="497511d5-0908-47b0-81f6-bb5125e3b2f9;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="33" />
+  </instance>
+  <instance id="120" >
+    <att name="averageScoreOfRoutes" value="10.0" />
+    <att name="minimalAvailableWagons" value="40" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="d844d3c5-8775-4b9d-bf01-42913540753b;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="40" />
+  </instance>
+  <instance id="121" >
+    <att name="averageScoreOfRoutes" value="10.0" />
+    <att name="minimalAvailableWagons" value="38" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="876ebe1a-1bae-4416-8fe2-5159874ecb15;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="40" />
+  </instance>
+  <instance id="1" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="9e677e0c-aff5-42b7-9a90-5cb55cff32e6;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="122" >
+    <att name="averageScoreOfRoutes" value="10.0" />
+    <att name="minimalAvailableWagons" value="38" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="05b46b62-41f0-4b4e-b285-ec0d048a101a;" />
+    <att name="handTrainCardsCount" value="11" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="40" />
+  </instance>
+  <instance id="2" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="44" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="0fc1a3ee-8603-4a42-8ea8-c02f7764f122;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="123" >
+    <att name="averageScoreOfRoutes" value="10.0" />
+    <att name="minimalAvailableWagons" value="35" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="e8496f10-6480-4a66-bb3a-53dea878a07b;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="35" />
+  </instance>
+  <instance id="3" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="42" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="0eeaca88-6129-4f9c-920d-22a16d90cb26;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="124" >
+    <att name="averageScoreOfRoutes" value="10.0" />
+    <att name="minimalAvailableWagons" value="32" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="05ac87ac-f574-4c5a-bf81-a8eb2ef8d7d9;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="32" />
+  </instance>
+  <instance id="4" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="42" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="20cdf41d-0084-41c0-9553-8d1ecda6739e;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="125" >
+    <att name="averageScoreOfRoutes" value="8.0" />
+    <att name="minimalAvailableWagons" value="32" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="8b7cc888-b44b-430b-9ab1-b25c6764fb3a;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="32" />
+  </instance>
+  <instance id="5" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="4855cab2-e45d-4685-9373-618a854abfc8;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="126" >
+    <att name="averageScoreOfRoutes" value="8.0" />
+    <att name="minimalAvailableWagons" value="32" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="b7537236-bfd7-414b-a7a2-cecbea6af4fd;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="32" />
+  </instance>
+  <instance id="6" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="15450f0f-a55a-486b-82a4-ce45a9b3a675;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="127" >
+    <att name="averageScoreOfRoutes" value="8.0" />
+    <att name="minimalAvailableWagons" value="32" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="8abf7cd9-efb7-4b92-be35-e73ebcb0b188;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="32" />
+  </instance>
+  <instance id="7" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="61925151-ceda-4518-8af5-5da38caad998;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="43" />
+  </instance>
+  <instance id="128" >
+    <att name="averageScoreOfRoutes" value="8.0" />
+    <att name="minimalAvailableWagons" value="32" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="95aa0cb2-0baf-4b48-b187-0439a842bd6e;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="32" />
+  </instance>
+  <instance id="8" >
+    <att name="averageScoreOfRoutes" value="2.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="b7578e9f-4afd-4015-a814-7a9e392e8a40;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="43" />
+  </instance>
+  <instance id="129" >
+    <att name="averageScoreOfRoutes" value="8.0" />
+    <att name="minimalAvailableWagons" value="28" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="149ebf19-1759-4dc6-9b72-93f213a2a9d6;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="28" />
+  </instance>
+  <instance id="9" >
+    <att name="averageScoreOfRoutes" value="2.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="fc65bd49-9e2d-4e81-b93e-b80406de83c8;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="43" />
+  </instance>
+  <instance id="20" >
+    <att name="averageScoreOfRoutes" value="3.6" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="760a82d1-e5aa-4286-9bd1-6c302814892e;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="33" />
+  </instance>
+  <instance id="21" >
+    <att name="averageScoreOfRoutes" value="3.6" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="4766eaf3-f4f6-41d9-9cf6-221b2760d03a;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="22" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="0ff2e6bd-8dca-4e6d-b8b9-48ab9ede94cb;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="23" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="7bee0fac-49d0-42e3-a1d0-5a61974be98b;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="24" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="f9d35cb7-0ea0-4b29-86d0-cb72007b5a1b;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="25" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="942ab8f7-d0d0-481b-bd43-34bec96ec2c5;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="26" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="12a963cf-28a9-4cda-bc75-1721502df8d8;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="27" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="ffd5b979-ca48-4d55-8cd2-ba476a23c3a3;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="28" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="0c53f64f-5825-4ef7-a815-22d46b865fe0;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="29" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="d2678584-f52b-40b3-a379-48cd2dbaaa12;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="130" >
+    <att name="averageScoreOfRoutes" value="7.75" />
+    <att name="minimalAvailableWagons" value="28" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="085771a0-e361-4955-9bbc-7b5934bf8331;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="28" />
+  </instance>
+  <instance id="131" >
+    <att name="averageScoreOfRoutes" value="7.75" />
+    <att name="minimalAvailableWagons" value="28" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="4addac73-a694-41ed-991e-b56addd09c71;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="28" />
+  </instance>
+  <instance id="132" >
+    <att name="averageScoreOfRoutes" value="7.75" />
+    <att name="minimalAvailableWagons" value="28" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="66a70a52-8d17-4bff-a9e1-5a8b8141379a;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="28" />
+  </instance>
+  <instance id="133" >
+    <att name="averageScoreOfRoutes" value="7.75" />
+    <att name="minimalAvailableWagons" value="28" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="5ba7816b-5b71-4069-b6f7-55c1e7ba1d6d;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="28" />
+  </instance>
+  <instance id="134" >
+    <att name="averageScoreOfRoutes" value="7.75" />
+    <att name="minimalAvailableWagons" value="28" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="6c9ef540-330a-4a8b-a26a-6f1bccdcbf4a;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="28" />
+  </instance>
+  <instance id="135" >
+    <att name="averageScoreOfRoutes" value="7.75" />
+    <att name="minimalAvailableWagons" value="24" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="d4c8106a-05cd-453f-8b45-85af3f683c99;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="24" />
+  </instance>
+  <instance id="136" >
+    <att name="averageScoreOfRoutes" value="7.6" />
+    <att name="minimalAvailableWagons" value="24" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="da884829-3ed2-464b-8e75-5414a20074da;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="24" />
+  </instance>
+  <instance id="137" >
+    <att name="averageScoreOfRoutes" value="7.6" />
+    <att name="minimalAvailableWagons" value="24" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="5577ca3b-04d4-4eb6-b7d6-b23b1ac2c464;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="24" />
+  </instance>
+  <instance id="138" >
+    <att name="averageScoreOfRoutes" value="7.6" />
+    <att name="minimalAvailableWagons" value="21" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="942ca571-48de-470b-93c7-772f4fcca45d;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="21" />
+  </instance>
+  <instance id="139" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="21" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="cee00dc0-318f-4898-a81a-e9e1f1e54254;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="21" />
+  </instance>
+  <instance id="30" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="04d0eb14-e21e-402e-92e7-e92cbc151b35;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="31" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="b4073332-e9bf-4485-81db-cb0ed9cb8dd1;" />
+    <att name="handTrainCardsCount" value="11" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="32" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="cdbf9c2c-786e-4230-827d-a351449fbb29;" />
+    <att name="handTrainCardsCount" value="12" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="33" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="8fb36236-b555-479e-a960-4b49b1c96360;" />
+    <att name="handTrainCardsCount" value="13" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="34" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="81b99fc5-384d-47fa-a132-eb350c327c38;" />
+    <att name="handTrainCardsCount" value="14" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="35" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="cb61b03c-177e-4ce8-8a41-42c7be484c3f;" />
+    <att name="handTrainCardsCount" value="15" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="27" />
+  </instance>
+  <instance id="36" >
+    <att name="averageScoreOfRoutes" value="5.5" />
+    <att name="minimalAvailableWagons" value="22" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="8d446299-b02a-47b6-af9a-e176772ba8cd;" />
+    <att name="handTrainCardsCount" value="12" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="24" />
+  </instance>
+  <instance id="37" >
+    <att name="averageScoreOfRoutes" value="5.285714" />
+    <att name="minimalAvailableWagons" value="22" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="6b6f07dd-dd5a-402e-83cb-c2fad6c2bc86;" />
+    <att name="handTrainCardsCount" value="11" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="23" />
+  </instance>
+  <instance id="38" >
+    <att name="averageScoreOfRoutes" value="4.75" />
+    <att name="minimalAvailableWagons" value="21" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="91f3405e-9dd8-4844-a44c-35e6c34da4c2;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="21" />
+  </instance>
+  <instance id="39" >
+    <att name="averageScoreOfRoutes" value="4.4444447" />
+    <att name="minimalAvailableWagons" value="16" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="983dcd11-7960-4ce7-8102-950133e3c70e;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="21" />
+  </instance>
+  <instance id="140" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="21" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="3b3fb2cf-b0c4-4d51-a6a8-1f62fd55bbe4;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="21" />
+  </instance>
+  <instance id="141" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="19" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="dc69c2b5-b8d9-4c6a-aedf-896b1a29444d;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="19" />
+  </instance>
+  <instance id="142" >
+    <att name="averageScoreOfRoutes" value="6.285714" />
+    <att name="minimalAvailableWagons" value="18" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="12698762-b1df-4726-ac9b-ac6e4012f8c5;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="18" />
+  </instance>
+  <instance id="143" >
+    <att name="averageScoreOfRoutes" value="5.625" />
+    <att name="minimalAvailableWagons" value="16" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="72f36ee5-0c56-41af-a765-0522267e430f;" />
+    <att name="handTrainCardsCount" value="0" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="16" />
+  </instance>
+  <instance id="144" >
+    <att name="averageScoreOfRoutes" value="5.2222223" />
+    <att name="minimalAvailableWagons" value="16" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="35c58f55-e3a8-4929-8d51-feeabb08cb54;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="16" />
+  </instance>
+  <instance id="145" >
+    <att name="averageScoreOfRoutes" value="5.2222223" />
+    <att name="minimalAvailableWagons" value="16" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="fbbef9cb-b0c1-459f-8700-24e78945fc3d;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="16" />
+  </instance>
+  <instance id="146" >
+    <att name="averageScoreOfRoutes" value="5.2222223" />
+    <att name="minimalAvailableWagons" value="14" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="b77afe59-2f3b-4778-88e9-64dbef0fec00;" />
+    <att name="handTrainCardsCount" value="0" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="14" />
+  </instance>
+  <instance id="147" >
+    <att name="averageScoreOfRoutes" value="4.9" />
+    <att name="minimalAvailableWagons" value="14" />
+    <att name="plan" value="DrawDestinationCards" />
+    <att name="routeOptions" value="dea3b227-827e-4db7-a082-1ee80093a6d4;" />
+    <att name="handTrainCardsCount" value="0" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="14" />
+  </instance>
+  <instance id="148" >
+    <att name="averageScoreOfRoutes" value="4.9" />
+    <att name="minimalAvailableWagons" value="14" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="de4eb746-09d6-4d84-95de-69878a673505;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="14" />
+  </instance>
+  <instance id="149" >
+    <att name="averageScoreOfRoutes" value="4.9" />
+    <att name="minimalAvailableWagons" value="14" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="29611e03-411d-443d-9f73-41bc6253fc5d;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="14" />
+  </instance>
+  <instance id="40" >
+    <att name="averageScoreOfRoutes" value="4.4444447" />
+    <att name="minimalAvailableWagons" value="16" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="97cdcee3-f478-457c-8455-b408bc593f68;" />
+    <att name="handTrainCardsCount" value="11" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="21" />
+  </instance>
+  <instance id="41" >
+    <att name="averageScoreOfRoutes" value="4.4444447" />
+    <att name="minimalAvailableWagons" value="16" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="152659f5-ea16-4c0c-90e1-e5d1c79562f2;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="16" />
+  </instance>
+  <instance id="42" >
+    <att name="averageScoreOfRoutes" value="5.0" />
+    <att name="minimalAvailableWagons" value="14" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="c50bcc84-ec96-4add-9f6a-b228b7d9533a;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="14" />
+  </instance>
+  <instance id="43" >
+    <att name="averageScoreOfRoutes" value="4.7272725" />
+    <att name="minimalAvailableWagons" value="14" />
+    <att name="plan" value="DrawDestinationCards" />
+    <att name="routeOptions" value="ecbfd9bb-5eb9-4e26-9e88-74926f1ae690;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="14" />
+  </instance>
+  <instance id="44" >
+    <att name="averageScoreOfRoutes" value="4.7272725" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="657fc06b-d7e4-401e-8c0b-7fcb54e86a6f;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="45" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="4bfe64b3-83fe-4c0e-a491-f7beaa7ec3b0;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="46" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="592e78fc-c2e8-44ce-9b8f-f3adf497d9fa;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="47" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="ae2fa37f-5a79-41ee-8d49-a00823ee9330;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="48" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="b8243055-12a7-442b-addb-474cade23f6d;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="49" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="1340b948-3b42-43fc-b4f7-6822c876103d;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="150" >
+    <att name="averageScoreOfRoutes" value="4.9" />
+    <att name="minimalAvailableWagons" value="13" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="43266e70-db14-4891-bdf0-813d9a739d07;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="13" />
+  </instance>
+  <instance id="151" >
+    <att name="averageScoreOfRoutes" value="4.5454545" />
+    <att name="minimalAvailableWagons" value="13" />
+    <att name="plan" value="DrawDestinationCards" />
+    <att name="routeOptions" value="b533066a-ad43-48e8-8bb5-3c64aab44c4f;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="13" />
+  </instance>
+  <instance id="152" >
+    <att name="averageScoreOfRoutes" value="4.5454545" />
+    <att name="minimalAvailableWagons" value="13" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="130d0531-0327-4b8f-94fd-f8cc5b85d68e;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="13" />
+  </instance>
+  <instance id="153" >
+    <att name="averageScoreOfRoutes" value="4.5454545" />
+    <att name="minimalAvailableWagons" value="13" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="45592a14-4e78-47e2-bcf2-3d77a09f463f;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="13" />
+  </instance>
+  <instance id="154" >
+    <att name="averageScoreOfRoutes" value="4.5454545" />
+    <att name="minimalAvailableWagons" value="13" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="41d4bf78-9076-4469-baf4-3b733c6ada73;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="13" />
+  </instance>
+  <instance id="155" >
+    <att name="averageScoreOfRoutes" value="4.5454545" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="a848d076-2a58-4dd3-9acc-4e2e6c785822;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="10" />
+  </instance>
+  <instance id="156" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawDestinationCards" />
+    <att name="routeOptions" value="87af0461-0ca7-471f-ab8f-4d7b1d3d969d;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="10" />
+  </instance>
+  <instance id="157" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="9" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="8094478a-f146-4512-a86a-0a6cd1249723;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="10" />
+  </instance>
+  <instance id="158" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="9" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="1cf4d927-4b18-452a-8d98-8694245a4e95;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="10" />
+  </instance>
+  <instance id="159" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="8" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="efdb8a76-54a4-4820-96c2-46a12833be19;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="8" />
+  </instance>
+  <instance id="50" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="6e039441-2209-4310-ad54-8622c404ea5d;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="51" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="49be751a-21a8-4d77-a555-6c769de70ae9;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="52" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="1e37c697-d57d-467a-b9d2-9d61ed1bc0d2;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="12" />
+  </instance>
+  <instance id="53" >
+    <att name="averageScoreOfRoutes" value="4.5" />
+    <att name="minimalAvailableWagons" value="8" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="b3305866-a7e7-4a4f-b180-1054c20c4e0b;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="8" />
+  </instance>
+  <instance id="54" >
+    <att name="averageScoreOfRoutes" value="4.6923075" />
+    <att name="minimalAvailableWagons" value="4" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="6b7693c4-f27c-44f0-bd27-d4d9d25186a3;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="55" >
+    <att name="averageScoreOfRoutes" value="4.642857" />
+    <att name="minimalAvailableWagons" value="4" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="5e075640-1b9f-4c6c-b44d-7620154e2677;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="56" >
+    <att name="averageScoreOfRoutes" value="4.642857" />
+    <att name="minimalAvailableWagons" value="4" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="1f3cf712-c356-415e-83e2-a1c34fe8e0a3;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="57" >
+    <att name="averageScoreOfRoutes" value="4.642857" />
+    <att name="minimalAvailableWagons" value="0" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="daea4528-4b96-4305-8725-2eeb07848fae;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="3" />
+  </instance>
+  <instance id="58" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="c8e90c26-e978-4934-8b81-440b83179aed;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="59" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="889e47e8-62af-4d35-8f7c-9025e9fc76f3;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="160" >
+    <att name="averageScoreOfRoutes" value="4.3076925" />
+    <att name="minimalAvailableWagons" value="8" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="a981e953-5ff6-420e-b0dd-cc078f056531;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="8" />
+  </instance>
+  <instance id="161" >
+    <att name="averageScoreOfRoutes" value="4.3076925" />
+    <att name="minimalAvailableWagons" value="8" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="7d0b7ce7-6599-41d6-a69f-d4c8f3dcae85;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="8" />
+  </instance>
+  <instance id="162" >
+    <att name="averageScoreOfRoutes" value="4.3076925" />
+    <att name="minimalAvailableWagons" value="6" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="3c4d26e5-53f6-41ef-9c94-1f40fb32071e;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="6" />
+  </instance>
+  <instance id="163" >
+    <att name="averageScoreOfRoutes" value="4.142857" />
+    <att name="minimalAvailableWagons" value="5" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="68dae0b3-3510-4ca9-96c8-84d8bb197892;" />
+    <att name="handTrainCardsCount" value="0" />
+    <att name="destinationCardsCount" value="2" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="164" >
+    <att name="averageScoreOfRoutes" value="3.9333334" />
+    <att name="minimalAvailableWagons" value="5" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="5720e1bc-756e-40b9-a6fb-48acc07eec53;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="165" >
+    <att name="averageScoreOfRoutes" value="3.9333334" />
+    <att name="minimalAvailableWagons" value="5" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="52b744bf-1356-40a6-b718-d384a089c6c4;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="166" >
+    <att name="averageScoreOfRoutes" value="3.9333334" />
+    <att name="minimalAvailableWagons" value="5" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="fd59c518-acd6-4776-bd10-c7c0c15b9246;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="167" >
+    <att name="averageScoreOfRoutes" value="3.9333334" />
+    <att name="minimalAvailableWagons" value="5" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="c3140e30-720d-4af2-ac2d-2c6f685e2bcb;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="168" >
+    <att name="averageScoreOfRoutes" value="3.9333334" />
+    <att name="minimalAvailableWagons" value="5" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="cd94aff2-3324-4e30-8874-4cee29442a17;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="169" >
+    <att name="averageScoreOfRoutes" value="3.9333334" />
+    <att name="minimalAvailableWagons" value="5" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="8324dd85-6967-4d5a-9684-636be8881544;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="60" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="e094d6e7-893f-4a1b-8af0-1ed97205ade5;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="61" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="00766c4e-f5bd-45de-8018-18d4b3915b3f;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="62" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="07f584b4-f356-4af2-9bf0-4d632b603c13;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="63" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="45" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="70ebafed-142f-428d-a7df-2a951e075a5c;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="45" />
+  </instance>
+  <instance id="64" >
+    <att name="averageScoreOfRoutes" value="0.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="e31529a3-2f2c-4cba-9e2c-0a427d28944d;" />
+    <att name="handTrainCardsCount" value="6" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="65" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="82dfe316-32da-4fb8-a368-795f02e1bf7e;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="66" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="09a5e3eb-d456-4d84-ae7f-d0c382e6e3e6;" />
+    <att name="handTrainCardsCount" value="8" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="67" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="41" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="0c359d46-dde7-4410-9f7b-ba95af63f8fc;" />
+    <att name="handTrainCardsCount" value="9" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="68" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="219459be-aa80-4e0c-99e2-94e808acb30d;" />
+    <att name="handTrainCardsCount" value="10" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="69" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="be198868-f575-413d-9554-7f6dec496ec7;" />
+    <att name="handTrainCardsCount" value="11" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="170" >
+    <att name="averageScoreOfRoutes" value="3.9333334" />
+    <att name="minimalAvailableWagons" value="5" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="a0d33291-785b-4cd6-be4b-fc2501af5c2a;" />
+    <att name="handTrainCardsCount" value="7" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="171" >
+    <att name="averageScoreOfRoutes" value="3.9333334" />
+    <att name="minimalAvailableWagons" value="0" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="9479c343-6c1f-4eae-a6f7-0ff400904b50;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="0" />
+  </instance>
+  <instance id="172" >
+    <att name="averageScoreOfRoutes" value="4.3125" />
+    <att name="minimalAvailableWagons" value="0" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="d5705b4b-c610-44d5-8e17-ffc4f3a4af75;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="0" />
+  </instance>
+  <instance id="173" >
+    <att name="averageScoreOfRoutes" value="4.3125" />
+    <att name="minimalAvailableWagons" value="0" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="efed27ea-0688-443e-bcec-23ba8b4e057c;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="0" />
+  </instance>
+  <instance id="70" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="36fb01a6-f695-499f-a156-88bc68ed5e13;" />
+    <att name="handTrainCardsCount" value="12" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="71" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="6c74a1da-c07a-41c1-b365-a0e328ea202c;" />
+    <att name="handTrainCardsCount" value="13" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="72" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="3655c344-0a2c-4fd5-96aa-e82fed01595a;" />
+    <att name="handTrainCardsCount" value="14" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="73" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="39" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="8f220948-63a6-49a7-a6af-fb4a809c5870;" />
+    <att name="handTrainCardsCount" value="15" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="41" />
+  </instance>
+  <instance id="74" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="37" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="ff1a12f3-7472-4293-ae0b-96f5f9de54e3;" />
+    <att name="handTrainCardsCount" value="11" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="37" />
+  </instance>
+  <instance id="75" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="375bb531-6f17-499a-8483-9a8b26269cf5;" />
+    <att name="handTrainCardsCount" value="12" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="37" />
+  </instance>
+  <instance id="76" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="87c33ebf-b16e-4d1b-a4bf-39b3d13d07ee;" />
+    <att name="handTrainCardsCount" value="13" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="37" />
+  </instance>
+  <instance id="77" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="2bfb4d88-90f9-42a2-b908-2f405e5285f6;" />
+    <att name="handTrainCardsCount" value="14" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="37" />
+  </instance>
+  <instance id="78" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="33" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="f58fe53a-aeda-4a5b-a8ce-7481fa44e5ea;" />
+    <att name="handTrainCardsCount" value="15" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="37" />
+  </instance>
+  <instance id="79" >
+    <att name="averageScoreOfRoutes" value="7.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="5a0cf910-6cc2-445e-b3b9-fbd6854404d2;" />
+    <att name="handTrainCardsCount" value="12" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="34" />
+  </instance>
+  <instance id="100" >
+    <att name="averageScoreOfRoutes" value="4.1" />
+    <att name="minimalAvailableWagons" value="11" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="88a405ba-3dac-4a66-bc52-1a45998ef09d;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="11" />
+  </instance>
+  <instance id="101" >
+    <att name="averageScoreOfRoutes" value="5.090909" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="9b832d4a-9cc0-4046-bb5a-bc0b1b60a2fe;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="11" />
+  </instance>
+  <instance id="102" >
+    <att name="averageScoreOfRoutes" value="5.090909" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="2146771c-dea2-468b-badf-9df6db29df3e;" />
+    <att name="handTrainCardsCount" value="3" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="11" />
+  </instance>
+  <instance id="103" >
+    <att name="averageScoreOfRoutes" value="5.090909" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="03e6a581-0bcb-4225-92fb-896a83792442;" />
+    <att name="handTrainCardsCount" value="4" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="11" />
+  </instance>
+  <instance id="104" >
+    <att name="averageScoreOfRoutes" value="5.090909" />
+    <att name="minimalAvailableWagons" value="10" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="cd1df609-ae8d-4d83-adfb-a5cd3a5f5424;" />
+    <att name="handTrainCardsCount" value="5" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="11" />
+  </instance>
+  <instance id="105" >
+    <att name="averageScoreOfRoutes" value="5.090909" />
+    <att name="minimalAvailableWagons" value="8" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="df0a4f69-e647-41d4-bbbe-3b63f5040677;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="8" />
+  </instance>
+  <instance id="106" >
+    <att name="averageScoreOfRoutes" value="5.0" />
+    <att name="minimalAvailableWagons" value="4" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="3109169e-26f3-465b-ba4c-c37edc20a1db;" />
+    <att name="handTrainCardsCount" value="0" />
+    <att name="destinationCardsCount" value="1" />
+    <att name="availableWagons" value="6" />
+  </instance>
+  <instance id="80" >
+    <att name="averageScoreOfRoutes" value="6.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromOpenCards" />
+    <att name="routeOptions" value="f52933f7-c0d5-4d4b-945f-eca5ccdef1a8;" />
+    <att name="handTrainCardsCount" value="13" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="34" />
+  </instance>
+  <instance id="107" >
+    <att name="averageScoreOfRoutes" value="4.769231" />
+    <att name="minimalAvailableWagons" value="4" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="f404730a-b979-4743-840d-4973c86a8f7e;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="6" />
+  </instance>
+  <instance id="81" >
+    <att name="averageScoreOfRoutes" value="6.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="1efb83da-f17f-44ea-92d6-20d68935813b;" />
+    <att name="handTrainCardsCount" value="14" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="34" />
+  </instance>
+  <instance id="108" >
+    <att name="averageScoreOfRoutes" value="4.769231" />
+    <att name="minimalAvailableWagons" value="4" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="fb7da694-adc7-4f19-aaab-e04f30627740;" />
+    <att name="handTrainCardsCount" value="2" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="6" />
+  </instance>
+  <instance id="82" >
+    <att name="averageScoreOfRoutes" value="6.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="2f8d0a12-ec91-4bbe-b79e-4c6fd3ec7bf2;" />
+    <att name="handTrainCardsCount" value="15" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="34" />
+  </instance>
+  <instance id="109" >
+    <att name="averageScoreOfRoutes" value="4.769231" />
+    <att name="minimalAvailableWagons" value="0" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="bcddfb6e-3463-4e29-977e-b517e00ebf0a;" />
+    <att name="handTrainCardsCount" value="1" />
+    <att name="destinationCardsCount" value="0" />
+    <att name="availableWagons" value="5" />
+  </instance>
+  <instance id="83" >
+    <att name="averageScoreOfRoutes" value="6.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="340e2c52-6e46-4e11-9359-3088fb74f157;" />
+    <att name="handTrainCardsCount" value="16" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="34" />
+  </instance>
+  <instance id="84" >
+    <att name="averageScoreOfRoutes" value="6.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="2cb19ed6-d4ed-4a04-b1d3-45d51647e0a7;" />
+    <att name="handTrainCardsCount" value="17" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="34" />
+  </instance>
+  <instance id="85" >
+    <att name="averageScoreOfRoutes" value="6.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="DrawCardFromDeck" />
+    <att name="routeOptions" value="b2fa9883-bcfe-4f9c-9d08-b599d72321ff;" />
+    <att name="handTrainCardsCount" value="18" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="34" />
+  </instance>
+  <instance id="86" >
+    <att name="averageScoreOfRoutes" value="6.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="831316d6-ed40-48ca-8be2-3b23f5f295dd;" />
+    <att name="handTrainCardsCount" value="16" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="32" />
+  </instance>
+  <instance id="87" >
+    <att name="averageScoreOfRoutes" value="5.0" />
+    <att name="minimalAvailableWagons" value="27" />
+    <att name="plan" value="ClaimRoute" />
+    <att name="routeOptions" value="a59bcccc-4322-4a16-b606-b7f945b12550;" />
+    <att name="handTrainCardsCount" value="13" />
+    <att name="destinationCardsCount" value="3" />
+    <att name="availableWagons" value="29" />
+  </instance>
+</instances>
+<cb name="CaseBase">
+     <case name="88" />
+     <case name="89" />
+     <case name="110" />
+     <case name="111" />
+     <case name="112" />
+     <case name="113" />
+     <case name="114" />
+     <case name="115" />
+     <case name="116" />
+     <case name="90" />
+     <case name="117" />
+     <case name="91" />
+     <case name="118" />
+     <case name="92" />
+     <case name="119" />
+     <case name="93" />
+     <case name="94" />
+     <case name="95" />
+     <case name="96" />
+     <case name="97" />
+     <case name="10" />
+     <case name="98" />
+     <case name="11" />
+     <case name="99" />
+     <case name="12" />
+     <case name="13" />
+     <case name="14" />
+     <case name="15" />
+     <case name="16" />
+     <case name="17" />
+     <case name="18" />
+     <case name="19" />
+     <case name="120" />
+     <case name="121" />
+     <case name="1" />
+     <case name="122" />
+     <case name="2" />
+     <case name="123" />
+     <case name="3" />
+     <case name="124" />
+     <case name="4" />
+     <case name="125" />
+     <case name="5" />
+     <case name="126" />
+     <case name="6" />
+     <case name="127" />
+     <case name="7" />
+     <case name="128" />
+     <case name="8" />
+     <case name="129" />
+     <case name="9" />
+     <case name="20" />
+     <case name="21" />
+     <case name="22" />
+     <case name="23" />
+     <case name="24" />
+     <case name="25" />
+     <case name="26" />
+     <case name="27" />
+     <case name="28" />
+     <case name="29" />
+     <case name="130" />
+     <case name="131" />
+     <case name="132" />
+     <case name="133" />
+     <case name="134" />
+     <case name="135" />
+     <case name="136" />
+     <case name="137" />
+     <case name="138" />
+     <case name="139" />
+     <case name="30" />
+     <case name="31" />
+     <case name="32" />
+     <case name="33" />
+     <case name="34" />
+     <case name="35" />
+     <case name="36" />
+     <case name="37" />
+     <case name="38" />
+     <case name="39" />
+     <case name="140" />
+     <case name="141" />
+     <case name="142" />
+     <case name="143" />
+     <case name="144" />
+     <case name="145" />
+     <case name="146" />
+     <case name="147" />
+     <case name="148" />
+     <case name="149" />
+     <case name="40" />
+     <case name="41" />
+     <case name="42" />
+     <case name="43" />
+     <case name="44" />
+     <case name="45" />
+     <case name="46" />
+     <case name="47" />
+     <case name="48" />
+     <case name="49" />
+     <case name="150" />
+     <case name="151" />
+     <case name="152" />
+     <case name="153" />
+     <case name="154" />
+     <case name="155" />
+     <case name="156" />
+     <case name="157" />
+     <case name="158" />
+     <case name="159" />
+     <case name="50" />
+     <case name="51" />
+     <case name="52" />
+     <case name="53" />
+     <case name="54" />
+     <case name="55" />
+     <case name="56" />
+     <case name="57" />
+     <case name="58" />
+     <case name="59" />
+     <case name="160" />
+     <case name="161" />
+     <case name="162" />
+     <case name="163" />
+     <case name="164" />
+     <case name="165" />
+     <case name="166" />
+     <case name="167" />
+     <case name="168" />
+     <case name="169" />
+     <case name="60" />
+     <case name="61" />
+     <case name="62" />
+     <case name="63" />
+     <case name="64" />
+     <case name="65" />
+     <case name="66" />
+     <case name="67" />
+     <case name="68" />
+     <case name="69" />
+     <case name="170" />
+     <case name="171" />
+     <case name="172" />
+     <case name="173" />
+     <case name="70" />
+     <case name="71" />
+     <case name="72" />
+     <case name="73" />
+     <case name="74" />
+     <case name="75" />
+     <case name="76" />
+     <case name="77" />
+     <case name="78" />
+     <case name="79" />
+     <case name="100" />
+     <case name="101" />
+     <case name="102" />
+     <case name="103" />
+     <case name="104" />
+     <case name="105" />
+     <case name="106" />
+     <case name="80" />
+     <case name="107" />
+     <case name="81" />
+     <case name="108" />
+     <case name="82" />
+     <case name="109" />
+     <case name="83" />
+     <case name="84" />
+     <case name="85" />
+     <case name="86" />
+     <case name="87" />
+</cb>
+</Project>
