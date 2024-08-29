@@ -221,6 +221,9 @@ public class GameManager : MonoBehaviour
                 case "Rule AI #2":
                     players[i].isHardcodedAI2 = true;
                     break;
+                case "Evil AI":
+                    players[i].isEvilAI = true;
+                    break;
             }
             //players[i].isAI = PlayerPrefs.GetInt(name) == 1 ? true : false;
 

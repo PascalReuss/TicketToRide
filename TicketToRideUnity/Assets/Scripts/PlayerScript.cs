@@ -11,7 +11,9 @@ public class PlayerScript : MonoBehaviour
     // KI #2
     public bool isHardcodedAI2 { get; set; }
     // human player
-    public bool isHuman{ get; set; }
+    public bool isHuman { get; set; }
+    // evil AI
+    public bool isEvilAI { get; set; }
     // whether it is the players turn
     public bool isActivePlayer { get; set; }
     

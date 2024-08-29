@@ -59,12 +59,11 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-
 # Compiled class file
-*.class
+#*.class
 
 # Log file
-*.log
+#*.log
 
 # BlueJ files
 *.ctxt
@@ -73,8 +72,8 @@ crashlytics-build.properties
 .mtj.tmp/
 
 # Package Files #
-*.class
-*.jar
+#*.class
+#*.jar
 *.war
 *.nar
 *.ear
@@ -89,4 +88,3 @@ replay_pid*
 **/Java-Console_Log.txt
 
 *.htm
-

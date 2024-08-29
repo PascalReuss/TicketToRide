@@ -26706,6 +26706,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vancouver
       objectReference: {fileID: 0}
+    - target: {fileID: 1086145330432567618, guid: d4017cff362d66542a68d0eabee7e4dd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1086145330432567622, guid: d4017cff362d66542a68d0eabee7e4dd, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -32545,7 +32549,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 33
+  field of view: 39
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

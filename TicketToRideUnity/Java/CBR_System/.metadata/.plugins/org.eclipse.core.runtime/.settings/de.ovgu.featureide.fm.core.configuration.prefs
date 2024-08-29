@@ -1,0 +1,2 @@
+defaultFactoryWorkspace=\#Thu Aug 29 11\:40\:44 CEST 2024\r\n$de.ovgu.featureide.fm.attributes.format.config.XmlExtendedConfFormat\=de.ovgu.featureide.fm.core.ExtendedConfigurationFactory\r\ndefault\=de.ovgu.featureide.fm.core.DefaultConfigurationFactory\r\n
+eclipse.preferences.version=1
