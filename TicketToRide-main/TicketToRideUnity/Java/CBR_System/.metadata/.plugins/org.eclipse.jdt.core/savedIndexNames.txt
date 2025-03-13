@@ -1,0 +1,6 @@
+INDEX VERSION 1.134+C:\Users\Administrator\Desktop\TicketToRide-main\TicketToRideUnity\Java\CBR_System\.metadata\.plugins\org.eclipse.jdt.core
+3242060825.index
+464026347.index
+1865797976.index
+472722655.index
+3502623421.index
