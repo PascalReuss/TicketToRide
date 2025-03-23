@@ -42,8 +42,11 @@ public class PlayerScript : MonoBehaviour
     public List<string> acquiredRoutes { get; set; }
 
     // Added for Q-Learning : List of the best ways to fullfill destination card
+    public GameState gameState { get; set; }
+    public MetaLayer metaLayer { get; set; }
     public List<CityConnection> bestWay { get; set; }
-
+    public QTable qTable { get; set; }
+    public QTable qTableBackup { get; set; }
     public PlayerScript()
     {
     }
@@ -58,6 +61,8 @@ public class PlayerScript : MonoBehaviour
         longestRouteDistance = 0;
         cities = new List<string>();
         bestWay = new List<CityConnection>();
+        qTable = new QTable(gameState);
+        qTableBackup = qTable;
     }
 
     // Start is called before the first frame update

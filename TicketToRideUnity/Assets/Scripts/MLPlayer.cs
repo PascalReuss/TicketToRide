@@ -31,8 +31,8 @@ public class MLPlayer
     {
         this.gameState = gameState; // Store the game state reference
         this.metaLayer = metaLayer; // Initialize MetaLayer to interact with game state
-        qTable = new QTable(gameState, metaLayer); // Initialize qTable to store the Q Values
-        qTableBackup = new QTable(gameState, metaLayer);
+        qTable = new QTable(gameState); // Initialize qTable to store the Q Values
+        qTableBackup = new QTable(gameState);
     }
     /// <summary>
     /// Initialisiert QTable, QTableBackup, bestWay, bestWayList
@@ -57,7 +57,9 @@ public class MLPlayer
             foreach (var route in connection)
             {
                 if (gameState.getPlayerTargetCities(player).Contains(route.city))
+                {
                     route.routeValue = route.routeValue + 1000;
+                }
             }
         }
     }
@@ -87,8 +89,6 @@ public class MLPlayer
             else if (i % (episodes/10) == 0)
                 findBestWay(startCity, targetCity);
 
-            //Debug.Log("EPISODE #" + i );
-
             getNextQValue(startCity, targetCity, alpha, gamma, connectionCounter, training);
             
             // 10 Mal wird die CSV Datei mit dem aktuellen Q-Table erweitert
@@ -98,7 +98,31 @@ public class MLPlayer
             }
         }
     }
+    public void findShortestConnection(string targetCity, int episodes, double alpha, double gamma, int connectionCounter)
+    {
+        bool training = true;
+        for (int i = 1; i <= episodes; i++)
+        {
+            foreach (var city in player.cities)
+            {
+                // Abfrage, ob die Pfadsuche beide Städte gefunden hat.
+                if (hasCrashed == true)
+                {
+                    qTable = qTableBackup;
+                    hasCrashed = false;
+                    //Debug.Log("Crash at episode: " + i + " !!");
+                }
+                else if (i % (episodes / 10) == 0)
+                    findBestWay(city, targetCity);
 
+                getNextQValue(city, targetCity, alpha, gamma, connectionCounter, training);
+                if (i % (episodes / 10) == 0)
+                {
+                    writeQTableToCSV(i, city, targetCity);
+                }
+            }
+        }
+    }
     public string selectAffordableRoute(PlayerScript player, GameObject routes)
     {
         string targetRoute = "";
@@ -253,20 +277,20 @@ public class MLPlayer
 
     public bool checkConnection(string startCity, string targetCity, HashSet<string> visited = null)
     {
-        //Debug.Log("###########################Stadt: " + startCity + "  to:  " + targetCity);
+        //Debug.Log("Check from: " + startCity + " to: " + targetCity);
         if (startCity == targetCity)
-            return true;  // Verbindung gefunden!
+            return true; // Connection found!
 
         if (visited == null)
             visited = new HashSet<string>();
 
-        if (visited.Contains(startCity)) // Endlosschleife vermeiden
+        if (visited.Contains(startCity)) // Exit on endless loop
         {
-            Debug.Log("Endlosschleife");
-            return false;  
+            //Debug.Log("Endless Loop");
+            return false;
         }
 
-        visited.Add(startCity); // Stadt als besucht markieren
+        visited.Add(startCity); // mark city as visited
 
         List<string> kiRoutes = player.acquiredRoutes;
 
@@ -276,14 +300,14 @@ public class MLPlayer
             string city1 = cities[0];
             string city2 = cities[1];
 
-            // Prüfen, ob die Route eine Verbindung von startCity ist
+            // Check if the route is a connection from startCity
             if (city1 == startCity && checkConnection(city2, targetCity, visited))
                 return true;
             if (city2 == startCity && checkConnection(city1, targetCity, visited))
                 return true;
         }
 
-        return false;  // Keine Verbindung gefunden
+        return false;  // No connection found
     }
     // check connection End -----------------------------------------------------------------------
 
@@ -304,10 +328,10 @@ public class MLPlayer
     {
         //Debug.Log("getNextQValue(" + startCity + ", " + targetCity + ", " + alpha + ", " + gamma + ", " + training + ")");
 
-        // Abbruchbedingung 1: Solange Ziel nicht erreicht -> Loop Q Learning, ansonsten -> Ziel erreicht, return 1000
+        // Termination condition 1: As long as target is not reached -> Loop Q Learning, otherwise -> target reached, return 1000
         if (startCity != targetCity)
         {
-            // Abbruchbedingung 2: Anzahl "connectionCounter" Verbindungen werden überprüft, return -100
+            // Termination condition 2: Number of "connectionCounter" connections are checked, return -100
             if (connectionCounter == 0)
             {
                 //Debug.Log("Exeeded connection limit! Stuck in " + startCity + " to " + targetCity);
@@ -315,7 +339,7 @@ public class MLPlayer
                 return -100;
             }
             connectionCounter = connectionCounter - 1;
-
+            
             string nextCity;
             if (training)
             {
@@ -326,14 +350,12 @@ public class MLPlayer
                 nextCity = pickMaxNextCity(startCity);
             }
             CityConnection route = getNextRoute(startCity, nextCity);
-            //double reward = getReward(city);
             double reward = route.weight;
-            //double qValue = getQValue2(city, nextCity);
             double qValue = route.routeValue;
             double nextQValue = getNextQValue(nextCity, targetCity, alpha, gamma, connectionCounter, training);
             //Debug.Log("alpha = " + alpha + "\n" + "gamma = " + gamma + "\n" + "city = " + city + "\n" + "qValue = " + qValue + "\n" + "nextCity = " + nextCity + "\n" + "route.routeName = " + route.routeName);
 
-            //Formel: Q(s, a) ← Q(s, a) + α   * (R(s, a)+   γ   * max Q(s', a')  - Q(s, a))
+            //Formula: Q(s, a) ← Q(s, a) + α   * (R(s, a)+   γ   * max Q(s', a')  - Q(s, a))
             double newQValue = qValue + alpha * (reward + gamma * nextQValue - qValue);
             
             if (qTable.qDictionary.ContainsKey(startCity))
@@ -460,7 +482,7 @@ public class MLPlayer
     /// <param name="city2">The destination city for the Q-table export.</param>
     public void writeQTableToCSV(int counter, string startCity, string targetCity)
     {
-        string filePath = Path.Combine(Application.dataPath, "Q-Tables", "Q-Table " + startCity + " to " + targetCity + ".csv");
+        string filePath = Path.Combine(Application.dataPath, "Q-Tables", player.playerName + " Q-Table " + startCity + " to " + targetCity + ".csv");
         if (qTable.qDictionary == null || qTable.qDictionary.Count == 0)
         {
             Debug.Log("QTable is empty or not initialized.");

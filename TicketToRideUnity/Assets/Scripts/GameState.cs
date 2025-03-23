@@ -21,7 +21,21 @@ public class GameState : MonoBehaviour
         { "Joker", 0 }
     };
     public Dictionary<string, List<CityConnection>> cityMap { get; set; }
+    public Dictionary<string, List<CityConnection>> copyCityMap()
+    {
+        var copy = new Dictionary<string, List<CityConnection>>();
 
+        foreach (var entry in cityMap)
+        {
+            // Eine neue Liste für die CityConnections erstellen
+            var connectionsCopy = entry.Value.Select(conn => new CityConnection(conn.city, conn.routeName)).ToList();
+
+            // Die kopierte Liste der kopierten Stadt hinzufügen
+            copy.Add(entry.Key, connectionsCopy);
+        }
+
+        return copy;
+    }
     // List of cards that are currently open
     public List<string> OpenCards { get; set; } = new List<string>();
 

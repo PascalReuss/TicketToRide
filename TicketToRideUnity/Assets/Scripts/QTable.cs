@@ -7,54 +7,38 @@ using System.Linq;
 public class QTable
 {
     private GameState gameState;
-    private MetaLayer metaLayer;
-
+    // calculate in each iteration
     public Dictionary<string, List<CityConnection>> qDictionary { get; set;}
+    // restores the qDictionary on a crash
     public Dictionary<string, List<CityConnection>> qDictionaryBackup { get; set; }
+    // ready to use
+    private Dictionary<string, List<CityConnection>> qDictionaryBaseline;
 
-    public QTable(GameState gameState, MetaLayer metaLayer)
+    public QTable(GameState gameState)
     {
-        this.gameState = gameState;
-        this.metaLayer = metaLayer;
+        this.gameState = gameState; // Initialize qTable to store the Q Values
     }
 
+    /// <summary>
+    /// set the qDictionary ready for use
+    /// </summary>
     public void initializeQDictionary()
     {
         qDictionary = new Dictionary<string, List<CityConnection>>();
         qDictionaryBackup = new Dictionary<string, List<CityConnection>>();
-        qDictionary = gameState.cityMap;
+        qDictionary = gameState.copyCityMap();
         qDictionaryBackup = qDictionary;
-        List<string> qTargets = gameState.getPlayerTargetCities(gameState.Player);
-        foreach (var x in qTargets)
-            Debug.Log(x);
+        qDictionaryBaseline = qDictionary;
     }
+    /// <summary>
+    /// delete the routName of given parameter in the qDictionary
+    /// </summary>
+    /// <param name="routeName"></param>
     public void deleteRoutesInQDictionary(string routeName)
     {
-        // Durchlaufe das gesamte qDictionary
         foreach (var cityConnections in qDictionary.Values)
         {
-            // Entferne alle CityConnections, deren routeName dem übergebenen routeName entspricht
             cityConnections.RemoveAll(connection => connection.routeName == routeName);
-        }
-    }
-
-    public void initializeQValues(List<string> qTargets, Dictionary<string, List<CityConnection>> qDictionary)
-    {
-        Debug.Log("init Q Values");
-        foreach (var targetCity in qTargets)
-        {
-            if (qDictionary.ContainsKey(targetCity))
-            {
-                foreach (var connection in qDictionary[targetCity])
-                {
-                    connection.routeValue = 1000;
-                }
-                Debug.Log($"Updated all routeValues in {targetCity} to 1000");
-            }
-            else
-            {
-                Debug.LogWarning($"City {targetCity} not found in qDictionary");
-            }
         }
     }
     public void UpdateRouteValue(string city, string routeName, double newValue)
@@ -134,7 +118,25 @@ public class QTable
         // Rekursiver Aufruf mit aktualisiertem usedRouteNames
         UpdateRouteValuesRecursive(nextTargets, value - 50, stepsRemaining - 1, nextPreviousCities, usedRouteNames);
     }
-
+    public void initializeQValues(List<string> qTargets, Dictionary<string, List<CityConnection>> qDictionary)
+    {
+        Debug.Log("init Q Values");
+        foreach (var targetCity in qTargets)
+        {
+            if (qDictionary.ContainsKey(targetCity))
+            {
+                foreach (var connection in qDictionary[targetCity])
+                {
+                    connection.routeValue = 1000;
+                }
+                Debug.Log($"Updated all routeValues in {targetCity} to 1000");
+            }
+            else
+            {
+                Debug.LogWarning($"City {targetCity} not found in qDictionary");
+            }
+        }
+    }
     public void PrintQTable()
     {
         Debug.Log("=== QTable Contents ===");
@@ -155,7 +157,7 @@ public class QTable
     }
     public void printQTableForCity(string city)
     {
-        Debug.Log($"=== QTable für Stadt: {city} ===");
+        Debug.Log($"=== QTable for city: {city} ===");
 
         foreach (var connection in qDictionary[city])
         {
@@ -164,7 +166,7 @@ public class QTable
                       $"IsTarget: {connection.isTarget}");
         }
 
-        Debug.Log($"=== Ende der QTable für {city} ===");
+        Debug.Log($"=== End of QTable for {city} ===");
     }
     public void PrintQTableGrid()
     {

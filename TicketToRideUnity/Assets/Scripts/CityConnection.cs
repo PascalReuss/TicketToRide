@@ -35,20 +35,4 @@ public class CityConnection
         }
     }
 
-    // Added for QLearning
-    public double RouteValue()
-    {
-        if (GameObject.Find(routeName) != null)
-        {
-            GameObject route = GameObject.Find(routeName);
-            //double routeValue = route.GetComponent<RouteScript>().routeLength;
-            double routeValue = 0;
-            return routeValue;
-        }
-        else
-        {
-            Debug.Log("Routename not found: " + routeName + ", neighborCity: " + city);
-            return 0;
-        }
-    }
 }
