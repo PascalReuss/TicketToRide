@@ -261,6 +261,7 @@ public class GameManager : MonoBehaviour
 
         //generate map with citys and teir connections
         CreateCityMap();
+        CreateWeights();
         gameState.cityMap = cityMap;
 
 
@@ -340,9 +341,13 @@ public class GameManager : MonoBehaviour
         logAIactions = true;
 
         //Added to start the QTable in the MLPlayer (redundant)
-        foreach (var p in players.Where(p => p.isMLAI))
+        if (players.Any(p => p.isMLAI))
         {
             mlPlayer.startQTable();
+        }
+        foreach (var p in players.Where(p => p.isMLAI))
+        {
+            p.qTable = mlPlayer.qTable.DeepCopy();
         }
     }
 
@@ -934,12 +939,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("ML Spieler " + activePlayer.playerName + " am Zug in Runde: " + gameState.TurnCounter);
         mlPlayer.player = activePlayer;
+        mlPlayer.qTable = activePlayer.qTable;
         mlPlayer.updateQTable();
 
         bool destCardFulfilled = true;
         foreach (var destCard in activePlayer.handdestinationcards)
         {
-            if (!mlPlayer.checkConnection(destCard.citiesAndPoints[0], destCard.citiesAndPoints[1]))
+            if (!mlPlayer.checkConnection(destCard.citiesAndPoints[0], destCard.citiesAndPoints[1]) && !destCard.fulfilled)
             {
                 destCardFulfilled = false;
                 mlPlayer.startTraining(destCard.citiesAndPoints[0], destCard.citiesAndPoints[1], 40000, 0.2, 0.9, 100);
@@ -955,7 +961,7 @@ public class GameManager : MonoBehaviour
         //mlPlayer.startTraining("Vancouver", "Miami", 40000, 0.2, 0.9, 100);
         //mlPlayer.findBestWay("Vancouver", "Miami");
 
-        //mlPlayer.testLOG(mlPlayer.getBestWay()); // Debug for List of best ways
+        //mlPlayer.testLOG(mlPlayer.getShortWay()); // Debug for List of best ways
 
         //int summe = 0;
         //foreach (var x in mlPlayer.getUniqueBestRoutes())
@@ -977,8 +983,13 @@ public class GameManager : MonoBehaviour
         int actionPoints = 2;
 
         string targetRoute = mlPlayer.selectAffordableRoute(activePlayer, routes);
-        List<string> sortedColors = mlPlayer.calculateColorsSortedByNeed(activePlayer, routes);
-        
+        List<string> sortedColors = mlPlayer.calculateColorsSortedByNeed(activePlayer);
+
+        string loog = "";
+        foreach (var co in sortedColors)
+            loog += co + "\n";
+        Debug.Log("Farben(ASC):\n" + loog);
+
         string bestAction = "pickTrainCardfromOpenCards";
 
         if (targetRoute != "")
@@ -993,79 +1004,74 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1); // Warten auf Unity
 
         firstCardDrawn = false;
-        while (actionPoints > 0)
+        if (lastPlayerBeforeGameEnds != null)
         {
-            switch (bestAction)
+            StartCoroutine(StartRuleProcessAI1());
+        }
+        else
+        {
+            while (actionPoints > 0)
             {
-                case "build":
-                    if (actionPoints == 2)
-                    {
-                        StartCoroutine(AIbuysRoute(targetRoute));
-                        actionPoints = 0;
-                        break;
-                    }
-                    else
-                        Debug.Log("Tried to build, but has no action points left!");
-                    break;
-
-                case "pickTrainCardfromOpenCards":
-                    foreach (string color in sortedColors)
-                    {
-                        if (Array.Exists(faceupTraincards, card => card.color == color))
+                switch (bestAction)
+                {
+                    case "build":
+                        if (actionPoints == 2)
                         {
-                            AIdrawsOpenCard(color);
-                            Debug.Log("Picked Card Color from open Cards: " + color);
-                            yield return new WaitForSecondsRealtime(0.5F); // Warten auf Unity
-                            actionPoints -= 1;
-                            firstCardDrawn = true;
-                            break; // Farbe gefunden, daher abbrechen
+                            StartCoroutine(AIbuysRoute(targetRoute));
+                            actionPoints = 0;
+                            break;
                         }
-                    }
+                        else
+                            Debug.Log("Tried to build, but has no action points left!");
+                        break;
 
-                    if (actionPoints > 0) // Falls keine passende Farbe gefunden wurde
-                    {
-
+                    case "pickTrainCardfromOpenCards":
+                        if (actionPoints > 0)
+                        {
+                            foreach (string color in sortedColors)
+                            {
+                                if (Array.Exists(faceupTraincards, card => card.color == color))
+                                {
+                                    AIdrawsOpenCard(color);
+                                    Debug.Log(activePlayer.playerName + " picked Card from open Cards: " + color);
+                                    yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+                                    actionPoints -= 1;
+                                    firstCardDrawn = true;
+                                    break;
+                                }
+                            }
+                        }
                         if (Array.Exists(faceupTraincards, card => card.color == "Joker") && actionPoints == 2)
                         {
                             AIdrawsOpenCard("Joker");
                             firstCardDrawn = true;
-                            Debug.Log("Picked Card Color from open Cards: Joker");
-                            //yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+                            Debug.Log(activePlayer.playerName + " picked Card from open Cards: Joker");
+                            yield return new WaitForSecondsRealtime(1); // Warten auf Unity
                             actionPoints = 0;
                             break;
                         }
                         else
                         {
                             DrawTrainCardFromDeck();
-                            Debug.Log("Picked Card Color from open Cards: Card from Deck");
-                            //yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+                            Debug.Log(activePlayer.playerName + " picked Card from open Cards: Card from Deck");
+                            yield return new WaitForSecondsRealtime(1); // Warten auf Unity
                             actionPoints -= 1;
                             break;
                         }
-                    }
-                    break;
 
-                case "pickTrainCardfromDeck":
-
-                    DrawTrainCardFromDeck();
-                    firstCardDrawn = true;
-                    //yield return new WaitForSecondsRealtime(1); // Warten auf Unity
-                    actionPoints -= 1;
-                    break;
-
-                case "pickNewDestinationCard":
-                    if (lastPlayerBeforeGameEnds != null)
-                        StartCoroutine(StartRuleProcessAI1());
-                    actionPoints = 0;
-                    destinationcardsDeck.GetComponent<DestinationCardDeckScript>().OnMouseUp();
-                    yield return new WaitForSecondsRealtime(1); // Warten auf Unity
-                    int destinationCardPosition = ElectDestinationCardsInGame();
-                    StartCoroutine(AIselectsDestinationCard(destinationCardPosition));
-                    break;
+                    case "pickNewDestinationCard":
+                        actionPoints = 0;
+                        destinationcardsDeck.GetComponent<DestinationCardDeckScript>().OnMouseUp();
+                        yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+                        int destinationCardPosition = ElectDestinationCardsInGame();
+                        StartCoroutine(AIselectsDestinationCard(destinationCardPosition));
+                        break;
+                        
+                }
+                yield return new WaitForSecondsRealtime(1); // Warten auf Unity
             }
-
-            yield return new WaitForSecondsRealtime(1); // Warten auf Unity
         }
+        
         yield return new WaitForSecondsRealtime(1); // Warten auf Unity
     }
     IEnumerator StartRuleProcessEvilAI()
@@ -1207,7 +1213,7 @@ public class GameManager : MonoBehaviour
     IEnumerator StartRuleProcessAI1()
     {
         // Added Debug
-        Debug.Log("Active Player = " + gameState.Player.playerName);
+        //Debug.Log("Active Player = " + gameState.Player.playerName);
         //gameState.LogMovesForPlayer(activePlayer.playerName);
 
         // --- variables ---
@@ -1638,6 +1644,7 @@ public class GameManager : MonoBehaviour
                                 {
                                     routeName = routes.transform.GetChild(r).name;
                                     StartCoroutine(AIbuysRoute(routeName));
+                                    yield return new WaitForSecondsRealtime(1);
                                     break;
                                 }
                         }
@@ -1727,7 +1734,6 @@ public class GameManager : MonoBehaviour
             if (color != "Joker")
                 handcardsColorsCount.Add(color, 0);
         }
-
         foreach (TrainCard t in activePlayer.handtraincards)
         {
             if (t.color != "Joker")
@@ -1735,7 +1741,6 @@ public class GameManager : MonoBehaviour
             else
                 jokerCount++;
         }
-
         string selectedColor = routeColor;
         if (routeColor == "Grey")
         {
@@ -1754,7 +1759,6 @@ public class GameManager : MonoBehaviour
                 selectedColor = sortedDict.First().Key;
             }
         }
-
         // search for cards on players hand with needed routeColor
         int routeLength = route.GetComponent<RouteScript>().routeLength;
         for (int i = 0; i < handcardsPanel.transform.childCount; i++)
@@ -1768,7 +1772,6 @@ public class GameManager : MonoBehaviour
             if (counter == routeLength)
                 break;
         }
-
         // if not enough cards were selected, joker cards are needed
         if (counter < routeLength)
         {
@@ -1783,7 +1786,6 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
-
         yield return new WaitForSecondsRealtime(1);
 
         if (counter == routeLength)
@@ -3154,6 +3156,14 @@ public class GameManager : MonoBehaviour
         cityMap.Add("Miami", new List<CityConnection> { new CityConnection("Charleston", "Charleston_Miami_Purple"), new CityConnection("Atlanta", "Atlanta_Miami_Blue"), new CityConnection("NewOrleans", "NewOrleans_Miami_Red") });
         cityMap.Add("NewOrleans", new List<CityConnection> { new CityConnection("Houston", "Houston_NewOrleans_Grey"), new CityConnection("LittleRock", "LittleRock_NewOrleans_Green"), new CityConnection("Atlanta", "Atlanta_NewOrleans_Yellow"), new CityConnection("Atlanta", "Atlanta_NewOrleans_Orange"), new CityConnection("Miami", "NewOrleans_Miami_Red") });
         cityMap.Add("Nashville", new List<CityConnection> { new CityConnection("SaintLouis", "SaintLouis_Nashville_Grey"), new CityConnection("LittleRock", "LittleRock_Nashville_White"), new CityConnection("Atlanta", "Nashville_Atlanta_Grey"), new CityConnection("Raleigh", "Nashville_Raleigh_Black"), new CityConnection("Pittsburgh", "Pittsburgh_Nashville_Yellow") });
+
+        foreach (var city in cityMap) // Added for QLearning
+        {
+            foreach (var connection in city.Value)
+            {
+                connection.routeValue = -1; 
+            }
+        }
     }
 
     public void CreateWeights()
@@ -3166,7 +3176,7 @@ public class GameManager : MonoBehaviour
             {
                 connection.weight = GetRouteLength(connection.routeName);
                 // Added for QLearning
-                connection.routeValue = -1;
+                //connection.routeValue = -1;
             }
         }
     }
@@ -3218,17 +3228,15 @@ public class GameManager : MonoBehaviour
             //Schleife die durch alle Zielkarten iteriert
             for (int d=0; d < p.handdestinationcards.Count; d++)
             {
-                Debug.Log("Spieler= " + p.playerName); 
-                Debug.Log("Debug Points: " + p.handdestinationcards[d].citiesAndPoints[0] + " und " + p.handdestinationcards[d].citiesAndPoints[1]);
 
                 if (CheckCityConnection(p.handdestinationcards[d].citiesAndPoints[0], p.handdestinationcards[d].citiesAndPoints[1], p))
                 {
-                    Debug.Log("Zielkarte abgeschlossen: " + p.handdestinationcards[d].citiesAndPoints[0] + 
+                    Debug.Log("Spieler: " + p.playerName + ", Zielkarte abgeschlossen: " + p.handdestinationcards[d].citiesAndPoints[0] + 
                         " nach " + p.handdestinationcards[d].citiesAndPoints[1] + ": +" + p.handdestinationcards[d].points);
                     p.score += int.Parse(p.handdestinationcards[d].citiesAndPoints[2]);
                 } else
                 {
-                    Debug.Log("Zielkarte nicht abgeschlossen: " + p.handdestinationcards[d].citiesAndPoints[0] +
+                    Debug.Log("Spieler: " + p.playerName + ", Zielkarte nicht abgeschlossen: " + p.handdestinationcards[d].citiesAndPoints[0] +
                         " nach " + p.handdestinationcards[d].citiesAndPoints[1] + ": -" + p.handdestinationcards[d].points);
                     p.score -= int.Parse(p.handdestinationcards[d].citiesAndPoints[2]);
                 }

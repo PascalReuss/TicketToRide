@@ -17,7 +17,7 @@ public class MLPlayer
     public QTable qTable { get; set; }
     public QTable qTableBackup { get; set; }
 
-    private string fileName = Application.dataPath + "/BestWays.csv";
+    private string fileName = Application.dataPath + "/CalculatedWay.csv";
     public List<CityConnection> bestWay { get; set; }
     public List<List<CityConnection>> bestWayList { get; set; }
     private bool hasCrashed = false;
@@ -40,7 +40,7 @@ public class MLPlayer
     public void startQTable()
     {
         qTable.initializeQDictionary();
-        qTableBackup = qTable;
+        qTableBackup = qTable.DeepCopy();
         bestWay = new List<CityConnection>();
         bestWayList = new List<List<CityConnection>>();
     }
@@ -58,7 +58,7 @@ public class MLPlayer
             {
                 if (gameState.getPlayerTargetCities(player).Contains(route.city))
                 {
-                    route.routeValue = route.routeValue + 1000;
+                    route.routeValue = route.routeValue + 0;
                 }
             }
         }
@@ -72,7 +72,7 @@ public class MLPlayer
     /// <param name="episodes">The number of training episodes.</param>
     /// <param name="alpha">The learning rate of the algorithm.</param>
     /// <param name="gamma">The discount factor for future rewards.</param>
-    /// <param name="connectionCounter">The number of possible connections in the network.</param>
+    /// <param name="connectionCounter">The number of possible loops finding the best connections.</param>
     public void startTraining(string startCity, string targetCity, int episodes, double alpha, double gamma, int connectionCounter)
     {
         bool training = true;
@@ -153,8 +153,8 @@ public class MLPlayer
             {
                 // Get the RouteScript component for the current route
                 RouteScript route = routes.transform.GetChild(r).GetComponent<RouteScript>();
-                // Ensure the route has no owner (i.e., it is unclaimed)
-                if (route.owner == null)
+                // Ensure the route has no owner (i.e., it is unclaimed) and the player has enough wagons
+                if (route.owner == null && route.routeLength <= player.availableWagons)
                 {
                     // Check if the route matches the player's hand cards and is in the list of potential routes
                     if (route.routeLength <= count &&
@@ -170,7 +170,7 @@ public class MLPlayer
         // Return the selected route's name, or an empty string if no route was selected
         return targetRoute;
     }
-
+    
     public Dictionary<string, int> getCostsForRoute(string routeName)
     {
         Dictionary<string, int> costs = new Dictionary<string, int>();
@@ -182,14 +182,18 @@ public class MLPlayer
         return costs;
     }
 
-    public List<string> calculateColorsSortedByNeed(PlayerScript player, GameObject routes)
+    /// <summary>
+    /// Calculates the colors that the player needs to draw, sorted in ascending order of missing cards.
+    /// </summary>
+    /// <param name="player">The player for whom the calculation is performed.</param>
+    /// <param name="routes">The GameObject containing the routes.</param>
+    /// <returns>A list of color names, sorted by the number of missing cards (ascending).</returns>
+    public List<string> calculateColorsSortedByNeed(PlayerScript player)
     {
         Dictionary<string, int> playerHandcards = gameState.GetPlayerHandCards(player);
         Dictionary<string, Dictionary<string, int>> routeCosts = new Dictionary<string, Dictionary<string, int>>();
-
         // Joker-Karten extrahieren
         int jokerCount = playerHandcards.ContainsKey("Joker") ? playerHandcards["Joker"] : 0;
-
         // Sammle die benötigten Karten für jede Route
         foreach (CityConnection connection in player.bestWay)
         {
@@ -210,7 +214,6 @@ public class MLPlayer
             {
                 int handCount = playerHandcards.ContainsKey(cost.Key) ? playerHandcards[cost.Key] : 0;
                 int missingCards = Math.Max(0, cost.Value - (handCount + jokerCount));
-
                 if (cost.Key == "Grey")
                 {
                     foreach (var handCard in playerHandcards)
@@ -236,13 +239,20 @@ public class MLPlayer
                 }
             }
         }
-
         // Farben sortiert nach benötigten Karten zurückgeben
         return missingCardsPerColor.OrderBy(x => x.Value).Select(x => x.Key).ToList();
     }
 
     // check connection Start --------------------------------------------------------------------
 
+    /// <summary>
+    /// !deprecated! Alternative used fpr total score calculation
+    /// </summary>
+    /// <param name="startCity">Start city from destinationcard start</param>
+    /// <param name="targetCity">Destination city from destinationcard</param>
+    /// <param name="player">Active Player</param>
+    /// <param name="counter">int value to stop rekursiv loop</param>
+    /// <returns></returns>
     public List<string> getCityConnection(string startCity, string targetCity, PlayerScript player, int counter)
     {
         if (counter <= 0)
@@ -264,6 +274,11 @@ public class MLPlayer
         }
         return routes;
     }
+    /// <summary>
+    /// !deprecated! Alternative used fpr total score calculation 
+    /// </summary>
+    /// <param name="routes"></param>
+    /// <returns></returns>
     public Dictionary<string, int> getCityConnectionWeights(List<string> routes)
     {
         Dictionary<string, int> routesWithWeights = new Dictionary<string, int>();

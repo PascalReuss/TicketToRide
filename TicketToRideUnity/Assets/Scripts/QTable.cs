@@ -61,6 +61,24 @@ public class QTable
             Debug.LogWarning($"City {city} not found in QTable");
         }
     }
+    public QTable DeepCopy()
+    {
+        var copy = new QTable(this.gameState);
+        copy.qDictionary = this.qDictionary.ToDictionary(
+            entry => entry.Key,
+            entry => new List<CityConnection>(entry.Value) // Kopiere die Listen-Inhalte
+        );
+        copy.qDictionaryBackup = this.qDictionaryBackup.ToDictionary(
+            entry => entry.Key,
+            entry => new List<CityConnection>(entry.Value)
+        );
+        copy.qDictionaryBaseline = this.qDictionaryBaseline.ToDictionary(
+            entry => entry.Key,
+            entry => new List<CityConnection>(entry.Value)
+        );
+
+        return copy;
+    }
     public void UpdateRouteValuesRecursive(List<string> currentTargets, double value, int stepsRemaining, Dictionary<string, string> previousCities, HashSet<string> usedRouteNames)
     {
         // Abbruchbedingung

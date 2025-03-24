@@ -21,7 +21,7 @@ public class GameState : MonoBehaviour
         { "Joker", 0 }
     };
     public Dictionary<string, List<CityConnection>> cityMap { get; set; }
-    public Dictionary<string, List<CityConnection>> copyCityMap()
+    public Dictionary<string, List<CityConnection>> copyCityMapOLD()
     {
         var copy = new Dictionary<string, List<CityConnection>>();
 
@@ -31,6 +31,30 @@ public class GameState : MonoBehaviour
             var connectionsCopy = entry.Value.Select(conn => new CityConnection(conn.city, conn.routeName)).ToList();
 
             // Die kopierte Liste der kopierten Stadt hinzufügen
+            copy.Add(entry.Key, connectionsCopy);
+        }
+
+        return copy;
+    }
+    public Dictionary<string, List<CityConnection>> copyCityMap()
+    {
+        var copy = new Dictionary<string, List<CityConnection>>();
+
+        foreach (var entry in cityMap)
+        {
+            var connectionsCopy = new List<CityConnection>();
+
+            foreach (var conn in entry.Value)
+            {
+                var newConnection = new CityConnection(conn.city, conn.routeName)
+                {
+                    weight = conn.weight,          // Übernimmt den weight-Wert
+                    routeValue = conn.routeValue   // Übernimmt den routeValue-Wert
+                };
+
+                connectionsCopy.Add(newConnection);
+            }
+
             copy.Add(entry.Key, connectionsCopy);
         }
 
@@ -77,12 +101,33 @@ public class GameState : MonoBehaviour
 
     public List<string> getAllAcquiredEnemyRoutes()
     {
-        List<string> result = new List<string>();
+        List<string> aquiredRoutes = new List<string>();
         foreach (var player in getAllOtherPlayers())
         {
-            result.AddRange(player.acquiredRoutes);
+            aquiredRoutes.AddRange(player.acquiredRoutes);
         }
-        return result;
+        
+        if (PlayerList.Count == 2) // add double connections to the list on a two player game
+        {
+            List<string> newRoutes = new List<string>(); // temp
+            foreach (string route in aquiredRoutes)
+            {
+                string[] part = route.Split('_');
+                if(part.Length == 4)
+                {
+                    if (part[3] == "1")
+                    {
+                        newRoutes.Add(part[0] + "_" + part[1] + "_" + part[2] + "_2");
+                    }
+                    if (part[3] == "2")
+                    {
+                        newRoutes.Add(part[0] + "_" + part[1] + "_" + part[2] + "_1");
+                    }
+                }
+            }
+            aquiredRoutes.AddRange(newRoutes);
+        }
+        return aquiredRoutes;
     }
     
     /// <summary>
