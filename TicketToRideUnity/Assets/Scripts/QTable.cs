@@ -30,6 +30,7 @@ public class QTable
         qDictionaryBackup = qDictionary;
         qDictionaryBaseline = qDictionary;
     }
+
     /// <summary>
     /// delete the routName of given parameter in the qDictionary
     /// </summary>
@@ -66,7 +67,7 @@ public class QTable
         var copy = new QTable(this.gameState);
         copy.qDictionary = this.qDictionary.ToDictionary(
             entry => entry.Key,
-            entry => new List<CityConnection>(entry.Value) // Kopiere die Listen-Inhalte
+            entry => new List<CityConnection>(entry.Value) // copy list
         );
         copy.qDictionaryBackup = this.qDictionaryBackup.ToDictionary(
             entry => entry.Key,

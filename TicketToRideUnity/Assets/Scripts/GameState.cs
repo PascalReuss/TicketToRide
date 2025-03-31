@@ -21,21 +21,7 @@ public class GameState : MonoBehaviour
         { "Joker", 0 }
     };
     public Dictionary<string, List<CityConnection>> cityMap { get; set; }
-    public Dictionary<string, List<CityConnection>> copyCityMapOLD()
-    {
-        var copy = new Dictionary<string, List<CityConnection>>();
 
-        foreach (var entry in cityMap)
-        {
-            // Eine neue Liste für die CityConnections erstellen
-            var connectionsCopy = entry.Value.Select(conn => new CityConnection(conn.city, conn.routeName)).ToList();
-
-            // Die kopierte Liste der kopierten Stadt hinzufügen
-            copy.Add(entry.Key, connectionsCopy);
-        }
-
-        return copy;
-    }
     public Dictionary<string, List<CityConnection>> copyCityMap()
     {
         var copy = new Dictionary<string, List<CityConnection>>();
@@ -51,7 +37,6 @@ public class GameState : MonoBehaviour
                     weight = conn.weight,          // Übernimmt den weight-Wert
                     routeValue = conn.routeValue   // Übernimmt den routeValue-Wert
                 };
-
                 connectionsCopy.Add(newConnection);
             }
 
@@ -79,7 +64,6 @@ public class GameState : MonoBehaviour
     public Dictionary<int, int> pointsOfRouteLength { get; set; }
     // **Player Information**: List of all players in the game.
     public List<PlayerScript> PlayerList { get; set; } = new List<PlayerScript>();
-
 
     public List<PlayerScript> getAllOtherPlayers()
     {

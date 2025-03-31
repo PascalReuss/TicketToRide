@@ -426,15 +426,15 @@ public class MLPlayer
     private string pickNextCity(string city)
     {
         List<CityConnection> possibleConnections = new List<CityConnection>();
-
+        float epsilon = 0.5f; // = 50% Wahrscheinlichkeit
         // Überprüfen, ob die Stadt in der Q-Tabelle vorhanden ist
         if (qTable.qDictionary.ContainsKey(city))
         {
             possibleConnections = qTable.qDictionary[city];
         }
 
-        // 50% Chance: Zufällige Stadt oder Stadt mit höchstem Q-Wert wählen
-        if (UnityEngine.Random.Range(0f, 1f) < 0.5f) // 50% Wahrscheinlichkeit
+        // Zufällige Stadt oder Stadt mit höchstem Q-Wert wählen
+        if (UnityEngine.Random.Range(0f, 1f) < epsilon) 
         {
             // select random city
             int randomIndex = UnityEngine.Random.Range(0, possibleConnections.Count); // used UnityEngine.Random and not System.Random
