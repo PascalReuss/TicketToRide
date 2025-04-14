@@ -18,7 +18,7 @@ public class CityConnection
         this.weight = RouteLength();
         // Added 2 lines for MLPlayer : QLearning
         this.routeValue = 0;
-        this.isTarget = false; // test
+        this.isTarget = false; 
     }
 
     public int RouteLength()

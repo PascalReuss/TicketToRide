@@ -576,10 +576,16 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(StartRuleProcessEvilAI());
         }
-        if (activePlayer.isMLAI)
+
+        if (activePlayer.playerName == "Dummy" && activePlayer.isMLAI)
+        {
+            StartCoroutine(StartRuleProcessDummy());
+        }
+        else if (activePlayer.isMLAI)
         {
             StartCoroutine(StartRuleProcessMLAI());
         }
+
 
         if (recordingCases && activePlayer.isHuman)
         {
@@ -933,37 +939,67 @@ public class GameManager : MonoBehaviour
         }
         return counter == activePlayer.handdestinationcards.Count;
     }
+    IEnumerator StartRuleProcessDummy()
+    {
+        Debug.Log(activePlayer.playerName + " am Zug in Runde: " + gameState.TurnCounter);
+        DrawTrainCardFromDeck();
+        yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+        DrawTrainCardFromDeck();
+        yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+    }
     IEnumerator StartRuleProcessMLAI()
     {
+        yield return new WaitForSecondsRealtime(0.5f);
+
         Debug.Log("ML Spieler " + activePlayer.playerName + " am Zug in Runde: " + gameState.TurnCounter);
-        activePlayer.qTable.qDictionary = gameState.copyCityMap();
+        if (turnCounter <= 2) // route weights are sometimes not created before turn 2
+        {
+            activePlayer.qTable.qDictionary = gameState.copyCityMap();
+            yield return new WaitForSecondsRealtime(1);
+        }
 
         mlPlayer.player = activePlayer;
         mlPlayer.qTable = activePlayer.qTable;
         mlPlayer.updateQTable();
+        //mlPlayer.qTable.PrintQTable();
 
         bool destCardFulfilled = true;
+        
+        // start of Q-learning for all destinationcards
         foreach (var destCard in activePlayer.handdestinationcards)
         {
             if (!mlPlayer.checkConnection(destCard.citiesAndPoints[0], destCard.citiesAndPoints[1]) && !destCard.fulfilled)
             {
                 destCardFulfilled = false;
-                mlPlayer.startTraining(destCard.citiesAndPoints[0], destCard.citiesAndPoints[1], 40000, 0.2, 0.9, 100);
+                mlPlayer.startTraining(destCard.citiesAndPoints[0], destCard.citiesAndPoints[1], 1000, 0.3, 0.95, 100); // comment this for test purpose
                 yield return new WaitForSecondsRealtime(1); // Warten auf Unity
             }
         }
 
+        // Test1 Vancouver to Denver
+        //mlPlayer.startTraining("Vancouver", "Denver", 1000, 0.2, 0.9, 100);
+
+        // Experiment 2 LosAngeles to Miami
+        //mlPlayer.startTraining("LosAngeles", "Miami", 1000, 0.3, 0.95, 100);
+        //if (mlPlayer.checkConnection("LosAngeles", "Miami"))
+        //    gameState.LogMoves();
+
+        // Test4 El Paso to Denver
+        //mlPlayer.startTraining("ElPaso", "Denver", 1000, 0.2, 0.95, 100);
+        //yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+
+        // Debug Start ----------------------------------------------------------------------------
+
         foreach (var x in gameState.getPlayerTargetCities(activePlayer))
             Debug.Log("TargetCity: " + x);
 
-        //TEST Vancouver, Miami
-        //mlPlayer.startTraining("Vancouver", "Miami", 40000, 0.2, 0.9, 100);
-        //mlPlayer.findBestWay("Vancouver", "Miami");
-
         //mlPlayer.testLOG(mlPlayer.getShortWay()); // Debug for List of best ways
-        
+        //mlPlayer.testLOG(mlPlayer.getBestWay()); // Debug for List of best ways
+
+        // Debug for bestWay values
         //foreach (var x in mlPlayer.bestWay)
         //    Debug.Log("name: " + x.routeName +"weight: " + x.weight);
+
 
         //int summe = 0;
         //foreach (var x in mlPlayer.getUniqueBestRoutes())
@@ -971,22 +1007,26 @@ public class GameManager : MonoBehaviour
         //    Debug.Log("RouteName = " + x.routeName + " RouteValue = " + x.routeValue + " Weight = " + x.weight);
         //    summe += pointsOfRouteLength[x.weight];
         //}
-        //Debug.Log("Summe Punkte: " + summe);
-        //Debug.Log("Anzahl Unique Routen = " + mlPlayer.getUniqueBestRoutes().Count());
+        //Debug.Log("Sum Weight: " + summe);
+        //Debug.Log("Unique Routes = " + mlPlayer.getUniqueBestRoutes().Count());
 
         //mlPlayer.qTable.PrintQTableGrid();
 
-        // start test here
+        // Debug End ------------------------------------------------------------------------------
 
+        // save the connection, which fulfilles the latest destinationcard
         activePlayer.bestWay = mlPlayer.getShortWay(); // select the shortest way
+        //activePlayer.bestWay = mlPlayer.getBestWay(); // select the best way
+        yield return new WaitForSecondsRealtime(1); // Warten auf Unity
 
-        // end test here
-
-        int actionPoints = 2;
-
+        // set the route to buy
         string targetRoute = mlPlayer.selectAffordableRoute(activePlayer, routes);
+        yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+        
+        // set the needed colors
         List<string> sortedColors = mlPlayer.calculateColorsSortedByNeed(activePlayer);
-                
+        yield return new WaitForSecondsRealtime(1); // Warten auf Unity
+
         string bestAction = "pickTrainCardfromOpenCards";
 
         if (targetRoute != "")
@@ -998,8 +1038,7 @@ public class GameManager : MonoBehaviour
             bestAction = "pickNewDestinationCard";
         }
         
-        yield return new WaitForSecondsRealtime(1); // Warten auf Unity
-
+        int actionPoints = 2;
         firstCardDrawn = false;
         if (lastPlayerBeforeGameEnds != null)
         {
@@ -1045,29 +1084,6 @@ public class GameManager : MonoBehaviour
                             checks++;
                         }
 
-                        if (cardDrawn && actionPoints > 0)
-                        {
-                            cardDrawn = false;
-                            checks = 0;
-                            while (checks < 2 && actionPoints > 0)
-                            {
-                                foreach (string color in sortedColors)
-                                {
-                                    if (Array.Exists(faceupTraincards, card => card.color == color))
-                                    {
-                                        AIdrawsOpenCard(color);
-                                        Debug.Log(activePlayer.playerName + " picked Card from open Cards: " + color);
-                                        yield return new WaitForSecondsRealtime(1);
-                                        actionPoints -= 1;
-                                        firstCardDrawn = true;
-                                        cardDrawn = true;
-                                        break;
-                                    }
-                                }
-                                checks++;
-                            }
-                        }
-
                         if (!cardDrawn && Array.Exists(faceupTraincards, card => card.color == "Joker") && actionPoints == 2)
                         {
                             AIdrawsOpenCard("Joker");
@@ -1079,7 +1095,7 @@ public class GameManager : MonoBehaviour
                         else if (!cardDrawn && actionPoints > 0)
                         {
                             DrawTrainCardFromDeck();
-                            Debug.Log(activePlayer.playerName + " picked Card from open Cards: Card from Deck");
+                            Debug.Log(activePlayer.playerName + " picked Card from Deck");
                             yield return new WaitForSecondsRealtime(1);
                             actionPoints -= 1;
                         }
@@ -1090,6 +1106,7 @@ public class GameManager : MonoBehaviour
                         destinationcardsDeck.GetComponent<DestinationCardDeckScript>().OnMouseUp();
                         yield return new WaitForSecondsRealtime(1);
                         int destinationCardPosition = ElectDestinationCardsInGame();
+                        gameState.AddMove(activePlayer, "Pick new destinationcard", "", "");
                         StartCoroutine(AIselectsDestinationCard(destinationCardPosition));
                         break;
                 }
@@ -1370,6 +1387,7 @@ public class GameManager : MonoBehaviour
                                 {
                                     string routeName = routes.transform.GetChild(r).name;
                                     StartCoroutine(AIbuysRoute(routeName));
+                                    yield return new WaitForSecondsRealtime(2);
                                 }
                             }
                             break; // Verlasse die Schleife nach dem ersten Treffer
@@ -1534,7 +1552,7 @@ public class GameManager : MonoBehaviour
     {
         // Added Debug
         Debug.Log("Active Player = " + gameState.Player.playerName);
-        
+
         // if all destination cards are done
         if (CheckIfAllHandDestinationcardsAreFulfilledOrNotReachable())
         {
@@ -1744,24 +1762,20 @@ public class GameManager : MonoBehaviour
     IEnumerator AIbuysRoute(string routeName)
     {
         Debug.Log(activePlayer.playerName + " Claim route: " + routeName);
-        Debug.Log("1");
         GameObject route = GameObject.Find(routeName);
         route.transform.GetChild(0).GetComponent<RoutepartScript>().OnMouseOver();
         yield return new WaitForSecondsRealtime(1.5F);
         route.transform.GetChild(0).GetComponent<RoutepartScript>().OnMouseDown();
         string routeColor = route.GetComponent<RouteScript>().routeColor;
-        Debug.Log("2");
         int counter = 0;
         int jokerCount = 0;
         // handcards count of each routeColor on hand
         Dictionary<string, int> handcardsColorsCount = new Dictionary<string, int>();
-        Debug.Log("3");
         foreach (string color in cardColors)
         {
             if (color != "Joker")
                 handcardsColorsCount.Add(color, 0);
         }
-        Debug.Log("4");
         foreach (TrainCard t in activePlayer.handtraincards)
         {
             if (t.color != "Joker")
@@ -1769,11 +1783,9 @@ public class GameManager : MonoBehaviour
             else
                 jokerCount++;
         }
-        Debug.Log("5");
         string selectedColor = routeColor;
         if (routeColor == "Grey")
         {
-            Debug.Log("5.5");
             // Filter out colors that do not have enough cards for the route length
             var sufficientColors = handcardsColorsCount.Where(x => x.Value + jokerCount >= route.GetComponent<RouteScript>().routeLength)
                                                        .OrderBy(x => x.Value)
@@ -1789,7 +1801,6 @@ public class GameManager : MonoBehaviour
                 selectedColor = sortedDict.First().Key;
             }
         }
-        Debug.Log("6");
         // search for cards on players hand with needed routeColor
         int routeLength = route.GetComponent<RouteScript>().routeLength;
         for (int i = 0; i < handcardsPanel.transform.childCount; i++)
@@ -1803,11 +1814,9 @@ public class GameManager : MonoBehaviour
             if (counter == routeLength)
                 break;
         }
-        Debug.Log("7");
         // if not enough cards were selected, joker cards are needed
         if (counter < routeLength)
         {
-            Debug.Log("7.7");
             for (int i = 0; i < handcardsPanel.transform.childCount; i++)
             {
                 if (handcardsPanel.transform.GetChild(i).GetComponent<TrainCardScript>().color == "Joker")
@@ -1823,7 +1832,7 @@ public class GameManager : MonoBehaviour
 
         if (counter == routeLength)
         {
-            gameState.AddMove(activePlayer, "BuyRoute", "", routeName);
+            gameState.AddMove(activePlayer, "Buy route", "", routeName);
             OnClickConfirmCardsBtn();
         }
     }
@@ -1997,13 +2006,19 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(StartRuleProcessEvilAI());
                 yield return new WaitForSecondsRealtime(0.5F);
             }
-            if (activePlayer.isMLAI)
+            if (activePlayer.playerName.Contains("Dummy") && activePlayer.isMLAI)
+            {
+                yield return new WaitForSecondsRealtime(0.5F);
+                StartCoroutine(StartRuleProcessDummy());
+                yield return new WaitForSecondsRealtime(0.5F);
+            }
+            else if (activePlayer.isMLAI)
             {
                 yield return new WaitForSecondsRealtime(0.5F);
                 StartCoroutine(StartRuleProcessMLAI());
                 yield return new WaitForSecondsRealtime(0.5F);
             }
-
+            
             newTurnProcessing = false;
         }
         yield return new WaitForSeconds(0.5F);
@@ -2137,7 +2152,7 @@ public class GameManager : MonoBehaviour
         // remove the drawn card from the deck
         traincards.Remove(drawnCard);
         gameState.DrawCard(drawnCard.color);
-        gameState.AddMove(activePlayer, "DrawCard", drawnCard.color, "");
+        gameState.AddMove(activePlayer, "Draw card from deck", drawnCard.color, "");
         // drawn card to player's hand
         activePlayer.AddTrainCardToHand(drawnCard);
         // create and display this card
@@ -2236,7 +2251,7 @@ public class GameManager : MonoBehaviour
         // save number 
         int position = card.gameObject.transform.parent.GetComponent<PositionScript>().position;
 
-        gameState.AddMove(activePlayer, "DrawCard", drawnCard.color, "");
+        gameState.AddMove(activePlayer, "Draw card from open cards", drawnCard.color, "");
 
         // draw new random card from deck
         OpenTrainCardFromDeck(position);
@@ -3090,7 +3105,7 @@ public class GameManager : MonoBehaviour
         if (lastPlayerBeforeGameEnds == activePlayer)
         {
             Debug.Log("Game is over.");
-            //gameState.LogMoves();
+            gameState.LogMoves();
             return true;
         }        
         if (activePlayer.availableWagons < 3 && lastPlayerBeforeGameEnds == null)

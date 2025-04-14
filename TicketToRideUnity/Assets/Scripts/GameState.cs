@@ -5,6 +5,7 @@ using System.Linq; // Usage of Sum()
 
 public class GameState : MonoBehaviour
 {
+    // **MoveHistory**: Stores the history of moves made during the game.
     public MoveHistory MoveHistory { get; private set; } = new MoveHistory();
 
     // **Card Deck**: Stores the count of each card color in the deck.
@@ -20,32 +21,11 @@ public class GameState : MonoBehaviour
         { "Yellow", 0 },
         { "Joker", 0 }
     };
+
+    // **cityMap**: Reference to the original cityMap, modifications will affect the original data.
     public Dictionary<string, List<CityConnection>> cityMap { get; set; }
 
-    public Dictionary<string, List<CityConnection>> copyCityMap()
-    {
-        var copy = new Dictionary<string, List<CityConnection>>();
-
-        foreach (var entry in cityMap)
-        {
-            var connectionsCopy = new List<CityConnection>();
-
-            foreach (var conn in entry.Value)
-            {
-                var newConnection = new CityConnection(conn.city, conn.routeName)
-                {
-                    weight = conn.weight,          // Übernimmt den weight-Wert
-                    routeValue = conn.routeValue   // Übernimmt den routeValue-Wert
-                };
-                connectionsCopy.Add(newConnection);
-            }
-
-            copy.Add(entry.Key, connectionsCopy);
-        }
-
-        return copy;
-    }
-    // List of cards that are currently open
+    // **OpenCards**: List of cards that are currently open
     public List<string> OpenCards { get; set; } = new List<string>();
 
     // **Destination Cards**: Stores destination cards for each player.
@@ -65,10 +45,40 @@ public class GameState : MonoBehaviour
     // **Player Information**: List of all players in the game.
     public List<PlayerScript> PlayerList { get; set; } = new List<PlayerScript>();
 
+    /// <summary>
+    /// Creates a deep copy of the cityMap dictionary.
+    /// Each CityConnection object within the cityMap is copied to ensure the original map is not modified.
+    /// </summary>
+    /// <returns>
+    /// A new dictionary containing copies of the CityConnection objects from the original cityMap.
+    /// </returns>
+    public Dictionary<string, List<CityConnection>> copyCityMap()
+    {
+        var copy = new Dictionary<string, List<CityConnection>>();
+
+        foreach (var entry in cityMap)
+        {
+            var connectionsCopy = new List<CityConnection>();
+
+            foreach (var conn in entry.Value)
+            {
+                var newConnection = new CityConnection(conn.city, conn.routeName)
+                {
+                    weight = conn.weight,          // copy weight
+                    routeValue = conn.routeValue   // copy routeValue
+                };
+                connectionsCopy.Add(newConnection);
+            }
+
+            copy.Add(entry.Key, connectionsCopy);
+        }
+
+        return copy;
+    }
     public List<PlayerScript> getAllOtherPlayers()
     {
         List<PlayerScript> otherPlayers = new List<PlayerScript>(PlayerList);
-        otherPlayers.Remove(Player);// Entfernt den aktiven Spieler aus der Liste
+        otherPlayers.Remove(Player);// removes active Player
         return otherPlayers;
     }
     public List<string> getPlayerCities(PlayerScript player)
@@ -85,16 +95,16 @@ public class GameState : MonoBehaviour
 
     public List<string> getAllAcquiredEnemyRoutes()
     {
-        List<string> aquiredRoutes = new List<string>();
+        List<string> blockedRoutes = new List<string>();
         foreach (var player in getAllOtherPlayers())
         {
-            aquiredRoutes.AddRange(player.acquiredRoutes);
+            blockedRoutes.AddRange(player.acquiredRoutes);
         }
         
         if (PlayerList.Count == 2) // add double connections to the list on a two player game
         {
             List<string> newRoutes = new List<string>(); // temp
-            foreach (string route in aquiredRoutes)
+            foreach (string route in blockedRoutes)
             {
                 string[] part = route.Split('_');
                 if(part.Length == 4)
@@ -109,17 +119,18 @@ public class GameState : MonoBehaviour
                     }
                 }
             }
-            aquiredRoutes.AddRange(newRoutes);
+            blockedRoutes.AddRange(newRoutes);
         }
-        return aquiredRoutes;
+        return blockedRoutes;
     }
-    
+
     /// <summary>
-    /// 
+    /// Returns a list of target cities that the player must connect based on their destination cards.
+    /// Each destination card contains two cities that are considered target cities.
     /// </summary>
-    /// <param name="player">Beliebiger Spieler</param>
+    /// <param name="player">The player whose target cities are to be retrieved.</param>
     /// <returns>
-    /// Liste mit allen Städten, die verbunden werden müssen
+    /// A list of cities the player needs to connect based on their destination cards.
     /// </returns>
     public List<string> getPlayerTargetCities(PlayerScript player)
     {
@@ -135,10 +146,10 @@ public class GameState : MonoBehaviour
     }
 
     /// <summary>
-    /// Erstellt eine Liste aller freien (nicht belegten) Routen.
+    /// Creates a list of all free (unoccupied) routes.
     /// </summary>
     /// <returns>
-    /// Eine Liste von Strings, die die Namen aller unbesetzten Routen enthält.
+    /// A list of strings containing the names of all unoccupied routes.
     /// </returns>
     public List<string> getFreeRoutes()
     {
@@ -158,11 +169,11 @@ public class GameState : MonoBehaviour
     }
 
     /// <summary>
-    /// Überprüft, ob eine bestimmte Route bereits besetzt ist.
+    /// Checks if a specific route is already occupied.
     /// </summary>
-    /// <param name="routeName">Der Name der Route, die überprüft werden soll.</param>
+    /// <param name="routeName">The name of the route to check.</param>
     /// <returns>
-    /// <c>true</c>, wenn die Route besetzt ist; andernfalls <c>false</c>.
+    /// <c>true</c> if the route is occupied; otherwise, <c>false</c>.
     /// </returns>
     private bool isRouteOccupied(string routeName)
     {
@@ -171,11 +182,11 @@ public class GameState : MonoBehaviour
     }
 
     /// <summary>
-    /// Ermittelt den Besitzer einer bestimmten Route.
+    /// Retrieves the owner of a specific route.
     /// </summary>
-    /// <param name="routeName">Der Name der Route, deren Besitzer ermittelt werden soll.</param>
+    /// <param name="routeName">The name of the route whose owner is to be determined.</param>
     /// <returns>
-    /// Ein <see cref="PlayerScript"/>-Objekt, das den Besitzer der Route repräsentiert.
+    /// A <see cref="PlayerScript"/> object representing the owner of the route.
     /// </returns>
     private PlayerScript GetRouteOwner(string routeName)
     {
@@ -184,11 +195,11 @@ public class GameState : MonoBehaviour
     }
 
     /// <summary>
-    /// Erstellt ein Dictionary mit allen belegten Routen und ihren jeweiligen Besitzern.
+    /// Creates a dictionary of all occupied routes and their respective owners.
     /// </summary>
     /// <returns>
-    /// Ein Dictionary, in dem die Schlüssel die Namen der besetzten Routen sind 
-    /// und die Werte die entsprechenden Besitzer als <see cref="PlayerScript"/>-Objekte.
+    /// A dictionary where the keys are the names of the occupied routes, 
+    /// and the values are the corresponding owners as <see cref="PlayerScript"/> objects.
     /// </returns>
     public Dictionary<string, PlayerScript> getRoutesOwner()
     {
@@ -457,11 +468,12 @@ public class GameState : MonoBehaviour
     public void LogMoves()
     {
         var allMoves = MoveHistory.GetAllMoves();
-
+        string log = "";
         foreach (var move in allMoves)
         {
-            Debug.Log($"Turn {move.TurnCounter}: Player {move.Player.playerName} performed action '{move.Action}' " + move.CardColor + move.Route);
+            log += $"Turn {move.TurnCounter}: Player {move.Player.playerName} performed action '{move.Action}' {move.CardColor} {move.Route}\n";
         }
+        Debug.Log(log);
     }
 
     /// <summary>

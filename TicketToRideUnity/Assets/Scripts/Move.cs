@@ -92,7 +92,7 @@ public class Move
     /// </summary>
     /// <param name="destinationCards">The dictionary containing destination cards and associated players.</param>
     /// <returns>A string representation of the destination cards and their statuses.</returns>
-    private string FormatDestinationCards(Dictionary<DestinationCard, string> destinationCards)
+    public string FormatDestinationCards(Dictionary<DestinationCard, string> destinationCards)
     {
         return string.Join(", ", destinationCards.Select(kv => $"{kv.Key.ToString()} - Status: {kv.Value}"));
     }

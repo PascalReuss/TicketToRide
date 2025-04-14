@@ -16,12 +16,14 @@ public class MLPlayer
     // **QTable**: A reference to the QTable class to access and update q values. V3
     public QTable qTable { get; set; }
     public QTable qTableBackup { get; set; }
+    public List<CityConnection> network { get; set; }
 
     private string fileName = Application.dataPath + "/CalculatedWay.csv";
     public List<CityConnection> bestWay { get; set; }
     public List<List<CityConnection>> bestWayList { get; set; }
     private bool hasCrashed = false;
-
+    private double benefitForClaimedRoute = 50;
+    private float epsilon = 0.5f; // 50% probabilty to pick rndm next city
     /// <summary>
     /// Initializes a new instance of the MLPlayer class.
     /// </summary>
@@ -44,7 +46,9 @@ public class MLPlayer
         bestWay = new List<CityConnection>();
         bestWayList = new List<List<CityConnection>>();
     }
-
+    /// <summary>
+    /// update QTable, delete blocked routes, add benefit zu acquired routes
+    /// </summary>
     public void updateQTable()
     {
         bestWayList.Clear();
@@ -56,55 +60,96 @@ public class MLPlayer
         {
             foreach (var route in connection)
             {
-                if (gameState.getPlayerTargetCities(player).Contains(route.city))
+                if (player.acquiredRoutes.Contains(route.routeName))
                 {
-                    route.routeValue = route.routeValue + 0;
+                    route.routeValue += benefitForClaimedRoute;
                 }
             }
         }
     }
 
     /// <summary>
-    /// Starts the training of the Q-learning algorithm for pathfinding between two cities.
+    /// Starts the Q-learning training process to find an optimal path between a start city and a target city.
     /// </summary>
-    /// <param name="startCity">The starting city of the training.</param>
-    /// <param name="targetCity">The target city of the training.</param>
-    /// <param name="episodes">The number of training episodes.</param>
-    /// <param name="alpha">The learning rate of the algorithm.</param>
+    /// <param name="startCity">The city from which the pathfinding begins.</param>
+    /// <param name="targetCity">The destination city the agent should reach.</param>
+    /// <param name="episodes">The number of training episodes to run.</param>
+    /// <param name="alpha">The learning rate used in the Q-learning update formula.</param>
     /// <param name="gamma">The discount factor for future rewards.</param>
-    /// <param name="connectionCounter">The number of possible loops finding the best connections.</param>
+    /// <param name="connectionCounter">The maximum depth or step limit for recursive pathfinding.</param>
+    /// <remarks>
+    /// Uses an epsilon-greedy strategy with exponential decay to control exploration.
+    /// Periodically stores the best path and writes the Q-table to a CSV file.
+    /// If a failure occurs (e.g., too deep recursion or invalid state), the Q-table is rolled back to the previous backup.
+    /// </remarks>
     public void startTraining(string startCity, string targetCity, int episodes, double alpha, double gamma, int connectionCounter)
     {
         bool training = true;
+        float epsilonStart = 1.0f;
+        float epsilonMin = 0.05f;
+        float epsilon = epsilonStart;
+        float decayRate = (float)Math.Pow(epsilonMin / epsilonStart, 1.0 / episodes);
         for (int i = 1; i <= episodes; i++)
         {
-            // Abfrage, ob die Pfadsuche beide Städte gefunden hat.
+            // Calculate epsilon
+            epsilon = Mathf.Max(epsilonMin, epsilon * decayRate);
+            epsilon = (float)Math.Round(epsilon, 2);
+
+            // Check if getNextQValue has exceeded the limit of connectionCounter
             if (hasCrashed == true)
             {
                 qTable = qTableBackup;
                 hasCrashed = false;
                 //Debug.Log("Crash at episode: " + i + " !!");
             }
-            // 10 Mal wird ein "bester" Weg in die Liste bester Wege aufgenommen.
+            // Every 10% of episodes, findBestWay stores an optimal path.
             else if (i % (episodes/10) == 0)
                 findBestWay(startCity, targetCity);
+            else
+            {
+                // Two algorithms for Q-Learning:
+                // 1. Recursive approach
+                getNextQValue(startCity, targetCity, alpha, gamma, connectionCounter, training);
+                // 2. Standard training method
+                //trainQTable(startCity, targetCity, alpha, gamma, connectionCounter, training);
+            }
 
-            getNextQValue(startCity, targetCity, alpha, gamma, connectionCounter, training);
-            
-            // 10 Mal wird die CSV Datei mit dem aktuellen Q-Table erweitert
+            // The CSV file is updated with the current Q-table every 10% of the episodes
             if (i % (episodes/10) == 0)
             {
                 writeQTableToCSV(i, startCity, targetCity);
             }
         }
     }
+
+    /// <summary>
+    /// Trains the Q-learning algorithm to find the shortest connection between a given city and the target city.
+    /// </summary>
+    /// <param name="targetCity">The destination city the player aims to reach.</param>
+    /// <param name="episodes">The number of training episodes to perform.</param>
+    /// <param name="alpha">The learning rate for the Q-learning algorithm.</param>
+    /// <param name="gamma">The discount factor for future rewards.</param>
+    /// <param name="connectionCounter">The number of connections considered when evaluating possible paths.</param>
+    /// <remarks>
+    /// This method uses an epsilon-greedy approach with decay to balance exploration and exploitation.
+    /// Q-values are updated for each city in the player's list, and progress is saved periodically.
+    /// If a crash occurs during pathfinding, the previous Q-table is restored.
+    /// </remarks>
     public void findShortestConnection(string targetCity, int episodes, double alpha, double gamma, int connectionCounter)
     {
+        float epsilonStart = 1.0f;
+        float epsilonMin = 0.05f;
+        float epsilon = epsilonStart;
+        float decayRate = (float)Math.Pow(epsilonMin / epsilonStart, 1.0 / episodes);
+
         bool training = true;
         for (int i = 1; i <= episodes; i++)
         {
             foreach (var city in player.cities)
             {
+                // Calculate epsilon
+                epsilon = Mathf.Max(epsilonMin, epsilon * decayRate);
+                epsilon = (float)Math.Round(epsilon, 2);
                 // Abfrage, ob die Pfadsuche beide Städte gefunden hat.
                 if (hasCrashed == true)
                 {
@@ -123,54 +168,17 @@ public class MLPlayer
             }
         }
     }
-    public string selectAffordableRoute(PlayerScript player, GameObject routes)
-    {
-        string targetRoute = "";
 
-        List<string> bestUniqueRoutes = new List<string>();
-        foreach (var x in getShortWay())
-        {
-            bestUniqueRoutes.Add(x.routeName);
-        }
-        int jokerCount = 0;
-        Dictionary<string, int> playerHandCards = gameState.GetPlayerHandCards(player);
-        foreach (var card in playerHandCards)
-        {
-            string color = card.Key; // The color of the current card
-            int count = card.Value; // The number of cards of this color in the player's hand
-            if (color == "Joker")
-            {
-                jokerCount = count;
-            }
-            else
-            {
-                count += jokerCount;
-            }
-
-            //Debug.Log("color: " + color + "\n" + "count: " + count);
-            // Check all child objects of the routes GameObject
-            for (int r = 0; r < routes.transform.childCount; r++)
-            {
-                // Get the RouteScript component for the current route
-                RouteScript route = routes.transform.GetChild(r).GetComponent<RouteScript>();
-                // Ensure the route has no owner (i.e., it is unclaimed) and the player has enough wagons
-                if (route.owner == null && route.routeLength <= player.availableWagons)
-                {
-                    // Check if the route matches the player's hand cards and is in the list of potential routes
-                    if (route.routeLength <= count &&
-                        (bestUniqueRoutes.Contains(route.name) &&
-                        (route.routeColor == "Grey" || route.routeColor == color)))
-                    {
-                        // Set the target route to the name of this route
-                        targetRoute = routes.transform.GetChild(r).name;
-                    }
-                }
-            }
-        }
-        // Return the selected route's name, or an empty string if no route was selected
-        return targetRoute;
-    }
-    
+    /// <summary>
+    /// Returns the build costs (number of cards per color) for a given route based on its name.
+    /// </summary>
+    /// <param name="routeName">The name of the route (must match the name of the GameObject).</param>
+    /// <returns>
+    /// A dictionary with the route color as the key and the required number of cards as the value.
+    /// </returns>
+    /// <remarks>
+    /// This method uses Unity's GameObject system to find the route and retrieve its properties.
+    /// </remarks>
     public Dictionary<string, int> getCostsForRoute(string routeName)
     {
         Dictionary<string, int> costs = new Dictionary<string, int>();
@@ -182,71 +190,13 @@ public class MLPlayer
         return costs;
     }
 
-    /// <summary>
-    /// Calculates the colors that the player needs to draw, sorted in ascending order of missing cards.
-    /// </summary>
-    /// <param name="player">The player for whom the calculation is performed.</param>
-    /// <param name="routes">The GameObject containing the routes.</param>
-    /// <returns>A list of color names, sorted by the number of missing cards (ascending).</returns>
-    public List<string> calculateColorsSortedByNeed(PlayerScript player)
-    {
-        Dictionary<string, int> playerHandcards = gameState.GetPlayerHandCards(player);
-        Dictionary<string, Dictionary<string, int>> routeCosts = new Dictionary<string, Dictionary<string, int>>();
-        // Joker-Karten extrahieren
-        int jokerCount = playerHandcards.ContainsKey("Joker") ? playerHandcards["Joker"] : 0;
-        // Sammle die benötigten Karten für jede Route
-        foreach (CityConnection connection in player.bestWay)
-        {
-            if (gameState.getFreeRoutes().Contains(connection.routeName))
-            {
-                Dictionary<string, int> costs = getCostsForRoute(connection.routeName);
-                routeCosts.Add(connection.routeName, costs);
-            }
-        }
 
-        // Dictionary zur Speicherung der fehlenden Karten pro Farbe
-        Dictionary<string, int> missingCardsPerColor = new Dictionary<string, int>();
-
-        // Überprüfe, welche Farbe am wenigsten nachgezogen werden muss
-        foreach (var route in routeCosts)
-        {
-            foreach (var cost in route.Value) // cost.Key = Farbe, cost.Value = benötigte Anzahl
-            {
-                int handCount = playerHandcards.ContainsKey(cost.Key) ? playerHandcards[cost.Key] : 0;
-                int missingCards = Math.Max(0, cost.Value - (handCount + jokerCount));
-                if (cost.Key == "Grey")
-                {
-                    foreach (var handCard in playerHandcards)
-                    {
-                        if (handCard.Key != "Joker") // Joker wird separat behandelt
-                        {
-                            int available = handCard.Value + jokerCount;
-                            int missing = Math.Max(0, cost.Value - available);
-
-                            if (!missingCardsPerColor.ContainsKey(handCard.Key) || missing < missingCardsPerColor[handCard.Key])
-                            {
-                                missingCardsPerColor[handCard.Key] = missing;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (!missingCardsPerColor.ContainsKey(cost.Key) || missingCards < missingCardsPerColor[cost.Key])
-                    {
-                        missingCardsPerColor[cost.Key] = missingCards;
-                    }
-                }
-            }
-        }
-        // Farben sortiert nach benötigten Karten zurückgeben
-        return missingCardsPerColor.OrderBy(x => x.Value).Select(x => x.Key).ToList();
-    }
+  
 
     // check connection Start --------------------------------------------------------------------
 
     /// <summary>
-    /// !deprecated! Alternative used fpr total score calculation
+    /// !deprecated! Alternative used for total score calculation
     /// </summary>
     /// <param name="startCity">Start city from destinationcard start</param>
     /// <param name="targetCity">Destination city from destinationcard</param>
@@ -275,7 +225,7 @@ public class MLPlayer
         return routes;
     }
     /// <summary>
-    /// !deprecated! Alternative used fpr total score calculation 
+    /// !deprecated! Alternative used for total score calculation 
     /// </summary>
     /// <param name="routes"></param>
     /// <returns></returns>
@@ -330,7 +280,7 @@ public class MLPlayer
     // Q-Learning Start --------------------------------------------------------------------------
 
     /// <summary>
-    /// Calculates the next Q-value for a given state-action pair in the Q-learning algorithm.
+    /// Calculates the next Q-value for a given state-action pair in the Q-learning algorithm recursive.
     /// </summary>
     /// <param name="startCity">The current city in the route.</param>
     /// <param name="targetCity">The target city to reach.</param>
@@ -367,7 +317,9 @@ public class MLPlayer
             CityConnection route = getNextRoute(startCity, nextCity);
             double reward = route.weight;
             double qValue = route.routeValue;
+            
             double nextQValue = getNextQValue(nextCity, targetCity, alpha, gamma, connectionCounter, training);
+            
             //Debug.Log("alpha = " + alpha + "\n" + "gamma = " + gamma + "\n" + "city = " + city + "\n" + "qValue = " + qValue + "\n" + "nextCity = " + nextCity + "\n" + "route.routeName = " + route.routeName);
 
             //Formula: Q(s, a) ← Q(s, a) + α   * (R(s, a)+   γ   * max Q(s', a')  - Q(s, a))
@@ -375,30 +327,88 @@ public class MLPlayer
             
             if (qTable.qDictionary.ContainsKey(startCity))
             {
-                // Wenn es eine Verbindung von der aktuellen Stadt (startCity) zur Zielstadt (targetCity) gibt
                 foreach (CityConnection connection in qTable.qDictionary[startCity])
                 {
-                    if (connection.city == route.city)
+                    //if (connection.city == route.city)
+                    if (connection.routeName == route.routeName)
                     {
-                        // Setze den Q-Wert in das Dictionary
-                        qTable.UpdateRouteValue(startCity, connection.routeName, newQValue);
+                        // Set the Q-value in the dictionary
+                        //qTable.UpdateRouteValue(startCity, connection.routeName, newQValue);
+                        connection.routeValue = newQValue;
+
                         qTableBackup = qTable;
                         bestWay.Add(connection);
                         //qTable.printQValue(connection.routeName);
                     }
                 }
             }
-            //Debug.Log("newQValue: " + newQValue);
+            //Debug.Log($"newQValue: {newQValue} ");
             return newQValue;
         }
         else
         {
-            foreach (var connection in qTable.qDictionary[startCity])
-            {
-                connection.routeValue = 1000;
-            }
             return 1000.0;
         }
+    }
+    /// <summary>
+    /// Trains the Q-table based on standard Q-learning.
+    /// </summary>
+    /// <param name="startCity">The starting city.</param>
+    /// <param name="targetCity">The target city.</param>
+    /// <param name="alpha">Learning rate (alpha value).</param>
+    /// <param name="gamma">Discount factor (gamma value).</param>
+    /// <param name="maxSteps">Maximum number of steps per episode.</param>
+    /// <param name="training">Indicates whether training is active.</param>
+    public void trainQTable(string startCity, string targetCity, double alpha, double gamma, int maxSteps, bool training)
+    {
+        string currentCity = startCity;
+        int steps = 0;
+
+        while (currentCity != targetCity && steps < maxSteps)
+        {
+            string nextCity = training ? pickNextCity(currentCity) : pickMaxNextCity(currentCity);
+            CityConnection route = getNextRoute(currentCity, nextCity);
+            double reward = route.weight;
+
+            // Find the maximum Q-value for the next state
+            double maxNextQValue = getMaxQValue(nextCity);
+
+            // Q-value update based on the Q-learning formula
+            //Formula: Q(s, a) ←    Q(s, a)   +   α   *  (R(s, a) +   γ   * max Q(s', a')  - Q(s, a))
+            double newQValue = route.routeValue + alpha * (reward + gamma * maxNextQValue - route.routeValue);
+
+            // write the Q-value into the table
+            qTable.UpdateRouteValue(currentCity, route.routeName, newQValue);
+            qTableBackup = qTable;
+            bestWay.Add(route);
+
+            // move to the next city
+            currentCity = nextCity;
+            steps++;
+        }
+
+        // if the target is reached: set final routeValue
+        //if (currentCity == targetCity)
+        //{
+        //    foreach (var connection in qTable.qDictionary[currentCity])
+        //    {
+        //        connection.routeValue = 1000; // High value for reaching the target
+        //    }
+        //}
+    }
+
+    /// <summary>
+    /// Retrieves the highest Q-value for a given city.
+    /// </summary>
+    /// <param name="city">The city for which the maximum Q-value is determined.</param>
+    /// <returns>The highest Q-value for the city or 0.0 if no connections exist.</returns>
+    public double getMaxQValue(string city)
+    {
+        if (qTable.qDictionary.ContainsKey(city) && qTable.qDictionary[city].Count > 0)
+        {
+            return qTable.qDictionary[city].Max(connection => connection.routeValue);
+        }
+        return 0.0; // Default value if no connections exist
     }
 
     /// <summary>
@@ -417,7 +427,7 @@ public class MLPlayer
     }
 
     /// <summary>
-    /// Selects the next city based on an exploration-exploitation strategy.
+    /// Selects the next city based on an exploration-exploitation strategy, using epsilon-greedy with 50%
     /// </summary>
     /// <param name="city">The current city.</param>
     /// <returns>
@@ -426,15 +436,15 @@ public class MLPlayer
     private string pickNextCity(string city)
     {
         List<CityConnection> possibleConnections = new List<CityConnection>();
-        float epsilon = 0.5f; // = 50% Wahrscheinlichkeit
-        // Überprüfen, ob die Stadt in der Q-Tabelle vorhanden ist
+        
+        // Check, if the city exists in the qDictionary
         if (qTable.qDictionary.ContainsKey(city))
         {
             possibleConnections = qTable.qDictionary[city];
         }
 
-        // Zufällige Stadt oder Stadt mit höchstem Q-Wert wählen
-        if (UnityEngine.Random.Range(0f, 1f) < epsilon) 
+        // Pick a random route or the route with the highest routeValue
+        if (UnityEngine.Random.Range(0f, 1f) < epsilon)
         {
             // select random city
             int randomIndex = UnityEngine.Random.Range(0, possibleConnections.Count); // used UnityEngine.Random and not System.Random
@@ -464,7 +474,7 @@ public class MLPlayer
                 return route;
             }
         }
-        Debug.Log("Fehler: keine Route zur nächsten Stadt gefunden" + nextCity);
+        Debug.Log($"Error: Found no route to the next city: { nextCity }");
         return null;
     }
     // Q-Learning End -----------------------------------------------------------------------------
@@ -479,13 +489,14 @@ public class MLPlayer
     public void writeBestWayToCSV(List<CityConnection> bestWay)
     {
         TextWriter tw = new StreamWriter(fileName, true);
-        tw.WriteLine("City; RouteName; RouteValue; Weight");
+        tw.WriteLine(player.playerName + ";" + "City; RouteName; RouteValue; Weight;" + "Turn: " + gameState.TurnCounter);
         tw.Close();
         tw = new StreamWriter(fileName, true);
         foreach (var part in bestWay)
         {
-            tw.WriteLine(part.city + "; " + part.routeName + "; " + part.routeValue + "; " + part.weight);
+            tw.WriteLine(" ;" + part.city + "; " + part.routeName + "; " + part.routeValue + "; " + part.weight);
         }
+        tw.WriteLine(" ; ; ; ;");
         tw.Close();
     }
 
@@ -511,25 +522,25 @@ public class MLPlayer
         {
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                // Erste Zeile: Header mit Städtenamen
-                writer.Write("Step_" + counter + ";");  // Erste Spalte bleibt für Zeilenüberschriften
-                writer.WriteLine(string.Join(";", cityList));  // Spaltenüberschriften für Städte
+                // first row: Header with citynames
+                writer.Write("Step_" + counter + ";");  // first col gives the step counter
+                writer.WriteLine(string.Join(";", cityList));  // col titles
 
                 // Daten ausgeben
                 foreach (var rowCity in cityList)
                 {
-                    List<string> rowValues = new List<string> { rowCity };  // Zeilenüberschrift
+                    List<string> rowValues = new List<string> { rowCity };  // row titles
 
                     foreach (var colCity in cityList)
                     {
-                        // Finde den RouteValue, falls eine Verbindung existiert
+                        // if existes: find routeValue
                         CityConnection connection = qTable.qDictionary[rowCity].FirstOrDefault(c => c.city == colCity);
                         string value = connection != null ? connection.routeValue.ToString("F1") : "";
 
-                        rowValues.Add(value);  // Wert zur Zeile hinzufügen
+                        rowValues.Add(value);
                     }
 
-                    // Ganze Zeile in CSV schreiben
+                    // write in the rowvaules to CSV
                     writer.WriteLine(string.Join(";", rowValues));
                 }
             }
@@ -593,25 +604,28 @@ public class MLPlayer
 
         foreach (var way in bestWayList)
         {
-            int stops = way.Count(); // Anzahl der Verbindungen
-            double maxPoints = way.Sum(bestWay => bestWay.weight); // Summe der Streckenlänge
-            double maxValue = way.Sum(bestWay => bestWay.routeValue); // Summe der Q-Werte
+            int stops = way.Count(); // Number of cities in the current path
+            double maxPoints = way.Sum(bestWay => bestWay.weight); // Total reward for the current path
+            double maxValue = way.Sum(bestWay => bestWay.routeValue); // Total Q-value for the current path
 
-            // Vergleichslogik: Zuerst nach stops, dann maxPoints, dann maxValue
+            // Comparison logic:
+            // 1. Prefer fewer stops
+            // 2. If equal stops, prefer higher reward (maxPoints)
+            // 3. If equal stops and reward, prefer higher total Q-value (better learned policy)
             if (stops < highestStops
-                || (stops == highestStops && maxPoints > highestMaxPoints) // more valueabel route
-                //|| (stops == highestStops && maxPoints < highestMaxPoints) // shortest route
-                || (stops == highestStops && maxPoints == highestMaxPoints && maxValue < highestMaxValue) // shortest route
+                || (stops == highestStops && maxPoints > highestMaxPoints)
+                || (stops == highestStops && maxPoints == highestMaxPoints && maxValue > highestMaxValue)
                 )
             {
-                Debug.Log("####################### Found new better way #######################");
+                // Update best-known path so far
                 highestStops = stops;
                 highestMaxPoints = maxPoints;
                 highestMaxValue = maxValue;
                 theBestWay = way;
-                writeBestWayToCSV(way); // Insert the best way into csv file
+
+                // Save the best path to a CSV file
+                writeBestWayToCSV(way);
             }
-            //writeToCSV(way); // Insert all calculated ways into csv file
         }
         return theBestWay;
     }
@@ -620,7 +634,7 @@ public class MLPlayer
     /// Finds the shortest route from a list of possible routes based on the number of stops and maximum points.
     /// The best route is determined by the following criteria: 
     /// 1. Fewer stops,
-    /// 2. Higher maximum points (weight),
+    /// 2. Lower maximum points (weight),
     /// 3. Higher total route value (sum of route values).
     /// </summary>
     /// <returns>A list of <see cref="CityConnection"/> representing the shortest route.</returns>
@@ -633,28 +647,32 @@ public class MLPlayer
 
         foreach (var way in bestWayList)
         {
-            int stops = way.Count(); // Anzahl der Verbindungen
-            double maxPoints = way.Sum(bestWay => bestWay.weight); // Summe der Streckenlänge
-            double maxValue = way.Sum(bestWay => bestWay.routeValue); // Summe der Q-Werte
+            int stops = way.Count(); // Number of cities in the current path
+            double maxPoints = way.Sum(bestWay => bestWay.weight); // Total reward for the current path
+            double maxValue = way.Sum(bestWay => bestWay.routeValue); // Total Q-value for the current path
 
-            // Vergleichslogik: Zuerst nach stops, dann maxPoints, dann maxValue
+            // Comparison logic:
+            // 1. Prefer fewer stops
+            // 2. If equal stops, prefer lower total reward (shorter route in terms of weight)
+            // 3. If equal stops and reward, prefer higher Q-value (better learned policy)
             if (stops < highestStops
-                //|| (stops == highestStops && maxPoints > highestMaxPoints) // more valueabel route
-                || (stops == highestStops && maxPoints < highestMaxPoints) // shortest route
-                || (stops == highestStops && maxPoints == highestMaxPoints && maxValue < highestMaxValue) // shortest route
+                || (stops == highestStops && maxPoints < highestMaxPoints)
+                || (stops == highestStops && maxPoints == highestMaxPoints && maxValue < highestMaxValue)
                 )
             {
-                Debug.Log("####################### Found new shorter way #######################");
+                // Update best-known path so far
                 highestStops = stops;
                 highestMaxPoints = maxPoints;
                 highestMaxValue = maxValue;
                 theBestWay = way;
-                writeBestWayToCSV(way); // Insert the best way into csv file
+
+                // Save the best path to a CSV file
+                writeBestWayToCSV(way);
             }
-            //writeToCSV(way); // Insert all calculated ways into csv file
         }
         return theBestWay;
     }
+
     /// <summary>
     /// Retrieves a list of unique routes based on their route names, sorted by route value in descending order.
     /// Only the first occurrence of each route name is included in the result.
@@ -679,6 +697,131 @@ public class MLPlayer
         theBestWay.ForEach(x => Debug.Log("City = " + x.city));
     }
     // Bestway End --------------------------------------------------------------------------------
+
+    // start Heuristik 1 : build ------------------------------------------------------------------
+    /// <summary>
+    /// Selects an affordable and unclaimed route for the player based on their current hand of cards and available wagons.
+    /// </summary>
+    /// <param name="player">The player for whom the route is being selected.</param>
+    /// <param name="routes">The parent GameObject containing all route GameObjects as children.</param>
+    /// <returns>
+    /// The name of a route the player can afford and is part of their shortest path goals, or an empty string if no suitable route is found.
+    /// </returns>
+    /// <remarks>
+    /// This method checks if the player has enough matching cards (including Jokers) and wagons to claim a route.
+    /// It prioritizes routes that are part of the shortest paths calculated for the player.
+    /// </remarks>
+    public string selectAffordableRoute(PlayerScript player, GameObject routes)
+    {
+        string targetRoute = "";
+
+        List<string> bestUniqueRoutes = new List<string>();
+        foreach (var x in getShortWay())
+        //foreach (var x in getBestWay())
+        {
+            bestUniqueRoutes.Add(x.routeName);
+        }
+        int jokerCount = 0;
+        Dictionary<string, int> playerHandCards = gameState.GetPlayerHandCards(player);
+        foreach (var card in playerHandCards)
+        {
+            string color = card.Key; // The color of the current card
+            int count = card.Value; // The number of cards of this color in the player's hand
+            if (color == "Joker")
+            {
+                jokerCount = count;
+            }
+            else
+            {
+                count += jokerCount;
+            }
+
+            //Debug.Log("color: " + color + "\n" + "count: " + count);
+            // Check all child objects of the routes GameObject
+            for (int r = 0; r < routes.transform.childCount; r++)
+            {
+                // Get the RouteScript component for the current route
+                RouteScript route = routes.transform.GetChild(r).GetComponent<RouteScript>();
+                // Ensure the route has no owner and the player has enough wagons
+                if (route.owner == null && route.routeLength <= player.availableWagons)
+                {
+                    // Check if the route matches the player's hand cards and is in the list of potential routes
+                    if (route.routeLength <= count &&
+                        (bestUniqueRoutes.Contains(route.name) &&
+                        (route.routeColor == "Grey" || route.routeColor == color)))
+                    {
+                        // Set the target route to the name of this route
+                        targetRoute = routes.transform.GetChild(r).name;
+                    }
+                }
+            }
+        }
+        // Return the selected route's name, or an empty string if no route was selected
+        return targetRoute;
+    }
+    // end Heuristik 1 : build --------------------------------------------------------------------
+
+    // start Heuristik 2 : select colors ----------------------------------------------------------
+    /// <summary>
+    /// Calculates the colors that the player needs to draw, sorted in ascending order of missing cards.
+    /// </summary>
+    /// <param name="player">The player for whom the calculation is performed.</param>
+    /// <param name="routes">The GameObject containing the routes.</param>
+    /// <returns>A list of color names, sorted by the number of missing cards (ascending).</returns>
+    public List<string> calculateColorsSortedByNeed(PlayerScript player)
+    {
+        Dictionary<string, int> playerHandcards = gameState.GetPlayerHandCards(player);
+        Dictionary<string, Dictionary<string, int>> routeCosts = new Dictionary<string, Dictionary<string, int>>();
+        // Joker-Karten extrahieren
+        int jokerCount = playerHandcards.ContainsKey("Joker") ? playerHandcards["Joker"] : 0;
+
+        foreach (CityConnection connection in player.bestWay)
+        {
+            if (gameState.getFreeRoutes().Contains(connection.routeName))
+            {
+                Dictionary<string, int> costs = getCostsForRoute(connection.routeName);
+                routeCosts.Add(connection.routeName, costs);
+            }
+        }
+
+        // dictionary to save the amount and the color of missing cards
+        Dictionary<string, int> missingCardsPerColor = new Dictionary<string, int>();
+
+        foreach (var route in routeCosts)
+        {
+            foreach (var cost in route.Value) // cost.Key = color, cost.Value = needed amount
+            {
+                int handCount = playerHandcards.ContainsKey(cost.Key) ? playerHandcards[cost.Key] : 0;
+                int missingCards = Math.Max(0, cost.Value - (handCount + jokerCount));
+                if (cost.Key == "Grey")
+                {
+                    foreach (var handCard in playerHandcards)
+                    {
+                        if (handCard.Key != "Joker") // Joker is treated separately
+                        {
+                            int available = handCard.Value + jokerCount;
+                            int missing = Math.Max(0, cost.Value - available);
+
+                            if (!missingCardsPerColor.ContainsKey(handCard.Key) || missing < missingCardsPerColor[handCard.Key])
+                            {
+                                missingCardsPerColor[handCard.Key] = missing;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (!missingCardsPerColor.ContainsKey(cost.Key) || missingCards < missingCardsPerColor[cost.Key])
+                    {
+                        missingCardsPerColor[cost.Key] = missingCards;
+                    }
+                }
+            }
+        }
+        // Farben sortiert nach benötigten Karten zurückgeben
+        return missingCardsPerColor.OrderByDescending(x => x.Value).Select(x => x.Key).ToList();
+    }
+    // end Heuristik 2 : select colors ------------------------------------------------------------
 
     // Tests Start --------------------------------------------------------------------------------
     public string getOneConnection(PlayerScript dummy)
